@@ -7,80 +7,56 @@
  */
 echo $this->tag->javascriptInclude("js/jquery.min.js");
 $narudzbe = Narudzba::find();
-
 ?>
+<div id="scroll">
 
-<table id="narudzbe" border="1">
-    <tr>
-        <th>Sifra</th>
-        <th>Ime kupca</th>
-        <th>Adresa dostave</th>
-        <th>Ukupna cijena</th>
-        <th>Datum</th>
-    </tr>
-    <?php
-
-    foreach($narudzbe as $narudzba)
-    {
-        ?>
+    <table id="narudzbe" border="1">
         <tr>
-            <td><?php echo $narudzba->sifra_N?></td>
-            <td><?php echo $narudzba->ime_kupca?></td>
-            <td><?php echo $narudzba->adresa_dostava?></td>
-            <td><?php echo $narudzba->ukupna_cijena?></td>
-            <td><?php echo $narudzba->datum?></td>
+            <th>Sifra</th>
+            <th>Ime kupca</th>
+            <th>Adresa dostave</th>
+            <th>Ukupna cijena</th>
+            <th>Datum</th>
         </tr>
+        <?php
 
-    <?php }?>
-</table>
-
-<table id="stavke" border="1">
-    <tr>
-        <th>Sifra stavke</th>
-        <th>Sifra artikla</th>
-        <th>Naziv artikla</th>
-        <th>Ukupna cijena</th>
-    </tr>
-    <?/*
-   // function dodajStavke()
-   // {
-        $sifra = $_POST["sifra"];
-        $stavke = Stavka::find();
-        foreach ($stavke as $stavka)
+        foreach($narudzbe as $narudzba)
         {
             ?>
-    <tr>
-        <td><?php echo $stavka->sifra_S?></td>
-        <td><?php echo $stavka->sifra_N?></td>
-        <td><?php echo $stavka->naziv_A?></td>
-        <td><?php echo $stavka->ukupna_cijena?></td>
-    </tr>
-       <?php }*/
-    // }   ?>
+            <tr>
+                <td><?php echo $narudzba->sifra_N?></td>
+                <td><?php echo $narudzba->ime_kupca?></td>
+                <td><?php echo $narudzba->adresa_dostava?></td>
+                <td><?php echo $narudzba->ukupna_cijena?></td>
+                <td><?php echo $narudzba->datum?></td>
+            </tr>
 
-</table>
+        <?php }
+        ?>
+
+    </table>
+    <div >
+        <input id="stavkaN" type="text" />
+        <button type="button" onclick="prikaziStavke()">Prikaži stavke</button>
+    </div>
+</div>
+</form>
+
+<div id="odabir">
+    <table id="stavke" border="1">
+
+        <tr>
+            <th>Sifra stavke</th>
+            <th>Sifra artikla</th>
+            <th>Naziv artikla</th>
+            <th>Cijena</th>
+        </tr>
+    </table>
+</div>
 
 <script>
-    $("#narudzbe tr").click(function(){
-        $(this).addClass('selected').siblings().removeClass('selected');
-        var value=$(this).find('td:first').html();
-        napuni(value);
-        console.log(value);
-    });
 
-    function napuni(value)
-    {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange=function()
-        {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-                document.getElementById("stavke").innerHTML=xmlhttp.responseText;
-            }
-        }
-        xmlhttp.open("POST", "izracun?sifra=" + value, true);
-        xmlhttp.send();
-    }
+
 
 </script>
 
