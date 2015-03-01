@@ -5,32 +5,36 @@
  * Date: 27/02/15
  * Time: 11:47
  */
-use Phalcon\Tag; ?>
-
-<?php
-
-echo Phalcon\Tag::form("kosarica");
-
-echo Phalcon\Tag::select(array(
-    "Artikal",
-    Artikal::find(),
-    "using" => array("sifra", "naziv"),
-    "size" => 4
-));
-
-//$element = new Select("Popis", Artikal::find(), array("sifra", "naziv"));
-//Select::displayTo("Popis", "2");
-
-echo Phalcon\Tag::submitButton(array(
-    "Dodaj"
-));
+use Phalcon\Tag;
+use Phalcon\Forms\Element\Select;
 ?>
+
+<form>
+    <?php
+    echo Phalcon\Tag::select(array(
+        "Artikal",
+        Artikal::find(),
+        "using" => array("naziv", "naziv"),
+        "size" => 4
+    ));
+    ?>
 </form>
-<?php
-echo Phalcon\Tag::selectStatic(array(
-    "narudzba",
-    "size" => 10,
-    $this->addOption($this->request->getPost())
-));
+<br>
 
-?>
+<button type="button" onclick="puniKosaricu()">Dodaj artikl</button>
+
+<?php echo Phalcon\Tag::form("narudzba/stvori"); ?>
+
+<select id="kosarica" name="kosarica[]" size="8" multiple>
+</select>
+<button type="button" onclick="removeArtikl()">Makni Artikl</button>
+<br>
+<br>
+<input id="ImeKupca" type="text" /><label>Vaše ime</label>
+<input id="AdresaKupca" type="text" /><label>Adresa na koju želite dostavu</label>
+<br>
+<button type="submit" onclick="selectAll()">Spremi narudžbu</button>
+
+</form>
+
+
