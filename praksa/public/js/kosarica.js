@@ -2,10 +2,12 @@
  * Created by Luka on 28/02/15.
  */
 
+
+document.getElementById("Artikal").addEventListener("change", selektiraniArtikl)
+
 var artikl;
-document.getElementById("Artikal").addEventListener("change", art)
-document.getElementById("select2").addEventListener("click", selectAll)
-function art(){
+
+function selektiraniArtikl(){
     artikl = this.value;
 }
 
@@ -23,4 +25,10 @@ function selectAll()
     {
         selectBox.options[i].selected = true;
     }
+}
+
+function removeArtikl()
+{
+    var x = document.getElementById("kosarica");
+    x.remove(x.selectedIndex);
 }
