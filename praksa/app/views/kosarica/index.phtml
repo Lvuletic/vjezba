@@ -1,0 +1,36 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Luka
+ * Date: 27/02/15
+ * Time: 11:47
+ */
+use Phalcon\Tag; ?>
+
+<?php
+
+echo Phalcon\Tag::form("kosarica");
+
+echo Phalcon\Tag::select(array(
+    "Artikal",
+    Artikal::find(),
+    "using" => array("sifra", "naziv"),
+    "size" => 4
+));
+
+//$element = new Select("Popis", Artikal::find(), array("sifra", "naziv"));
+//Select::displayTo("Popis", "2");
+
+echo Phalcon\Tag::submitButton(array(
+    "Dodaj"
+));
+?>
+</form>
+<?php
+echo Phalcon\Tag::selectStatic(array(
+    "narudzba",
+    "size" => 10,
+    $this->addOption($this->request->getPost())
+));
+
+?>
