@@ -1,0 +1,64 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Luka
+ * Date: 01/03/15
+ * Time: 10:20
+ */
+echo $this->tag->javascriptInclude("js/jquery.min.js");
+$narudzbe = Narudzba::find();
+$stavke = Stavka::find();
+?>
+<table id="narudzbe" border="1">
+    <tr>
+        <th>Sifra</th>
+        <th>Ime kupca</th>
+        <th>Adresa dostave</th>
+        <th>Ukupna cijena</th>
+        <th>Datum</th>
+    </tr>
+    <?php
+    foreach($narudzbe as $narudzba)
+    {
+        ?>
+        <tr>
+            <td><?php echo $narudzba->sifra_N?></td>
+            <td><?php echo $narudzba->ime_kupca?></td>
+            <td><?php echo $narudzba->adresa_dostava?></td>
+            <td><?php echo $narudzba->ukupna_cijena?></td>
+            <td><?php echo $narudzba->datum?></td>
+        </tr>
+
+    <?php }?>
+</table>
+
+<table id="stavke" border="1">
+    <tr>
+        <th>Sifra stavke</th>
+        <th>Sifra artikla</th>
+        <th>Naziv artikla</th>
+        <th>Ukupna cijena</th>
+    </tr>
+
+</table>
+
+<?php
+function add($a, $b)
+{
+    $c = $a + $b;
+    return $c;
+}
+
+?>
+
+<script>
+    $("#narudzbe tr").click(function(){
+        $(this).addClass('selected').siblings().removeClass('selected');
+        var value=$(this).find('td:first').html();
+        dodajRed(value);
+        <?php echo add(1,2);?>
+        console.log(value);
+    });
+
+</script>
+
