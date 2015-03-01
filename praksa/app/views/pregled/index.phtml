@@ -7,8 +7,9 @@
  */
 echo $this->tag->javascriptInclude("js/jquery.min.js");
 $narudzbe = Narudzba::find();
-$stavke = Stavka::find();
+
 ?>
+
 <table id="narudzbe" border="1">
     <tr>
         <th>Sifra</th>
@@ -18,6 +19,7 @@ $stavke = Stavka::find();
         <th>Datum</th>
     </tr>
     <?php
+
     foreach($narudzbe as $narudzba)
     {
         ?>
@@ -39,26 +41,46 @@ $stavke = Stavka::find();
         <th>Naziv artikla</th>
         <th>Ukupna cijena</th>
     </tr>
+    <?/*
+   // function dodajStavke()
+   // {
+        $sifra = $_POST["sifra"];
+        $stavke = Stavka::find();
+        foreach ($stavke as $stavka)
+        {
+            ?>
+    <tr>
+        <td><?php echo $stavka->sifra_S?></td>
+        <td><?php echo $stavka->sifra_N?></td>
+        <td><?php echo $stavka->naziv_A?></td>
+        <td><?php echo $stavka->ukupna_cijena?></td>
+    </tr>
+       <?php }*/
+    // }   ?>
 
 </table>
-
-<?php
-function add($a, $b)
-{
-    $c = $a + $b;
-    return $c;
-}
-
-?>
 
 <script>
     $("#narudzbe tr").click(function(){
         $(this).addClass('selected').siblings().removeClass('selected');
         var value=$(this).find('td:first').html();
-        dodajRed(value);
-        <?php echo add(1,2);?>
+        napuni(value);
         console.log(value);
     });
+
+    function napuni(value)
+    {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById("stavke").innerHTML=xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("POST", "izracun?sifra=" + value, true);
+        xmlhttp.send();
+    }
 
 </script>
 
