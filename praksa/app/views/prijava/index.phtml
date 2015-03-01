@@ -1,0 +1,21 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Luka
+ * Date: 27/02/15
+ * Time: 11:35
+ */
+use Phalcon\Tag; ?>
+
+<?php echo Phalcon\Tag::form('prijava/start') ?>
+
+<label for="email">Username/Email</label>
+<?php echo Phalcon\Tag::textField(array("email", "size" => "30")) ?>
+
+<label for="password">Lozinka</label>
+<?php echo Phalcon\Tag::passwordField(array("lozinka", "size" => "30")) ?>
+
+<?php echo Phalcon\Tag::submitButton(array('Login')) ?>
+
+</form>
+
