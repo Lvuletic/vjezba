@@ -1,0 +1,2 @@
+# hello-world
+pocetna vjezba
