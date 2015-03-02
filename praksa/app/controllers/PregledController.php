@@ -10,43 +10,30 @@ class PregledController extends \Phalcon\Mvc\Controller
 {
     public function indexAction()
     {
+        $numberpageN = 1;
+        $narudzbe = Narudzba::find();
 
-    }
+        $paginatorN = new Phalcon\Paginator\Adapter\Model(array(
+            "data" => $narudzbe,
+            "limit" =>50,
+            "page" => $numberpageN
+        ));
 
-    public function izracunAction()
-    {
-        ?>
-        <div id="odabir">
-        <table id="stavke" border="1">
-
-        <tr>
-            <th>Sifra stavke</th>
-            <th>Sifra artikla</th>
-            <th>Naziv artikla</th>
-            <th>Cijena</th>
-        </tr>
-        <?php
+        $this->view->pageN = $paginatorN->getPaginate();
+        
+        $numberpageS = 1;
         $request = new Phalcon\Http\Request();
-        $sifra = $request->get('sifra');
-        $stavke = Stavka::find("sifra_N='$sifra'");
-        foreach($stavke as $stavka)
-        {
-            ?>
-            <tr>
-                <td><?php echo $stavka->sifra_S?></td>
-                <td><?php echo $stavka->sifra_A?></td>
-                <td><?php echo $stavka->naziv_A?></td>
-                <td><?php echo $stavka->ukupna_cijena?></td>
-            </tr>
-        <?php
+        $stavka = new Stavka();
+        $stavke = $stavka->findStavka($request->get('sifra'));
 
-        }
-        ?>
-        </table>
+        $paginatorS = new Phalcon\Paginator\Adapter\Model(array(
+            "data" => $stavke,
+            "limit" => 20,
+            "page" => $numberpageS
+        ));
 
-        </div>
-    <?php
-
+        $this->view->pageS = $paginatorS->getPaginate();
 
     }
+
 }
