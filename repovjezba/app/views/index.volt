@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{ get_doctype() }}
 <html>
 	<head>
 		<title>Phalcon PHP Framework</title>
@@ -6,13 +6,7 @@
 	</head>
 	<body>
     <div id="main">
-	    <div id="links">
-	        <ul>
-	            <li>{{ link_to("index/", "Glavna stranica") }}</li>
-	            <li>{{ link_to("pregled/", "Pregled narudzbi") }}</li>
-	            <li>{{ link_to("kosarica/", "Web kupovina") }}</li>
-	        </ul>
-	    </div>
+    {{ elements.getMenu() }}
 	    <div id="body">
 		{{ content() }}
 		</div>

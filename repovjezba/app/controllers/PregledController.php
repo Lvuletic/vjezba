@@ -21,19 +21,15 @@ class PregledController extends \Phalcon\Mvc\Controller
         ));
 
         $this->view->ordersPage = $ordersPaginator->getPaginate();
-        
-        $numberpageS = 1;
+
         $request = new Phalcon\Http\Request();
-        $orderItem = new OrderItem();
-        $items = $orderItem->findItem($request->get('code'));
+        $code = $request->get('code');
+        $phql = "SELECT OrderItem.*, Product.name FROM OrderItem JOIN Product ON OrderItem.orderCode = '$code' AND OrderItem.productCode = Product.code";
+        $query = $this->modelsManager->createQuery($phql);
+        $items = $query->execute();
 
-        $paginatorS = new Phalcon\Paginator\Adapter\Model(array(
-            "data" => $items,
-            "limit" => 20,
-            "page" => $numberpageS
-        ));
+        $this->view->orderItems = $items;
 
-        $this->view->orderItemPage = $paginatorS->getPaginate();
     }
 
 }

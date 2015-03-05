@@ -11,7 +11,7 @@ class KosaricaController extends \Phalcon\Mvc\Controller
     public function indexAction()
     {
         $this->view->form = new ProductForm();
-        $this->view->form2 = new KosaricaForm();
+        $this->view->formK = new KosaricaForm();
 
     }
 

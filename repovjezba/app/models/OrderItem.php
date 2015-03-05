@@ -7,31 +7,32 @@ class OrderItem extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    protected $order_code;
+    public $order_code;
 
     /**
      *
      * @var integer
      */
-    protected $product_code;
+    public $product_code;
 
     /**
      *
      * @var double
      */
-    protected $price;
+    public $price;
 
     /**
      *
      * @var integer
      */
-    protected $quantity;
+    public $quantity;
 
     /**
      *
      * @var double
      */
-    protected $total_price;
+    public $total_price;
+    public $productName;
 
     /**
      * Method to set the value of field order_code
@@ -67,7 +68,7 @@ class OrderItem extends \Phalcon\Mvc\Model
      */
     public function setPrice($price)
     {
-        $this->productPrice = $price;
+        $this->price = $price;
 
         return $this;
     }
@@ -80,7 +81,7 @@ class OrderItem extends \Phalcon\Mvc\Model
      */
     public function setQuantity($quantity)
     {
-        $this->itemQuantity = $quantity;
+        $this->quantity = $quantity;
 
         return $this;
     }
@@ -125,7 +126,7 @@ class OrderItem extends \Phalcon\Mvc\Model
      */
     public function getPrice()
     {
-        return $this->productPrice;
+        return $this->price;
     }
 
     /**
@@ -135,7 +136,7 @@ class OrderItem extends \Phalcon\Mvc\Model
      */
     public function getQuantity()
     {
-        return $this->itemQuantity;
+        return $this->quantity;
     }
 
     /**
@@ -156,8 +157,8 @@ class OrderItem extends \Phalcon\Mvc\Model
         return array(
             'order_code' => 'orderCode',
             'product_code' => 'productCode',
-            'price' => 'productPrice',
-            'quantity' => 'itemQuantity',
+            'price' => 'price',
+            'quantity' => 'quantity',
             'total_price' => 'totalPrice'
         );
     }

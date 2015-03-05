@@ -85,3 +85,25 @@ $di->set('modelsManager', function () {
     $manager = new Manager;
     return $manager;
 });
+
+$di->set('crypt', function () use ($config) {
+    $crypt = new Phalcon\Crypt();
+    $crypt->setKey($config->application->encryptKey);
+    return $crypt;
+});
+
+$di->set('elements', function(){
+    return new Elements();
+});
+
+
+$di->set('dispatcher', function () use ($di) {
+    $eventsManager = $di->getShared('eventsManager');
+    $security = new Security();
+    $eventsManager->attach('dispatch', $security);
+    $dispatcher = new Phalcon\Mvc\Dispatcher();
+    $dispatcher->setEventsManager($eventsManager);
+    return $dispatcher;
+});
+
+

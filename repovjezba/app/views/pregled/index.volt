@@ -11,10 +11,10 @@
     {% for order in ordersPage.items %}
     <tr>
         <td>{{ order.orderCode }}</td>
-        <td>{{ order.customerOrder }}</td>
+        <td>{{ order.customer }}</td>
         <td>{{ order.address }}</td>
         <td>{{ order.totalPrice }}</td>
-        <td>{{ order.orderDate }}</td>
+        <td>{{ order.date }}</td>
     </tr>
     {% endfor %}
 </table>
@@ -33,20 +33,21 @@
     <tr>
         <th>Sifra narudzbe</th>
         <th>Sifra artikla</th>
+        <th>Naziv artikla</th>
         <th>Cijena</th>
         <th>Kolicina</th>
         <th>Ukupna cijena</th>
-
     </tr>
-    {% for orderItem in orderItemPage.items %}
+
+    {% for item in orderItems %}
     <tr>
-        <td> {{ orderItem.orderCode }} </td>
-        <td> {{ orderItem.productCode }} </td>
-        <td> {{ orderItem.productPrice }} </td>
-        <td> {{ orderItem.itemQuantity }} </td>
-        <td> {{ orderItem.totalPrice }} </td>
+        <td> {{ item.orderItem.orderCode }} </td>
+        <td> {{ item.orderItem.productCode }} </td>
+        <td> {{ item.name }} </td>
+        <td> {{ item.orderItem.price }} </td>
+        <td> {{ item.orderItem.quantity }} </td>
+        <td> {{ item.orderItem.totalPrice }} </td>
     </tr>
     {% endfor %}
 </table>
 </div>
-

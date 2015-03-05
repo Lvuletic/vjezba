@@ -51,7 +51,7 @@ class OrdersController extends \Phalcon\Mvc\Controller
             }
             $order->save();
             $this->flash->success("Vaša narudžba je uspješno zaprimljena");
-            return $this->dispatcher->forward(array("controller" => "kosarica", "action" => "index"));
+            return $this->dispatcher->forward(array("controller" => "kosarica", "action" => "index.volt"));
         }
     }
 }

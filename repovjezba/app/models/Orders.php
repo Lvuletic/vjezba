@@ -7,31 +7,31 @@ class Orders extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    protected $order_code;
+    public $order_code;
 
     /**
      *
      * @var string
      */
-    protected $customer;
+    public $customer;
 
     /**
      *
      * @var string
      */
-    protected $address_delivery;
+    public $address_delivery;
 
     /**
      *
      * @var double
      */
-    protected $total_price;
+    public $total_price;
 
     /**
      *
      * @var string
      */
-    protected $date;
+    public $date;
 
     /**
      * Method to set the value of field order_code
@@ -54,7 +54,7 @@ class Orders extends \Phalcon\Mvc\Model
      */
     public function setCustomer($customer)
     {
-        $this->customerOrder = $customer;
+        $this->customer = $customer;
 
         return $this;
     }
@@ -93,7 +93,7 @@ class Orders extends \Phalcon\Mvc\Model
      */
     public function setDate($date)
     {
-        $this->orderDate = $date;
+        $this->date = $date;
 
         return $this;
     }
@@ -115,7 +115,7 @@ class Orders extends \Phalcon\Mvc\Model
      */
     public function getCustomer()
     {
-        return $this->customerOrder;
+        return $this->customer;
     }
 
     /**
@@ -145,7 +145,7 @@ class Orders extends \Phalcon\Mvc\Model
      */
     public function getDate()
     {
-        return $this->orderDate;
+        return $this->date;
     }
 
     /**
@@ -155,10 +155,10 @@ class Orders extends \Phalcon\Mvc\Model
     {
         return array(
             'order_code' => 'orderCode',
-            'customer' => 'customerOrder',
+            'customer' => 'customer',
             'address_delivery' => 'address',
             'total_price' => 'totalPrice',
-            'date' => 'orderDate'
+            'date' => 'date'
         );
     }
 
