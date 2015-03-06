@@ -10,8 +10,7 @@ use Phalcon\Mvc\User\Component;
 
 class Elements extends Component
 {
-    private $_headerMenu = array(
-        'navbar-left' => array(
+    public $_headerMenu = array(
             'index' => array(
                 'caption' => 'glavna stranica',
                 'action' => 'index'
@@ -20,55 +19,34 @@ class Elements extends Component
                 'caption' => 'pregled narudžbi',
                 'action' => 'index'
             ),
-            'kosarica' => array(
+            'webcart' => array(
                 'caption' => 'web kupovina',
                 'action' => 'index'
             ),
             'user' => array(
-                'caption' => 'kupci',
+                'caption' => 'registracija',
                 'action' => 'index'
             ),
-        ),
-        'navbar-right' => array(
-            'session' => array(
+            'login' => array(
                 'caption' => 'prijava',
                 'action' => 'index'
             ),
-        )
-    );
+        );
+
 
     public function getMenu()
     {
         $auth = $this->session->get('auth');
-        $user = $auth["username"];
         if ($auth) {
-            $this->_headerMenu['navbar-right']['session'] = array(
+            $this->_headerMenu['navbar-left']['user'] = array(
+                'caption' => 'vaš račun',
+                'action' => 'account'
+            );
+            $this->_headerMenu['navbar-right']['login'] = array(
                 'caption' => 'odjava',
                 'action' => 'logout'
             );
-            echo "prijavljeni ste kao $user";
-        } else {
-            unset($this->_headerMenu['navbar-left']['user']);
         }
-
-        $controllerName = $this->view->getControllerName();
-        foreach ($this->_headerMenu as $position => $menu) {
-            echo '<div class="nav-collapse">';
-            echo '<ul class="nav navbar-nav ', $position, '">';
-            foreach ($menu as $controller => $option) {
-                if ($controllerName == $controller) {
-                    echo '<li class="active">';
-                } else {
-                    echo '<li>';
-                }
-                echo $this->tag->linkTo($controller . '/' . $option['action'], $option['caption']);
-                echo '</li>';
-            }
-            echo '</ul>';
-            echo '</div>';
-        }
-
-
     }
 
 }

@@ -10,11 +10,11 @@
     </tr>
     {% for order in ordersPage.items %}
     <tr>
-        <td>{{ order.orderCode }}</td>
-        <td>{{ order.customer }}</td>
-        <td>{{ order.address }}</td>
-        <td>{{ order.totalPrice }}</td>
-        <td>{{ order.date }}</td>
+        <td>{{ order.getOrderCode() }}</td>
+        <td>{{ order.getCustomer() }}</td>
+        <td>{{ order.getAddressDelivery() }}</td>
+        <td>{{ order.getTotalPrice() }}</td>
+        <td>{{ order.getDate() }}</td>
     </tr>
     {% endfor %}
 </table>
@@ -41,12 +41,12 @@
 
     {% for item in orderItems %}
     <tr>
-        <td> {{ item.orderItem.orderCode }} </td>
-        <td> {{ item.orderItem.productCode }} </td>
+        <td> {{ item.orderItem.getOrderCode() }} </td>
+        <td> {{ item.orderItem.getProductCode() }} </td>
         <td> {{ item.name }} </td>
-        <td> {{ item.orderItem.price }} </td>
-        <td> {{ item.orderItem.quantity }} </td>
-        <td> {{ item.orderItem.totalPrice }} </td>
+        <td> {{ item.orderItem.getPrice() }} </td>
+        <td> {{ item.orderItem.getQuantity() }} </td>
+        <td> {{ item.orderItem.getTotalPrice() }} </td>
     </tr>
     {% endfor %}
 </table>

@@ -9,31 +9,33 @@ class User extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    public $id;
+    protected $id;
 
     /**
      *
      * @var string
      */
-    public $username;
+    protected $username;
 
     /**
      *
      * @var string
      */
-    public $phone;
+    protected $phone;
 
     /**
      *
      * @var string
      */
-    public $email;
+    protected $email;
+
+    protected $address;
 
     /**
      *
      * @var string
      */
-    public $password;
+    protected $password;
 
     public function getSource()
     {
@@ -93,6 +95,13 @@ class User extends \Phalcon\Mvc\Model
         return $this;
     }
 
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
     /**
      * Method to set the value of field password
      *
@@ -123,7 +132,7 @@ class User extends \Phalcon\Mvc\Model
      */
     public function getUsername()
     {
-        return $this->$username;
+        return $this->username;
     }
 
     /**
@@ -144,6 +153,11 @@ class User extends \Phalcon\Mvc\Model
     public function getEmail()
     {
         return $this->email;
+    }
+
+    public function getAddress()
+    {
+        return $this->address;
     }
 
     /**
@@ -184,9 +198,48 @@ class User extends \Phalcon\Mvc\Model
             'id' => 'id',
             'username' => 'username',
             'phone' => 'phone', 
-            'email' => 'email', 
+            'email' => 'email',
+            'address' => 'address',
             'password' => 'password'
         );
+    }
+
+    public function findUser($id)
+    {
+        $user = User::findFirst($id);
+        return $user;
+    }
+
+    public function findAddress($id)
+    {
+        $user = User::findFirst($id);
+        return $user->address;
+    }
+
+    public function findUsername($id)
+    {
+        $user = User::findFirst($id);
+        return $user->username;
+    }
+
+    public function createNew($username, $phone, $email, $address, $password)
+    {
+        $user = new User();
+        $user->setUsername($username);
+        $user->setPhone($phone);
+        $user->setEmail($email);
+        $user->setAddress($address);
+        $user->setPassword($password);
+        return $user;
+    }
+
+    public function updateUser($user, $phone, $email, $address, $password)
+    {
+        $user->setPhone($phone);
+        $user->setEmail($email);
+        $user->setAddress($address);
+        $user->setPassword($password);
+        return $user;
     }
 
 }

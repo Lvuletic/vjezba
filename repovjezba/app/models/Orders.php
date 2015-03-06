@@ -7,31 +7,31 @@ class Orders extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    public $order_code;
+    protected $order_code;
 
     /**
      *
      * @var string
      */
-    public $customer;
+    protected $customer;
 
     /**
      *
      * @var string
      */
-    public $address_delivery;
+    protected $address_delivery;
 
     /**
      *
      * @var double
      */
-    public $total_price;
+    protected $total_price;
 
     /**
      *
      * @var string
      */
-    public $date;
+    protected $date;
 
     /**
      * Method to set the value of field order_code

@@ -6,12 +6,14 @@
  * Time: 11:56
  */
 
-class SessionController extends \Phalcon\Mvc\Controller
+class LoginController extends ControllerBase
 {
     public function indexAction()
     {
-        $this->view->form = new SessionForm();
+        $this->view->form = new LoginForm();
+
     }
+
     public function loginAction()
     {
         if ($this->request->isPost()) {
@@ -19,20 +21,20 @@ class SessionController extends \Phalcon\Mvc\Controller
             $password = $this->request->getPost("password");
            /* if ($usermail == "admin" && $password == "1234")
             {
-                $this->session->set("admin", "admin");
+                $this->login->set("admin", "admin");
             }*/
           //  else {
             $user = User::findFirst("email = '$usermail'");
 
-                if ($user && $this->security->checkHash($password, $user->password))
+                if ($user && $this->security->checkHash($password, $user->getPassword()))
                 {
-                    $this->session->set("user_id", $user->id);
-                    $this->cookies->set("user_id", $user->id);
+                    $this->session->set("user_id", $user->getId());
+                    $this->cookies->set("user_id", $user->getId());
                     $this->session->set("auth", array(
-                        "id" => $user->id,
-                        "username" => $user->username
+                        "id" => $user->getId(),
+                        "username" => $user->getUsername()
                     ));
-                    $this->flash->success("Dobrodosli " . $user->username);
+                    $this->flash->success("Dobrodosli " . $user->getUsername());
                 } else {
                     $this->flash->error("username ili email ili sifra su krivi");
                 }
@@ -47,14 +49,15 @@ class SessionController extends \Phalcon\Mvc\Controller
 
     public function logoutAction()
     {
+        $this->cookies->delete("user_id");
         $this->session->destroy();
         $this->flash->success("Uspješno ste odjavljeni");
-        /*return $this->dispatcher->forward(
+        return $this->dispatcher->forward(
             array(
                 "controller" => "index",
                 "action" => "index"
             )
-        );*/
+        );
     }
 
 }

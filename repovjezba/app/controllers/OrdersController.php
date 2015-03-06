@@ -8,7 +8,7 @@
 
 use Phalcon\Forms\Element\Date;
 
-class OrdersController extends \Phalcon\Mvc\Controller
+class OrdersController extends ControllerBase
 {
     public function indexAction()
     {
@@ -21,9 +21,10 @@ class OrdersController extends \Phalcon\Mvc\Controller
         {
 
             $order = new Orders();
-            $order->createNew($order, $this->request->getPost("address"), $this->request->getPost("customer"));
+            $user = new User();
+            $order->createNew($order, $user->findAddress($this->session->get('user_id')), $user->findUsername($this->session->get('user_id')));
             $order->save();
-            foreach ($this->request->getPost("kosarica") as $item)
+            foreach ($this->request->getPost("webcart") as $item)
             {
                 $orderItem = new OrderItem();
                 $productName = substr($item, 0, -1);
@@ -32,11 +33,10 @@ class OrdersController extends \Phalcon\Mvc\Controller
                 foreach ($products as $product)
                 {
 
-                    $orderItem->setProductCode($product->code);
-                    $orderItem->setPrice($product->price);
-                    $orderItem->setQuantity($quantity);
-                    $orderItem->setTotalPrice($quantity * $product->price);
-                    $order->totalPrice+=$orderItem->totalPrice;
+                    $orderItem = $orderItem->createNew($product, $quantity);
+                    $totalprice = 0;
+                    $totalprice+=$orderItem->getTotalPrice();
+                    $order->setTotalPrice($totalprice);
                 }
 
                 $orderItem->setOrderCode($order->orderCode);
@@ -51,7 +51,7 @@ class OrdersController extends \Phalcon\Mvc\Controller
             }
             $order->save();
             $this->flash->success("Vaša narudžba je uspješno zaprimljena");
-            return $this->dispatcher->forward(array("controller" => "kosarica", "action" => "index.volt"));
+            return $this->dispatcher->forward(array("controller" => "webcart", "action" => "index"));
         }
     }
 }

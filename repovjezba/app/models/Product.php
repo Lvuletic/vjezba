@@ -7,19 +7,88 @@ class Product extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    public $code;
+    protected $code;
 
     /**
      *
      * @var string
      */
-    public $name;
+    protected $name;
 
     /**
      *
      * @var double
      */
-    public $price;
+    protected $price;
+
+    /**
+     * Method to set the value of field code
+     *
+     * @param integer $code
+     * @return $this
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Method to set the value of field name
+     *
+     * @param string $name
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Method to set the value of field price
+     *
+     * @param double $price
+     * @return $this
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Returns the value of field code
+     *
+     * @return integer
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Returns the value of field name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Returns the value of field price
+     *
+     * @return double
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
 
     /**
      * Independent Column Mapping.
@@ -27,8 +96,8 @@ class Product extends \Phalcon\Mvc\Model
     public function columnMap()
     {
         return array(
-            'code' => 'code',
-            'name' => 'name',
+            'code' => 'code', 
+            'name' => 'name', 
             'price' => 'price'
         );
     }

@@ -29,12 +29,15 @@ class Security extends Plugin
             "users" => new Role("Users"),
             "guests" => new Role("Guests")
         );
+
         foreach ($roles as $role) {
             $acl->addRole($role);
         }
 
         $privateResources = array(
-            "kosarica" => array("index")
+            "webcart" => array("index"),
+            "orders" => array("create"),
+            "user" => array("account")
         );
 
         foreach ($privateResources as $resource => $actions) {
@@ -45,7 +48,7 @@ class Security extends Plugin
             "index" => array("index"),
             "user" => array("index", "register"),
             "pregled" => array("index"),
-            "session" => array("index", "login", "logout")
+            "login" => array("index", "login", "logout")
         );
 
         foreach ($publicResources as $resource => $actions) {
@@ -76,7 +79,6 @@ class Security extends Plugin
         } else {
             $role = "Users";
         }
-
 
         $controller = $dispatcher->getControllerName();
         $action = $dispatcher->getActionName();

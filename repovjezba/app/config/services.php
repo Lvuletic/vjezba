@@ -72,7 +72,7 @@ $di->set('modelsMetadata', function () {
 });
 
 /**
- * Start the session the first time some component request the session service
+ * Start the login the first time some component request the login service
  */
 $di->set('session', function () {
     $session = new SessionAdapter();

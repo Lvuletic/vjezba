@@ -6,7 +6,7 @@
  * Time: 10:07
  */
 
-class PregledController extends \Phalcon\Mvc\Controller
+class PregledController extends ControllerBase
 {
     public function indexAction()
     {
@@ -24,9 +24,8 @@ class PregledController extends \Phalcon\Mvc\Controller
 
         $request = new Phalcon\Http\Request();
         $code = $request->get('code');
-        $phql = "SELECT OrderItem.*, Product.name FROM OrderItem JOIN Product ON OrderItem.orderCode = '$code' AND OrderItem.productCode = Product.code";
-        $query = $this->modelsManager->createQuery($phql);
-        $items = $query->execute();
+        $orderItem = new OrderItem();
+        $items = $orderItem->findOrderItemProduct($code);
 
         $this->view->orderItems = $items;
 

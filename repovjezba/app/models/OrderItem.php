@@ -7,32 +7,31 @@ class OrderItem extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    public $order_code;
+    protected $order_code;
 
     /**
      *
      * @var integer
      */
-    public $product_code;
+    protected $product_code;
 
     /**
      *
      * @var double
      */
-    public $price;
+    protected $price;
 
     /**
      *
      * @var integer
      */
-    public $quantity;
+    protected $quantity;
 
     /**
      *
      * @var double
      */
-    public $total_price;
-    public $productName;
+    protected $total_price;
 
     /**
      * Method to set the value of field order_code
@@ -106,7 +105,7 @@ class OrderItem extends \Phalcon\Mvc\Model
      */
     public function getOrderCode()
     {
-        return $this->order_code;
+        return $this->orderCode;
     }
 
     /**
@@ -116,7 +115,7 @@ class OrderItem extends \Phalcon\Mvc\Model
      */
     public function getProductCode()
     {
-        return $this->product_code;
+        return $this->productCode;
     }
 
     /**
@@ -146,7 +145,7 @@ class OrderItem extends \Phalcon\Mvc\Model
      */
     public function getTotalPrice()
     {
-        return $this->total_price;
+        return $this->totalPrice;
     }
 
     /**
@@ -167,6 +166,23 @@ class OrderItem extends \Phalcon\Mvc\Model
     {
         $items = OrderItem::find("orderCode='$code'");
         return $items;
+    }
+
+    public function findOrderItemProduct($code)
+    {
+        $phql = "SELECT OrderItem.*, Product.name FROM OrderItem JOIN Product ON OrderItem.orderCode = '$code' AND OrderItem.productCode = Product.code";
+        $query = $this->getModelsManager()->createQuery($phql);
+        return $items = $query->execute();
+    }
+
+    public function createNew($product, $quantity)
+    {
+        $orderItem = new OrderItem();
+        $orderItem->setProductCode($product->getCode());
+        $orderItem->setPrice($product->getPrice());
+        $orderItem->setQuantity($quantity);
+        $orderItem->setTotalPrice($quantity * $product->getPrice());
+        return $orderItem;
     }
 
 }

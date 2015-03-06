@@ -10,11 +10,11 @@ use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Select;
 
-class KosaricaForm extends Form
+class WebCartForm extends Form
 {
     public function initialize()
     {
-        $select = new Select("kosarica", array(), array("size" => 6, "name" => "kosarica[]", "multiple" => "multiple"));
+        $select = new Select("webcart", array(), array("size" => 6, "name" => "webcart[]", "multiple" => "multiple"));
         $select->setLabel("Vasa kosarica");
 
         $this->add($select);
