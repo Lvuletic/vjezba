@@ -11,16 +11,10 @@ class PregledController extends ControllerBase
     public function indexAction()
     {
         $this->view->form = new PregledForm;
-        $ordersNumberPage = 1;
-        $orders = Orders::find();
+        $orders = new Orders();
+        $orders = $orders->findOrderCustomer();
 
-        $ordersPaginator = new Phalcon\Paginator\Adapter\Model(array(
-            "data" => $orders,
-            "limit" =>50,
-            "page" => $ordersNumberPage
-        ));
-
-        $this->view->ordersPage = $ordersPaginator->getPaginate();
+        $this->view->ordersPage = $orders;
 
         $request = new Phalcon\Http\Request();
         $code = $request->get('code');

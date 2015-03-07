@@ -3,18 +3,20 @@
 <table id="narudzbe" border="1">
     <tr>
         <th>Sifra</th>
+        <th>Sifra kupca</th>
         <th>Ime kupca</th>
         <th>Adresa dostave</th>
         <th>Ukupna cijena</th>
         <th>Datum</th>
     </tr>
-    {% for order in ordersPage.items %}
+    {% for row in ordersPage %}
     <tr>
-        <td>{{ order.getOrderCode() }}</td>
-        <td>{{ order.getCustomer() }}</td>
-        <td>{{ order.getAddressDelivery() }}</td>
-        <td>{{ order.getTotalPrice() }}</td>
-        <td>{{ order.getDate() }}</td>
+        <td>{{ row.orders.getOrderCode() }}</td>
+        <td>{{ row.orders.getCustomerId() }}</td>
+        <td>{{ row.username }}</td>
+        <td>{{ row.orders.getAddressDelivery() }}</td>
+        <td>{{ row.orders.getTotalPrice() }}</td>
+        <td>{{ row.orders.getDate() }}</td>
     </tr>
     {% endfor %}
 </table>

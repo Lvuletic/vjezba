@@ -148,6 +148,17 @@ class OrderItem extends \Phalcon\Mvc\Model
         return $this->totalPrice;
     }
 
+    public function initialize()
+    {
+        $this->belongsTo("orderCode", "Orders", "orderCode", array(
+            "foreignKey" => true
+        ));
+
+        $this->belongsTo("productCode", "Product", "code", array(
+            "foreignKey" => true
+        ));
+    }
+
     /**
      * Independent Column Mapping.
      */

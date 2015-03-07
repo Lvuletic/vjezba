@@ -23,7 +23,7 @@ class Elements extends Component
                 'caption' => 'web kupovina',
                 'action' => 'index'
             ),
-            'user' => array(
+            'customer' => array(
                 'caption' => 'registracija',
                 'action' => 'index'
             ),
@@ -38,11 +38,11 @@ class Elements extends Component
     {
         $auth = $this->session->get('auth');
         if ($auth) {
-            $this->_headerMenu['navbar-left']['user'] = array(
+            $this->_headerMenu['customer'] = array(
                 'caption' => 'vaš račun',
                 'action' => 'account'
             );
-            $this->_headerMenu['navbar-right']['login'] = array(
+            $this->_headerMenu['login'] = array(
                 'caption' => 'odjava',
                 'action' => 'logout'
             );

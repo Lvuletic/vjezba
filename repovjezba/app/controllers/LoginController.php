@@ -24,7 +24,7 @@ class LoginController extends ControllerBase
                 $this->login->set("admin", "admin");
             }*/
           //  else {
-            $user = User::findFirst("email = '$usermail'");
+            $user = Customer::findFirst("email = '$usermail'");
 
                 if ($user && $this->security->checkHash($password, $user->getPassword()))
                 {
@@ -41,7 +41,7 @@ class LoginController extends ControllerBase
             //}
 
         }
-        $this->dispatcher->forward(array(
+        return $this->dispatcher->forward(array(
             "controller" => "index",
             "action" => "index"
         ));
@@ -50,14 +50,10 @@ class LoginController extends ControllerBase
     public function logoutAction()
     {
         $this->cookies->delete("user_id");
-        $this->session->destroy();
-        $this->flash->success("Uspješno ste odjavljeni");
-        return $this->dispatcher->forward(
-            array(
-                "controller" => "index",
-                "action" => "index"
-            )
-        );
+        $this->session->remove("user_id");
+        $this->session->remove("auth");
+        $this->flashSession->success("Uspješno ste odjavljeni");
+        return $this->response->redirect("index/index");
     }
 
 }

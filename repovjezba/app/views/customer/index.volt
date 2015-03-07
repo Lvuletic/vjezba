@@ -1,6 +1,6 @@
 {{ content() }}
 <div>
-    {{ form("user/register", "role": "form") }}
+    {{ form("customer/register", "role": "form") }}
     {{ formUser.label("username") }}
     <br>
     {{ formUser.render("username") }}

@@ -9,6 +9,7 @@
     <div id="main">
 	    <div id="body">
 		{{ content() }}
+
 		</div>
 	</div>
 		{{ javascript_include('js/jquery.min.js') }}

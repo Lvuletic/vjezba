@@ -37,7 +37,7 @@ class Security extends Plugin
         $privateResources = array(
             "webcart" => array("index"),
             "orders" => array("create"),
-            "user" => array("account")
+            "customer" => array("account")
         );
 
         foreach ($privateResources as $resource => $actions) {
@@ -46,7 +46,7 @@ class Security extends Plugin
 
         $publicResources = array(
             "index" => array("index"),
-            "user" => array("index", "register"),
+            "customer" => array("index", "register"),
             "pregled" => array("index"),
             "login" => array("index", "login", "logout")
         );

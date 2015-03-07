@@ -2,7 +2,7 @@
 
 use Phalcon\Mvc\Model\Validator\Email as Email;
 
-class User extends \Phalcon\Mvc\Model
+class Customer extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -36,11 +36,6 @@ class User extends \Phalcon\Mvc\Model
      * @var string
      */
     protected $password;
-
-    public function getSource()
-    {
-        return "customer";
-    }
 
 
     /**
@@ -170,6 +165,13 @@ class User extends \Phalcon\Mvc\Model
         return $this->password;
     }
 
+    public function initialize()
+    {
+        $this->hasMany("id", "Orders", "customer_id", array(
+            "foreignKey" => true
+        ));
+    }
+
     /**
      * Validations and business logic
      */
@@ -206,40 +208,34 @@ class User extends \Phalcon\Mvc\Model
 
     public function findUser($id)
     {
-        $user = User::findFirst($id);
-        return $user;
+        $customer = Customer::findFirst($id);
+        return $customer;
     }
 
     public function findAddress($id)
     {
-        $user = User::findFirst($id);
-        return $user->address;
-    }
-
-    public function findUsername($id)
-    {
-        $user = User::findFirst($id);
-        return $user->username;
+        $customer = Customer::findFirst($id);
+        return $customer->address;
     }
 
     public function createNew($username, $phone, $email, $address, $password)
     {
-        $user = new User();
-        $user->setUsername($username);
-        $user->setPhone($phone);
-        $user->setEmail($email);
-        $user->setAddress($address);
-        $user->setPassword($password);
-        return $user;
+        $customer = new Customer();
+        $customer->setUsername($username);
+        $customer->setPhone($phone);
+        $customer->setEmail($email);
+        $customer->setAddress($address);
+        $customer->setPassword($password);
+        return $customer;
     }
 
-    public function updateUser($user, $phone, $email, $address, $password)
+    public function updateUser($customer, $phone, $email, $address, $password)
     {
-        $user->setPhone($phone);
-        $user->setEmail($email);
-        $user->setAddress($address);
-        $user->setPassword($password);
-        return $user;
+        $customer->setPhone($phone);
+        $customer->setEmail($email);
+        $customer->setAddress($address);
+        $customer->setPassword($password);
+        return $customer;
     }
 
 }

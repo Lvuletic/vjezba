@@ -6,36 +6,36 @@
  * Time: 16:19
  */
 
-class UserController extends ControllerBase
+class CustomerController extends ControllerBase
 {
     public function indexAction()
     {
-        $this->view->formUser = new UserForm();
+        $this->view->formUser = new CustomerForm();
 
     }
 
     public function accountAction()
     {
-        $user = User::findFirst($this->session->get("user_id"));
+        $user = Customer::findFirst($this->session->get("user_id"));
         $this->view->formAccount = new AccountForm($user);
     }
 
     public function registerAction()
     {
-        $form = new UserForm();
+        $form = new CustomerForm();
         if (!$form->isValid($this->request->getPost()))
         {
             foreach($form->getMessages() as $message) {
                 $this->flash->error($message);
             }
             return $this->dispatcher->forward(array(
-                "controller" => "user",
+                "controller" => "customer",
                 "action" => "index"
             ));
         }
         else
         {
-            $user = new User();
+            $user = new Customer();
             $password = $this->request->getPost('password');
             $user = $user->createNew($this->request->getPost("username"), $this->request->getPost("phone"),
                 $this->request->getPost("email"), $this->request->getPost("address"), $this->security->hash($password));
@@ -61,20 +61,20 @@ class UserController extends ControllerBase
                 $this->flash->error($message);
             }
             return $this->dispatcher->forward(array(
-                "controller" => "user",
+                "controller" => "customer",
                 "action" => "account"
             ));
         }
         else
         {
-            $user = new User();
+            $user = new Customer();
             $user = $user->findUser($this->session->get("user_id"));
             $password = $this->request->getPost('oldPassword');
             if ($this->security->checkHash($password, $user->getPassword()) == false)
             {
                 $this->flash->error("Upisali ste pogrešnu šifru kao staru šifru");
                 return $this->dispatcher->forward(array(
-                    "controller" => "user",
+                    "controller" => "customer",
                     "action" => "account"
                 ));
             }

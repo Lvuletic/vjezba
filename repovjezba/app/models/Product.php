@@ -90,6 +90,13 @@ class Product extends \Phalcon\Mvc\Model
         return $this->price;
     }
 
+    public function initialize()
+    {
+        $this->hasMany("code", "OrderItem", "product_code", array(
+            "foreignKey" => true
+        ));
+    }
+
     /**
      * Independent Column Mapping.
      */

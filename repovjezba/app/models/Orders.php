@@ -13,7 +13,7 @@ class Orders extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    protected $customer;
+    protected $customer_id;
 
     /**
      *
@@ -52,9 +52,9 @@ class Orders extends \Phalcon\Mvc\Model
      * @param string $customer
      * @return $this
      */
-    public function setCustomer($customer)
+    public function setCustomerId($customer_id)
     {
-        $this->customer = $customer;
+        $this->customerId = $customer_id;
 
         return $this;
     }
@@ -113,9 +113,9 @@ class Orders extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getCustomer()
+    public function getCustomerId()
     {
-        return $this->customer;
+        return $this->customerId;
     }
 
     /**
@@ -148,6 +148,18 @@ class Orders extends \Phalcon\Mvc\Model
         return $this->date;
     }
 
+
+    public function initialize()
+    {
+        $this->belongsTo("customerId", "Customer", "id", array(
+            "foreignKey" => true
+        ));
+
+        $this->hasMany("orderCode", "OrderItem", "orderCode", array(
+            "foreignKey" => true
+        ));
+    }
+
     /**
      * Independent Column Mapping.
      */
@@ -155,18 +167,25 @@ class Orders extends \Phalcon\Mvc\Model
     {
         return array(
             'order_code' => 'orderCode',
-            'customer' => 'customer',
+            'customer_id' => 'customerId',
             'address_delivery' => 'address',
             'total_price' => 'totalPrice',
             'date' => 'date'
         );
     }
 
-    public function createNew($order, $address, $name)
+    public function findOrderCustomer()
+    {
+        $phql = "SELECT Orders.*, Customer.username FROM Orders JOIN Customer ON Orders.customerId = Customer.id";
+        $query = $this->getModelsManager()->createQuery($phql);
+        return $items = $query->execute();
+    }
+
+    public function createNew($order, $address, $id)
     {
         $date = date("Y-m-d");
         $order->setAddressDelivery($address);
-        $order->setCustomer($name);
+        $order->setCustomerId($id);
         $order->setTotalPrice(0);
         $order->setDate($date);
         return $order;

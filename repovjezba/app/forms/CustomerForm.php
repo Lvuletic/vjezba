@@ -13,7 +13,7 @@ use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Email;
 use Phalcon\Validation\Validator\StringLength;
 
-class UserForm extends Form
+class CustomerForm extends Form
 {
     public function initialize()
     {

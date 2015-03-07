@@ -1,6 +1,6 @@
 {{ content() }}
 <div>
-    {{ form("user/save", "role": "form") }}
+    {{ form("customer/save", "role": "form") }}
 
     {{ formAccount.label("phone") }}
     <br>

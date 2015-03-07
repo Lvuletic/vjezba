@@ -21,9 +21,11 @@ class OrdersController extends ControllerBase
         {
 
             $order = new Orders();
-            $user = new User();
-            $order->createNew($order, $user->findAddress($this->session->get('user_id')), $user->findUsername($this->session->get('user_id')));
+            $customer = new Customer();
+            $customerId = $this->session->get("user_id");
+            $order->createNew($order, $customer->findAddress($customerId), $customerId);
             $order->save();
+            $totalprice = 0;
             foreach ($this->request->getPost("webcart") as $item)
             {
                 $orderItem = new OrderItem();
@@ -34,12 +36,12 @@ class OrdersController extends ControllerBase
                 {
 
                     $orderItem = $orderItem->createNew($product, $quantity);
-                    $totalprice = 0;
+
                     $totalprice+=$orderItem->getTotalPrice();
                     $order->setTotalPrice($totalprice);
                 }
 
-                $orderItem->setOrderCode($order->orderCode);
+                $orderItem->setOrderCode($order->getOrderCode());
 
                 if ($orderItem->save()==false)
                 {
