@@ -18,9 +18,6 @@ class PregledForm extends Form
 
         $this->add($text);
 
-
-
     }
-
 
 }

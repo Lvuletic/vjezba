@@ -96,7 +96,6 @@ $di->set('elements', function(){
     return new Elements();
 });
 
-
 $di->set('dispatcher', function () use ($di) {
     $eventsManager = $di->getShared('eventsManager');
     $security = new Security();
@@ -106,4 +105,7 @@ $di->set('dispatcher', function () use ($di) {
     return $dispatcher;
 });
 
-
+$di->set('factory', function () {
+    $factory = new FactoryMethod();
+    return $factory;
+});

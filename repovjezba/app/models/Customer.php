@@ -1,45 +1,39 @@
 <?php
-
-use Phalcon\Mvc\Model\Validator\Email as Email;
-
-class User extends \Phalcon\Mvc\Model
+use Phalcon\Mvc\Model\Validator\Email;
+class Customer extends \Phalcon\Mvc\Model implements Finder
 {
 
     /**
      *
      * @var integer
      */
-    public $id;
+    protected $id;
 
     /**
      *
      * @var string
      */
-    public $username;
+    protected $username;
 
     /**
      *
      * @var string
      */
-    public $phone;
+    protected $phone;
 
     /**
      *
      * @var string
      */
-    public $email;
-    public $address;
+    protected $email;
+
+    protected $address;
 
     /**
      *
      * @var string
      */
-    public $password;
-
-    public function getSource()
-    {
-        return "customer";
-    }
+    protected $password;
 
 
     /**
@@ -94,6 +88,13 @@ class User extends \Phalcon\Mvc\Model
         return $this;
     }
 
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
     /**
      * Method to set the value of field password
      *
@@ -124,7 +125,7 @@ class User extends \Phalcon\Mvc\Model
      */
     public function getUsername()
     {
-        return $this->$username;
+        return $this->username;
     }
 
     /**
@@ -147,6 +148,11 @@ class User extends \Phalcon\Mvc\Model
         return $this->email;
     }
 
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
     /**
      * Returns the value of field password
      *
@@ -155,6 +161,13 @@ class User extends \Phalcon\Mvc\Model
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function initialize()
+    {
+        $this->hasMany("id", "Orders", "customer_id", array(
+            "foreignKey" => true
+        ));
     }
 
     /**
@@ -189,6 +202,38 @@ class User extends \Phalcon\Mvc\Model
             'address' => 'address',
             'password' => 'password'
         );
+    }
+
+    public function findObject($id)
+    {
+        $customer = Customer::findFirst($id);
+        return $customer;
+    }
+
+    public function findAddress($id)
+    {
+        $customer = Customer::findFirst($id);
+        return $customer->address;
+    }
+
+    public function createNew($username, $phone, $email, $address, $password)
+    {
+        $customer = new Customer();
+        $customer->setUsername($username);
+        $customer->setPhone($phone);
+        $customer->setEmail($email);
+        $customer->setAddress($address);
+        $customer->setPassword($password);
+        return $customer;
+    }
+
+    public function updateUser($customer, $phone, $email, $address, $password)
+    {
+        $customer->setPhone($phone);
+        $customer->setEmail($email);
+        $customer->setAddress($address);
+        $customer->setPassword($password);
+        return $customer;
     }
 
 }

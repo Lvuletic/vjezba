@@ -17,7 +17,8 @@ return new \Phalcon\Config(array(
         'libraryDir'     => __DIR__ . '/../../app/library/',
         'cacheDir'       => __DIR__ . '/../../app/cache/',
         'formsDir'       => __DIR__ . '/../../app/forms/',
+        'factoryDir'     => __DIR__ . '/../../app/factories/',
         'encryptKey' => '2tx6]GD}532q4x_',
-        'baseUri'        => '/repovjezba/',
+        'baseUri'        => '/vjezba/',
     )
 ));

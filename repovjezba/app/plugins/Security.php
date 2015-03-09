@@ -18,7 +18,7 @@ class Security extends Plugin
    /* public function __construct($dependencyInjector) {
         $this->_dependencyInjector = $dependencyInjector;
     }*/
-/*
+
     public function getAcl()
     {
         $acl = new Phalcon\Acl\Adapter\Memory();
@@ -27,14 +27,18 @@ class Security extends Plugin
 
         $roles = array(
             "users" => new Role("Users"),
-            "guests" => new Role("Guests")
+            "guests" => new Role("Guests"),
+            "admin" => new Role("Admin")
         );
+
         foreach ($roles as $role) {
             $acl->addRole($role);
         }
 
         $privateResources = array(
-            "kosarica" => array("index2")
+            "webcart" => array("index"),
+            "orders" => array("create"),
+            "customer" => array("account")
         );
 
         foreach ($privateResources as $resource => $actions) {
@@ -42,10 +46,9 @@ class Security extends Plugin
         }
 
         $publicResources = array(
-            "index2" => array("index2"),
-            "user" => array("index2", "register"),
-            "pregled" => array("index2"),
-            "login" => array("index2", "login", "logout")
+            "index" => array("index"),
+            "customer" => array("index", "register"),
+            "login" => array("index", "login", "logout")
         );
 
         foreach ($publicResources as $resource => $actions) {
@@ -54,7 +57,9 @@ class Security extends Plugin
 
         foreach ($roles as $role) {
             foreach ($publicResources as $resource => $actions) {
-                $acl->allow($role->getName(), $resource, '*');
+                foreach ($actions as $action) {
+                    $acl->allow($role->getName(), $resource, $action);
+                }
             }
         }
 
@@ -65,6 +70,14 @@ class Security extends Plugin
             $this->persistent->acl = $acl;
         }
 
+        $productResource = new Resource("product");
+        $pregledResource = new Resource("pregled");
+        $acl->addResource($pregledResource, "index");
+        $acl->addResource($productResource, array("index", "create"));
+        $acl->allow("Admin", "pregled", "index");
+        $acl->allow("Admin", "product", "index");
+        $acl->allow("Admin", "product", "create");
+
         return $this->persistent->acl = $acl;
     }
 
@@ -74,9 +87,13 @@ class Security extends Plugin
         if (!$auth) {
             $role = "Guests";
         } else {
-            $role = "Users";
+            if ($this->session->get("user_id")==1)
+            {
+                $role = "Admin";
+            } else {
+                $role = "Users";
+            }
         }
-
 
         $controller = $dispatcher->getControllerName();
         $action = $dispatcher->getActionName();
@@ -89,12 +106,12 @@ class Security extends Plugin
             $this->flash->error("Nemate pristup ovoj stranici, molimo registrirajte se");
             $dispatcher->forward(
                 array(
-                    "controller" => "index2",
-                    "action" => "index2"
+                    "controller" => "index",
+                    "action" => "index"
                 )
             );
 
             return false;
         }
-    }*/
+    }
 }

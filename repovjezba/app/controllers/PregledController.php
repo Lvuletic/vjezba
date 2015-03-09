@@ -6,30 +6,26 @@
  * Time: 10:07
  */
 
-class PregledController extends \Phalcon\Mvc\Controller
+class PregledController extends ControllerBase
 {
+    public function initialize()
+    {
+        parent::initialize();
+    }
+
     public function indexAction()
     {
         $this->view->form = new PregledForm;
-        $ordersNumberPage = 1;
-        $orders = Orders::find();
+        $orders = $this->factory->createObject("Orders");
+        $orders = $orders->findOrderCustomer();
 
-        $ordersPaginator = new Phalcon\Paginator\Adapter\Model(array(
-            "data" => $orders,
-            "limit" =>50,
-            "page" => $ordersNumberPage
-        ));
-
-        $this->view->ordersPage = $ordersPaginator->getPaginate();
+        $this->view->ordersPage = $orders;
 
         $request = new Phalcon\Http\Request();
         $code = $request->get('code');
-        $phql = "SELECT OrderItem.*, Product.name FROM OrderItem JOIN Product ON OrderItem.orderCode = '$code' AND OrderItem.productCode = Product.code";
-        $query = $this->modelsManager->createQuery($phql);
-        $items = $query->execute();
+        $orderItem = $this->factory->createObject("OrderItem");
+        $items = $orderItem->findOrderItemProduct($code);
 
         $this->view->orderItems = $items;
-
     }
-
 }

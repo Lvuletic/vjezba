@@ -8,8 +8,13 @@
 
 use Phalcon\Forms\Element\Date;
 
-class OrdersController extends \Phalcon\Mvc\Controller
+class OrdersController extends ControllerBase
 {
+    public function initialize()
+    {
+        parent::initialize();
+    }
+
     public function indexAction()
     {
 
@@ -20,38 +25,40 @@ class OrdersController extends \Phalcon\Mvc\Controller
         if ($this->request->isPost() == true)
         {
 
-            $order = new Orders();
-            $order->createNew($order, $this->request->getPost("address"), $this->request->getPost("customer"));
+            $order = $this->factory->createObject("Orders");
+            $customer = $this->factory->createObject("Customer");
+            $customerId = $this->session->get("user_id");
+            $order->createNew($order, $customer->findAddress($customerId), $customerId);
             $order->save();
-            foreach ($this->request->getPost("kosarica") as $item)
+            $totalprice = 0;
+            foreach ($this->request->getPost("webcart") as $item)
             {
-                $orderItem = new OrderItem();
+                $orderItem = $this->factory->createObject("OrderItem");
                 $productName = substr($item, 0, -1);
                 $quantity = substr($item, -1);
                 $products = Product::find("name='$productName'");
                 foreach ($products as $product)
                 {
 
-                    $orderItem->setProductCode($product->code);
-                    $orderItem->setPrice($product->price);
-                    $orderItem->setQuantity($quantity);
-                    $orderItem->setTotalPrice($quantity * $product->price);
-                    $order->totalPrice+=$orderItem->totalPrice;
+                    $orderItem = $orderItem->createNew($product, $quantity);
+
+                    $totalprice+=$orderItem->getTotalPrice();
+                    $order->setTotalPrice($totalprice);
                 }
 
-                $orderItem->setOrderCode($order->orderCode);
+                $orderItem->setOrderCode($order->getOrderCode());
 
                 if ($orderItem->save()==false)
                 {
                     foreach($orderItem->getMessages() as $message)
                     {
-                        echo $message;
+                        $this->flash->notice($message);
                     }
                 }
             }
             $order->save();
             $this->flash->success("Vaša narudžba je uspješno zaprimljena");
-            return $this->dispatcher->forward(array("controller" => "kosarica", "action" => "index2.volt"));
+            return $this->dispatcher->forward(array("controller" => "webcart", "action" => "index"));
         }
     }
 }

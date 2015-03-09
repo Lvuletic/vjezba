@@ -1,30 +1,25 @@
 {{ content() }}
 
 <div>
-    {{ form("kosarica/index", "role": "form") }}
-    {{ form.label("product") }}
+    {{ form("webcart/index", "role": "form") }}
+    {{ formProduct.label("product") }}
     <br>
-    {{ form.render("product") }}
+    {{ formProduct.render("product") }}
     {{ end_form() }}
 </div>
 
 
 {{ submit_button("name": "add", "value": "Dodaj artikal", "id": "addArtikal", "onclick": "addArtikal()") }}
 <br><br>
-{{ form("Orders/create", "role": "form") }}
-{{ formK.label("kosarica") }}
+{{ form("orders/create", "role": "form") }}
+{{ formWebCart.label("webcart") }}
 <br>
-{{ formK.render("kosarica") }}
+{{ formWebCart.render("webcart") }}
 <br>
 {{ tag_html("button", ["type": "button", "value": "Makni artikal", "onclick": "removeArtikal()"], false, true, true) }}
 Makni artikal
 {{ tag_html_close("button") }}
-<br><br>
-{{ formK.label("customer") }}
-{{ formK.render("customer") }}
 <br>
-{{ formK.label("address") }}
-{{ formK.render("address") }}
 <br>
 {{ submit_button("name": "create", "value": "Spremi narudžbu", "onclick": "selectAll()") }}
 
