@@ -18,7 +18,7 @@ class Security extends Plugin
    /* public function __construct($dependencyInjector) {
         $this->_dependencyInjector = $dependencyInjector;
     }*/
-
+/*
     public function getAcl()
     {
         $acl = new Phalcon\Acl\Adapter\Memory();
@@ -29,15 +29,12 @@ class Security extends Plugin
             "users" => new Role("Users"),
             "guests" => new Role("Guests")
         );
-
         foreach ($roles as $role) {
             $acl->addRole($role);
         }
 
         $privateResources = array(
-            "webcart" => array("index"),
-            "orders" => array("create"),
-            "customer" => array("account")
+            "kosarica" => array("index2")
         );
 
         foreach ($privateResources as $resource => $actions) {
@@ -45,10 +42,10 @@ class Security extends Plugin
         }
 
         $publicResources = array(
-            "index" => array("index"),
-            "customer" => array("index", "register"),
-            "pregled" => array("index"),
-            "login" => array("index", "login", "logout")
+            "index2" => array("index2"),
+            "user" => array("index2", "register"),
+            "pregled" => array("index2"),
+            "login" => array("index2", "login", "logout")
         );
 
         foreach ($publicResources as $resource => $actions) {
@@ -80,6 +77,7 @@ class Security extends Plugin
             $role = "Users";
         }
 
+
         $controller = $dispatcher->getControllerName();
         $action = $dispatcher->getActionName();
 
@@ -91,12 +89,12 @@ class Security extends Plugin
             $this->flash->error("Nemate pristup ovoj stranici, molimo registrirajte se");
             $dispatcher->forward(
                 array(
-                    "controller" => "index",
-                    "action" => "index"
+                    "controller" => "index2",
+                    "action" => "index2"
                 )
             );
 
             return false;
         }
-    }
+    }*/
 }

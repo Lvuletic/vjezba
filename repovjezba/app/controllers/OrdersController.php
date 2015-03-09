@@ -8,7 +8,7 @@
 
 use Phalcon\Forms\Element\Date;
 
-class OrdersController extends ControllerBase
+class OrdersController extends \Phalcon\Mvc\Controller
 {
     public function indexAction()
     {
@@ -21,12 +21,9 @@ class OrdersController extends ControllerBase
         {
 
             $order = new Orders();
-            $customer = new Customer();
-            $customerId = $this->session->get("user_id");
-            $order->createNew($order, $customer->findAddress($customerId), $customerId);
+            $order->createNew($order, $this->request->getPost("address"), $this->request->getPost("customer"));
             $order->save();
-            $totalprice = 0;
-            foreach ($this->request->getPost("webcart") as $item)
+            foreach ($this->request->getPost("kosarica") as $item)
             {
                 $orderItem = new OrderItem();
                 $productName = substr($item, 0, -1);
@@ -35,13 +32,14 @@ class OrdersController extends ControllerBase
                 foreach ($products as $product)
                 {
 
-                    $orderItem = $orderItem->createNew($product, $quantity);
-
-                    $totalprice+=$orderItem->getTotalPrice();
-                    $order->setTotalPrice($totalprice);
+                    $orderItem->setProductCode($product->code);
+                    $orderItem->setPrice($product->price);
+                    $orderItem->setQuantity($quantity);
+                    $orderItem->setTotalPrice($quantity * $product->price);
+                    $order->totalPrice+=$orderItem->totalPrice;
                 }
 
-                $orderItem->setOrderCode($order->getOrderCode());
+                $orderItem->setOrderCode($order->orderCode);
 
                 if ($orderItem->save()==false)
                 {
@@ -53,7 +51,7 @@ class OrdersController extends ControllerBase
             }
             $order->save();
             $this->flash->success("Vaša narudžba je uspješno zaprimljena");
-            return $this->dispatcher->forward(array("controller" => "webcart", "action" => "index"));
+            return $this->dispatcher->forward(array("controller" => "kosarica", "action" => "index2.volt"));
         }
     }
 }

@@ -7,31 +7,32 @@ class OrderItem extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    protected $order_code;
+    public $order_code;
 
     /**
      *
      * @var integer
      */
-    protected $product_code;
+    public $product_code;
 
     /**
      *
      * @var double
      */
-    protected $price;
+    public $price;
 
     /**
      *
      * @var integer
      */
-    protected $quantity;
+    public $quantity;
 
     /**
      *
      * @var double
      */
-    protected $total_price;
+    public $total_price;
+    public $productName;
 
     /**
      * Method to set the value of field order_code
@@ -105,7 +106,7 @@ class OrderItem extends \Phalcon\Mvc\Model
      */
     public function getOrderCode()
     {
-        return $this->orderCode;
+        return $this->order_code;
     }
 
     /**
@@ -115,7 +116,7 @@ class OrderItem extends \Phalcon\Mvc\Model
      */
     public function getProductCode()
     {
-        return $this->productCode;
+        return $this->product_code;
     }
 
     /**
@@ -145,18 +146,7 @@ class OrderItem extends \Phalcon\Mvc\Model
      */
     public function getTotalPrice()
     {
-        return $this->totalPrice;
-    }
-
-    public function initialize()
-    {
-        $this->belongsTo("orderCode", "Orders", "orderCode", array(
-            "foreignKey" => true
-        ));
-
-        $this->belongsTo("productCode", "Product", "code", array(
-            "foreignKey" => true
-        ));
+        return $this->total_price;
     }
 
     /**
@@ -177,23 +167,6 @@ class OrderItem extends \Phalcon\Mvc\Model
     {
         $items = OrderItem::find("orderCode='$code'");
         return $items;
-    }
-
-    public function findOrderItemProduct($code)
-    {
-        $phql = "SELECT OrderItem.*, Product.name FROM OrderItem JOIN Product ON OrderItem.orderCode = '$code' AND OrderItem.productCode = Product.code";
-        $query = $this->getModelsManager()->createQuery($phql);
-        return $items = $query->execute();
-    }
-
-    public function createNew($product, $quantity)
-    {
-        $orderItem = new OrderItem();
-        $orderItem->setProductCode($product->getCode());
-        $orderItem->setPrice($product->getPrice());
-        $orderItem->setQuantity($quantity);
-        $orderItem->setTotalPrice($quantity * $product->getPrice());
-        return $orderItem;
     }
 
 }

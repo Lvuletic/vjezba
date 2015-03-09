@@ -6,11 +6,11 @@ var product;
 
 function selectedProduct(){
     product = this.value;
-    console.log(this.value);
+    //console.log(this.value);
 }
 
 function addArtikal() {
-    var selectbox = document.getElementById("webcart");
+    var selectbox = document.getElementById("kosarica");
     var quantity = 1;
         var options = selectbox.options;
         for (var i = 0; i < options.length; i++)
@@ -35,7 +35,7 @@ function addArtikal() {
 
 function selectAll()
 {
-    selectBox = document.getElementById("webcart");
+    selectBox = document.getElementById("kosarica");
     for (var i = 0; i < selectBox.options.length; i++)
     {
         selectBox.options[i].selected = true;
@@ -44,6 +44,6 @@ function selectAll()
 
 function removeArtikal()
 {
-    var selectbox = document.getElementById("webcart");
+    var selectbox = document.getElementById("kosarica");
     selectbox.remove(x.selectedIndex);
 }

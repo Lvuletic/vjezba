@@ -17,6 +17,7 @@ class ProductForm extends Form
         $select = new Select("product", Product::find(), array("size" => 6, "using" => array("name", "name")));
         $select->setLabel("Popis artikala");
 
+
         $this->add($select);
 
     }

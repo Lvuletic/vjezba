@@ -7,31 +7,31 @@ class Orders extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    protected $order_code;
+    public $order_code;
 
     /**
      *
      * @var string
      */
-    protected $customer_id;
+    public $customer;
 
     /**
      *
      * @var string
      */
-    protected $address_delivery;
+    public $address_delivery;
 
     /**
      *
      * @var double
      */
-    protected $total_price;
+    public $total_price;
 
     /**
      *
      * @var string
      */
-    protected $date;
+    public $date;
 
     /**
      * Method to set the value of field order_code
@@ -52,9 +52,9 @@ class Orders extends \Phalcon\Mvc\Model
      * @param string $customer
      * @return $this
      */
-    public function setCustomerId($customer_id)
+    public function setCustomer($customer)
     {
-        $this->customerId = $customer_id;
+        $this->customer = $customer;
 
         return $this;
     }
@@ -113,9 +113,9 @@ class Orders extends \Phalcon\Mvc\Model
      *
      * @return string
      */
-    public function getCustomerId()
+    public function getCustomer()
     {
-        return $this->customerId;
+        return $this->customer;
     }
 
     /**
@@ -148,18 +148,6 @@ class Orders extends \Phalcon\Mvc\Model
         return $this->date;
     }
 
-
-    public function initialize()
-    {
-        $this->belongsTo("customerId", "Customer", "id", array(
-            "foreignKey" => true
-        ));
-
-        $this->hasMany("orderCode", "OrderItem", "orderCode", array(
-            "foreignKey" => true
-        ));
-    }
-
     /**
      * Independent Column Mapping.
      */
@@ -167,25 +155,18 @@ class Orders extends \Phalcon\Mvc\Model
     {
         return array(
             'order_code' => 'orderCode',
-            'customer_id' => 'customerId',
+            'customer' => 'customer',
             'address_delivery' => 'address',
             'total_price' => 'totalPrice',
             'date' => 'date'
         );
     }
 
-    public function findOrderCustomer()
-    {
-        $phql = "SELECT Orders.*, Customer.username FROM Orders JOIN Customer ON Orders.customerId = Customer.id";
-        $query = $this->getModelsManager()->createQuery($phql);
-        return $items = $query->execute();
-    }
-
-    public function createNew($order, $address, $id)
+    public function createNew($order, $address, $name)
     {
         $date = date("Y-m-d");
         $order->setAddressDelivery($address);
-        $order->setCustomerId($id);
+        $order->setCustomer($name);
         $order->setTotalPrice(0);
         $order->setDate($date);
         return $order;

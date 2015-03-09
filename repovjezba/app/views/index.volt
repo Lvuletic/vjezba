@@ -5,15 +5,14 @@
 		{{ stylesheet_link('css/stilovi.css') }}
 	</head>
 	<body>
-	{{ partial("partials/navbar") }}
     <div id="main">
+    {{ elements.getMenu() }}
 	    <div id="body">
 		{{ content() }}
-
 		</div>
 	</div>
 		{{ javascript_include('js/jquery.min.js') }}
-		{{ javascript_include('js/webcart.js') }}
+		{{ javascript_include('js/kosarica.js') }}
 		{{ javascript_include('js/tablica.js') }}
 	</body>
 </html>

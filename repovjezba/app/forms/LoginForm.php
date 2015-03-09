@@ -10,7 +10,7 @@ use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Password;
 
-class LoginForm extends Form
+class LoginForm extends form
 {
     public function initialize()
     {

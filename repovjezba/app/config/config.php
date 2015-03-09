@@ -18,6 +18,6 @@ return new \Phalcon\Config(array(
         'cacheDir'       => __DIR__ . '/../../app/cache/',
         'formsDir'       => __DIR__ . '/../../app/forms/',
         'encryptKey' => '2tx6]GD}532q4x_',
-        'baseUri'        => '/vjezba/',
+        'baseUri'        => '/repovjezba/',
     )
 ));
