@@ -16,6 +16,7 @@ class LoginController extends ControllerBase
     public function indexAction()
     {
         $this->view->form = new LoginForm();
+        $this->loadTranslation("login");
 
     }
 
@@ -34,9 +35,9 @@ class LoginController extends ControllerBase
                         "id" => $user->getId(),
                         "username" => $user->getUsername()
                     ));
-                    $this->flash->success("Dobrodosli " . $user->getUsername());
+                    $this->flash->success("Welcome " . $user->getUsername());
                 } else {
-                    $this->flash->error("username ili email ili sifra su krivi");
+                    $this->flash->error("username or email are incorrect");
                 }
         }
         return $this->dispatcher->forward(array(
@@ -50,7 +51,7 @@ class LoginController extends ControllerBase
         $this->cookies->delete("user_id");
         $this->session->remove("user_id");
         $this->session->remove("auth");
-        $this->flashSession->success("Uspješno ste odjavljeni");
+        $this->flashSession->success("You have been successfully logged out");
         return $this->response->redirect("index/index");
     }
 

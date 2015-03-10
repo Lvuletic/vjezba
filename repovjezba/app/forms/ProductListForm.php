@@ -15,7 +15,7 @@ class ProductListForm extends Form
     public function initialize()
     {
         $select = new Select("product", Product::find(), array("size" => 6, "using" => array("name", "name")));
-        $select->setLabel("Popis artikala");
+        $select->setLabel("Product list");
 
         $this->add($select);
 

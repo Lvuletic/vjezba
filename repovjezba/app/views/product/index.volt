@@ -1,4 +1,5 @@
 {{ content() }}
+<?php echo $t->_("product") ?>
 <div>
     {{ form("product/create", "role": "form") }}
     {{ form.label("name") }}

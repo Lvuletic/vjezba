@@ -15,21 +15,10 @@ class WebCartForm extends Form
     public function initialize()
     {
         $select = new Select("webcart", array(), array("size" => 6, "name" => "webcart[]", "multiple" => "multiple"));
-        $select->setLabel("Vasa kosarica");
+        $select->setLabel("Your webcart");
 
         $this->add($select);
 
-        $text = new Text("customer");
-        $text->setLabel("Vaše ime: ");
-
-        $this->add($text);
-
-        $text2 = new Text("address");
-        $text2->setLabel("Adresa na koju želite dostavu: ");
-
-        $this->add($text2);
-
     }
-
 
 }

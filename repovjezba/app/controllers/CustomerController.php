@@ -16,6 +16,7 @@ class CustomerController extends ControllerBase
     public function indexAction()
     {
         $this->view->formUser = new CustomerForm();
+        $this->loadTranslation("customer");
 
     }
 

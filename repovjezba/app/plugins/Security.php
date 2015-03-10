@@ -46,7 +46,7 @@ class Security extends Plugin
         }
 
         $publicResources = array(
-            "index" => array("index"),
+            "index" => array("index", "changeLanguage"),
             "customer" => array("index", "register"),
             "login" => array("index", "login", "logout")
         );
@@ -103,15 +103,17 @@ class Security extends Plugin
         $allowed = $acl->isAllowed($role, $controller, $action);
         if ($allowed != Acl::ALLOW) {
 
-            $this->flash->error("Nemate pristup ovoj stranici, molimo registrirajte se");
+            $this->flash->error("You do not have access to this page, please login or register");
+
             $dispatcher->forward(
                 array(
                     "controller" => "index",
                     "action" => "index"
                 )
             );
-
             return false;
+
         }
     }
+
 }

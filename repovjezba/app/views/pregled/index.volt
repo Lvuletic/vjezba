@@ -1,4 +1,4 @@
-
+<?php echo $t->_("checkout") ?>
 <div id="scroll">
 <table id="narudzbe" border="1">
     <tr>
@@ -26,10 +26,10 @@
     {{ form("pregled/index", "role": "form") }}
     {{ form.label("code") }}
     {{ form.render("code") }}
-    {{ submit_button("name": "showOrderItems", "value": "Prikazi stavke", "id": "showOrderItems") }}
+    {{ submit_button("name": "showOrderItems", "value": "Show items", "id": "showOrderItems") }}
     {{ end_form() }}
 </div>
-
+<?php echo $t->_("items") ?>
 <div>
 <table>
     <tr>

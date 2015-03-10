@@ -27,5 +27,7 @@ class PregledController extends ControllerBase
         $items = $orderItem->findOrderItemProduct($code);
 
         $this->view->orderItems = $items;
+
+        $this->loadTranslation("pregled");
     }
 }

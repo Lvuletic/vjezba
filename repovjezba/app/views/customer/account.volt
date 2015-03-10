@@ -22,6 +22,6 @@
     <br>
     {{ formAccount.render("newPassword") }}
     <br>
-    {{ submit_button("value": "Spremite promjene") }}
+    {{ submit_button("value": "Save changes") }}
     {{ end_form() }}
 </div>

@@ -1,5 +1,4 @@
 
-
 document.getElementById("product").addEventListener("change", selectedProduct)
 
 var product;
@@ -9,7 +8,7 @@ function selectedProduct(){
     console.log(this.value);
 }
 
-function addArtikal() {
+function addProduct() {
     var selectbox = document.getElementById("webcart");
     var quantity = 1;
         var options = selectbox.options;
@@ -42,8 +41,8 @@ function selectAll()
     }
 }
 
-function removeArtikal()
+function removeProduct()
 {
     var selectbox = document.getElementById("webcart");
-    selectbox.remove(x.selectedIndex);
+    selectbox.remove(selectbox.selectedIndex);
 }

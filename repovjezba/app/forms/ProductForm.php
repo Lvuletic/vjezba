@@ -17,29 +17,29 @@ class ProductForm extends Form
     public function initialize()
     {
         $text = new Text("name");
-        $text->setLabel("Ime proizvoda");
+        $text->setLabel("Product name");
         $text->addValidator(new PresenceOf(array(
-            'message' => 'Potrebno je ime'
+            'message' => 'Product name is required'
         )));
 
         $this->add($text);
 
         $text2 = new Text("price");
-        $text2->setLabel("Cijena");
+        $text2->setLabel("Price");
         $text2->addValidator(new PresenceOf(array(
-            'message' => 'Potrebna je cijena'
+            'message' => 'Price is required'
         )));
         $text2->addValidator(new Regex(array(
             'pattern' => '[0-9]+(\.[0-9][0-9]?)?',
-            'message' => 'Cijena mora biti samo brojevi i decimale'
+            'message' => 'Price can only be numbers and two decimals'
         )));
 
         $this->add($text2);
 
         $text3 = new Select("type", array("bijela tehnika", "hrana", "alkohol", "slatkisi", "mesnati proizvodi", "zitarice"));
-        $text3->setLabel("Tip");
+        $text3->setLabel("Type");
         $text3->addValidator(new PresenceOf(array(
-            'message' => 'Potreban je email'
+            'message' => 'Product type is required'
         )));
 
         $this->add($text3);

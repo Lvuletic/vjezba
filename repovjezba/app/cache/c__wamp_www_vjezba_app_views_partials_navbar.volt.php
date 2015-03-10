@@ -1,10 +1,10 @@
-{{ elements.getMenu() }}
+<?php echo $this->elements->getMenu(); ?>
 <div>
     <ul>
          <li> <?php echo $this->tag->linkTo("index/changeLanguage/hr", "Hrvatski") ?> </li>
          <li> <?php echo $this->tag->linkTo("index/changeLanguage/en", "English") ?> </li>
-        {% for controller,option in elements._headerMenu %}
+        <?php foreach ($this->elements->_headerMenu as $controller => $option) { ?>
             <li> <?php echo $this->tag->linkTo($controller. '/' .$option['action'], $option['caption']) ?> </li>
-        {% endfor %}
+        <?php } ?>
     </ul>
 </div>

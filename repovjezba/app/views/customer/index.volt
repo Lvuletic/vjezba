@@ -1,4 +1,5 @@
 {{ content() }}
+<?php echo $t->_("register") ?>
 <div>
     {{ form("customer/register", "role": "form") }}
     {{ formUser.label("username") }}
@@ -21,6 +22,6 @@
     <br>
     {{ formUser.render("password") }}
     <br>
-    {{ submit_button("value": "Registriraj se") }}
+    {{ submit_button("value": "Register") }}
     {{ end_form() }}
 </div>

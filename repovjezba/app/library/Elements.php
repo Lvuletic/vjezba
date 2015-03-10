@@ -24,8 +24,8 @@ class Elements extends Component
                 'action' => 'index'
             ),
             'product' => array(
-            'caption' => 'proizvodi',
-            'action' => 'index'
+                'caption' => 'proizvodi',
+                'action' => 'index'
             ),
             'customer' => array(
                 'caption' => 'registracija',

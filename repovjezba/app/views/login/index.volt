@@ -1,4 +1,5 @@
 {{ content() }}
+<?php echo $t->_("login") ?>
 <div>
     {{ form("login/login", "role": "form") }}
     {{ form.label("usermail") }}

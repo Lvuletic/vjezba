@@ -20,7 +20,7 @@ class LoginForm extends Form
         $this->add($text);
 
         $text2 = new Password("password");
-        $text2->setLabel("Lozinka ");
+        $text2->setLabel("Password ");
 
         $this->add($text2);
     }

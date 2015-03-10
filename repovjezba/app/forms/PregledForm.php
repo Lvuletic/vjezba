@@ -14,7 +14,7 @@ class PregledForm extends Form
     public function initialize()
     {
         $text = new Text("code");
-        $text->setLabel("Unesite sifru narudzbe");
+        $text->setLabel("Enter order code");
 
         $this->add($text);
 

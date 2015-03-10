@@ -1,5 +1,5 @@
 {{ content() }}
-
+<?php echo $t->_("webshop") ?>
 <div>
     {{ form("webcart/index", "role": "form") }}
     {{ formProduct.label("product") }}
@@ -9,19 +9,19 @@
 </div>
 
 
-{{ submit_button("name": "add", "value": "Dodaj artikal", "id": "addArtikal", "onclick": "addArtikal()") }}
+{{ submit_button("name": "add", "value": "Add product", "id": "addProduct", "onclick": "addProduct()") }}
 <br><br>
 {{ form("orders/create", "role": "form") }}
 {{ formWebCart.label("webcart") }}
 <br>
 {{ formWebCart.render("webcart") }}
 <br>
-{{ tag_html("button", ["type": "button", "value": "Makni artikal", "onclick": "removeArtikal()"], false, true, true) }}
-Makni artikal
+{{ tag_html("button", ["type": "button", "onclick": "removeProduct()"], false, true, true) }}
+Remove product
 {{ tag_html_close("button") }}
 <br>
 <br>
-{{ submit_button("name": "create", "value": "Spremi narudžbu", "onclick": "selectAll()") }}
+{{ submit_button("name": "create", "value": "Save order", "onclick": "selectAll()") }}
 
 {{ end_form() }}
 </form>
