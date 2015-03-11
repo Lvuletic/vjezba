@@ -1,6 +1,7 @@
 <?php
+
 use Phalcon\Mvc\Model\Validator\Email;
-class Customer extends \Phalcon\Mvc\Model implements Finder
+class Customer extends \Phalcon\Mvc\Model
 {
 
     /**

@@ -7,12 +7,13 @@ class IndexController extends ControllerBase
         parent::initialize();
     }
 
-    public function indexAction()
+    public function indexAction($word)
     {
         // $this->flash->notice($this->session->get("user_id"));
         // $this->flash->notice($this->session->get("auth"));
         // $this->flash->notice($this->session->get("lang"));
         $this->loadTranslation("index");
+        $this->changeStringAction($word);
     }
 
     public function changeLanguageAction($lang)
@@ -20,6 +21,11 @@ class IndexController extends ControllerBase
         $this->session->set("lang", $lang);
         $referer = $this->request->getHTTPReferer();
         return $this->response->setHeader("Location", $referer);
+    }
+
+    public function changeStringAction($word)
+    {
+        $this->view->word = $word;
     }
 
 }

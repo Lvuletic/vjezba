@@ -107,7 +107,7 @@ class Security extends Plugin
 
             $dispatcher->forward(
                 array(
-                    "controller" => "index",
+                    "controller" => "login",
                     "action" => "index"
                 )
             );
