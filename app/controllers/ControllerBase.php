@@ -5,6 +5,11 @@ use Phalcon\Mvc\Controller;
 class ControllerBase extends Controller
 {
     public function initialize() {
+        $this->assets
+            ->addJs("js/jquery.min.js")
+            ->addJs("js/tablica.js")
+            ->addJs("js/webcart.js");
+        $this->assets->addCss("css/stilovi.css");
         $this->tag->setDoctype(\Phalcon\Tag::HTML5);
     }
 
@@ -17,7 +22,7 @@ class ControllerBase extends Controller
             $this->session->set("lang", "en");
             $language = $this->session->get("lang");
         }
-        include $translationPath.$language."/".$translationFile.".php";
+        require $translationPath.$language."/".$translationFile.".php";
         $translator = new Phalcon\Translate\Adapter\NativeArray(array(
             "content" => $messages
         ));

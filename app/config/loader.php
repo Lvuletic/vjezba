@@ -14,7 +14,8 @@ $loader->registerDirs(
         $config->application->modelsDir,
         $config->application->factoryDir,
         $config->application->formsDir,
-        $config->application->messagesDir
+        $config->application->messagesDir,
+        $config->application->cacheDir
     )
 )->register();
 

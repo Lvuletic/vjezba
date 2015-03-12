@@ -1,4 +1,8 @@
+<html>
 {{ content() }}
+<head> </head>
+
+<body>
 <?php echo $t->_("webshop") ?>
 <div>
     {{ form("webcart/index", "role": "form") }}
@@ -7,7 +11,6 @@
     {{ formProduct.render("product") }}
     {{ end_form() }}
 </div>
-
 
 {{ submit_button("name": "add", "value": "Add product", "id": "addProduct", "onclick": "addProduct()") }}
 <br><br>
@@ -25,5 +28,8 @@ Remove product
 
 {{ end_form() }}
 </form>
+{{ assets.outputJs() }}
+</body>
+</html>
 
 

@@ -101,7 +101,7 @@ $di->set('dispatcher', function () use ($di) {
     $security = new Security();
     $wordChanger = new WordChanger();
     $eventsManager->attach('dispatch', $security);
-    $eventsManager->attach('dispatch:beforeDispatchLoop',  $wordChanger);
+    $eventsManager->attach('view:afterRender',  $wordChanger);
     $dispatcher = new Phalcon\Mvc\Dispatcher();
     $dispatcher->setEventsManager($eventsManager);
     return $dispatcher;
@@ -110,4 +110,36 @@ $di->set('dispatcher', function () use ($di) {
 $di->set('factory', function () {
     $factory = new FactoryMethod();
     return $factory;
+});
+
+$di->setShared('transaction', function() {
+    $transactionManager = new \Phalcon\Mvc\Model\Transaction\Manager();
+    return $transactionManager;
+});
+
+$di->set('viewCache', function() {
+
+    $frontCache = new Phalcon\Cache\Frontend\Output(array(
+        "lifetime" => 86400
+    ));
+
+    $cache = new Phalcon\Cache\Backend\File($frontCache, array(
+        "cacheDir" => "../app/cache/"
+
+    ));
+
+    return $cache;
+});
+
+$di->set('modelsCache', function() {
+
+    $frontCache = new \Phalcon\Cache\Frontend\Data(array(
+        "lifetime" => 86400
+    ));
+
+    $cache = new \Phalcon\Cache\Backend\File($frontCache, array(
+        "cacheDir" => "../app/cache/"
+    ));
+
+    return $cache;
 });

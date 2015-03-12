@@ -181,9 +181,37 @@ class OrderItem extends \Phalcon\Mvc\Model
 
     public function findOrderItemProduct($code)
     {
-        $phql = "SELECT OrderItem.*, Product.name FROM OrderItem JOIN Product ON OrderItem.orderCode = '$code' AND OrderItem.productCode = Product.code";
-        $query = $this->getModelsManager()->createQuery($phql);
-        return $items = $query->execute();
+
+
+        //$cache = $this->modelsCache;
+       // $items = $cache->get("orderItems-product");
+       // if ($items == null)
+       // {
+        /*
+            $phql = "SELECT OrderItem.*, Product.name FROM OrderItem JOIN Product ON OrderItem.orderCode = '$code' AND OrderItem.productCode = Product.code";
+            $query = $this->getModelsManager()->createQuery($phql);
+
+            $query->cache(array(
+                "key" => "stavke",
+                "lifetime" => 36000
+            ));
+        $items = $query->execute(array(
+            "cache" => "stavke"
+        ));
+        */
+
+          //  $cache->save("orderItems-product", $items);
+       // }
+        $items = $this->getmodelsManager()->createBuilder()
+            ->columns(array("OrderItem.*", "Product.name"))
+            ->from("OrderItem")
+            ->join("Product", "OrderItem.orderCode = '$code' AND OrderItem.productCode = Product.code")
+            ->orderBy("OrderItem.productCode")
+            ->getQuery()
+            ->execute();
+      // $items = $cache->get("dodo");
+
+        return $items;
     }
 
     public function createNew($product, $quantity)

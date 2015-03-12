@@ -13,22 +13,11 @@ use Phalcon\Mvc\User\Plugin;
 
 class WordChanger extends Plugin
 {
-    public function beforeDispatchLoop(Event $event, Dispatcher $dispatcher)
+    public function afterRender(Event $event, View $view)
     {
-        /*$contents = $view->getContent();
-        $filter = new Phalcon\Filter();
-        $filter->sanitize($contents, "striptags");
+        $contents = (string)$view->getContent();
         $contents = str_replace("ipsum", "CICOSTOS", $contents);
-        $view->setContent($contents);*/
-
-        $controller = $dispatcher->getControllerName();
-        $action = $dispatcher->getActionName();
-        if ($controller == "index" && $action == "index")
-        {
-            $word = array("CICOSTOS");
-            $dispatcher->setParams($word);
-        }
-
+        $view->setContent($contents);
     }
 
 }

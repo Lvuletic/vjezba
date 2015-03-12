@@ -1,3 +1,6 @@
+<html>
+<head> {{ assets.outputCss() }} </head>
+<body>
 <?php echo $t->_("checkout") ?>
 <div id="scroll">
 <table id="narudzbe" border="1">
@@ -11,12 +14,12 @@
     </tr>
     {% for row in ordersPage %}
     <tr>
-        <td>{{ row.orders.getOrderCode() }}</td>
-        <td>{{ row.orders.getCustomerId() }}</td>
-        <td>{{ row.username }}</td>
-        <td>{{ row.orders.getAddressDelivery() }}</td>
-        <td>{{ row.orders.getTotalPrice() }}</td>
-        <td>{{ row.orders.getDate() }}</td>
+        <td>{{ row.getOrderCode() }}</td>
+        <td>{{ row.getCustomerId() }}</td>
+        <td></td>
+        <td>{{ row.getAddressDelivery() }}</td>
+        <td>{{ row.getTotalPrice() }}</td>
+        <td>{{ row.getDate() }}</td>
     </tr>
     {% endfor %}
 </table>
@@ -53,3 +56,6 @@
     {% endfor %}
 </table>
 </div>
+{{ assets.outputJs() }}
+</body>
+</html>

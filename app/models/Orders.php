@@ -176,7 +176,7 @@ class Orders extends \Phalcon\Mvc\Model
 
     public function findOrderCustomer()
     {
-        $phql = "SELECT Orders.*, Customer.username FROM Orders JOIN Customer ON Orders.customerId = Customer.id";
+        $phql = "SELECT Orders.*, Customer.username FROM Orders JOIN Customer ON Orders.customerId = Customer.id ORDER BY Orders.orderCode";
         $query = $this->getModelsManager()->createQuery($phql);
         return $items = $query->execute();
     }

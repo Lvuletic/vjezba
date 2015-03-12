@@ -15,19 +15,30 @@ class PregledController extends ControllerBase
 
     public function indexAction()
     {
-        $this->view->form = new PregledForm;
-        $orders = $this->factory->createObject("Orders");
-        $orders = $orders->findOrderCustomer();
-
-        $this->view->ordersPage = $orders;
-
-        $request = new Phalcon\Http\Request();
-        $code = $request->get('code');
-        $orderItem = $this->factory->createObject("OrderItem");
-        $items = $orderItem->findOrderItemProduct($code);
-
-        $this->view->orderItems = $items;
-
         $this->loadTranslation("pregled");
+
+            $this->view->form = new PregledForm;
+
+            $cache = $this->modelsCache;
+            $orders = $cache->get("order-cache");
+            if ($orders === null)
+            {
+                // $orders = $this->factory->createObject("Orders");
+                $orders = Orders::find();
+                $cache->save("order-cache", $orders, 15);
+            }
+            $this->view->ordersPage = $orders;
+
+
+            $request = new Phalcon\Http\Request();
+            $code = $request->get('code');
+            $orderItem = $this->factory->createObject("OrderItem");
+            $items = $orderItem->findOrderItemProduct($code);
+
+            $this->view->orderItems = $items;
+
+
+
+
     }
 }

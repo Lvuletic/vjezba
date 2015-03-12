@@ -41,13 +41,18 @@ class CustomerController extends ControllerBase
         }
         else
         {
+            $this->db->begin();
 
             $user = $this->factory->createObject("Customer");
             $password = $this->request->getPost('password');
             $user = $user->createNew($this->request->getPost("username"), $this->request->getPost("phone"),
                 $this->request->getPost("email"), $this->request->getPost("address"), $this->security->hash($password));
-            $success = $user->save();
-
+            if($user->save()==false)
+            {
+                $success = false;
+                $this->db->rollback();
+            } else $success = true;
+            $this->db->commit();
             if ($success) {
                 echo "Thanks for registering!";
             } else {
@@ -74,6 +79,7 @@ class CustomerController extends ControllerBase
         }
         else
         {
+            $this->db->begin();
             $user = $this->factory->createObject("Customer");
             $user = $user->findUser($this->session->get("user_id"));
             $password = $this->request->getPost('oldPassword');
@@ -90,7 +96,12 @@ class CustomerController extends ControllerBase
                 $newPassword = $this->request->getPost("newPassword");
                 $user = $user->updateUser($user, $this->request->getPost("phone"), $this->request->getPost("email"),
                     $this->request->getPost("address"), $this->security->hash($newPassword));
-                $success = $user->save();
+                if($user->save()==false)
+                {
+                    $success = false;
+                    $this->db->rollback();
+                } else $success = true;
+                $this->db->commit();
                 if ($success) {
                     $this->flash->notice("Vaše promjene su uspješno spremljene");
                 } else {

@@ -25,8 +25,9 @@ function addProduct() {
             }
 
         }
+    var newitem = product;
     var item = document.createElement("option");
-    var newitem = product.concat(quantity);
+    var newitem = newitem.concat(quantity);
     item.text = newitem;
     selectbox.add(item);
 

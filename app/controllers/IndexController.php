@@ -7,13 +7,12 @@ class IndexController extends ControllerBase
         parent::initialize();
     }
 
-    public function indexAction($word)
+    public function indexAction()
     {
-        // $this->flash->notice($this->session->get("user_id"));
-        // $this->flash->notice($this->session->get("auth"));
-        // $this->flash->notice($this->session->get("lang"));
+
         $this->loadTranslation("index");
-        $this->changeStringAction($word);
+        $this->view->cache(array("lifetime" => 3600, "key" => "index-cache"));
+
     }
 
     public function changeLanguageAction($lang)
@@ -23,9 +22,5 @@ class IndexController extends ControllerBase
         return $this->response->setHeader("Location", $referer);
     }
 
-    public function changeStringAction($word)
-    {
-        $this->view->word = $word;
-    }
 
 }

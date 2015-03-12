@@ -24,39 +24,43 @@ class OrdersController extends ControllerBase
     {
         if ($this->request->isPost() == true)
         {
+            $this->db->begin();
 
             $order = $this->factory->createObject("Orders");
             $customer = $this->factory->createObject("Customer");
             $customerId = $this->session->get("user_id");
             $order->createNew($order, $customer->findAddress($customerId), $customerId);
-            $order->save();
+            if($order->save()==false)
+            {
+                $this->db->rollback();
+            };
+
             $totalprice = 0;
             foreach ($this->request->getPost("webcart") as $item)
             {
                 $orderItem = $this->factory->createObject("OrderItem");
                 $productName = substr($item, 0, -1);
                 $quantity = substr($item, -1);
-                $products = Product::find("name='$productName'");
-                foreach ($products as $product)
-                {
-
-                    $orderItem = $orderItem->createNew($product, $quantity);
-
-                    $totalprice+=$orderItem->getTotalPrice();
-                    $order->setTotalPrice($totalprice);
-                }
-
+                $product = Product::findFirst("name='$productName'");
+                $orderItem = $orderItem->createNew($product, $quantity);
+                $totalprice += $orderItem->getTotalPrice();
+                $order->setTotalPrice($totalprice);
                 $orderItem->setOrderCode($order->getOrderCode());
 
-                if ($orderItem->save()==false)
-                {
-                    foreach($orderItem->getMessages() as $message)
-                    {
+                if ($orderItem->save() == false) {
+                    $this->db->rollback();
+                    foreach ($orderItem->getMessages() as $message) {
                         $this->flash->notice($message);
                     }
                 }
             }
-            $order->save();
+
+            if ($order->save() == false) {
+                $this->db->rollback();
+
+            };
+
+            $this->db->commit();
             $this->flash->success("Vaša narudžba je uspješno zaprimljena");
             return $this->dispatcher->forward(array("controller" => "webcart", "action" => "index"));
         }

@@ -17,7 +17,6 @@ class LoginController extends ControllerBase
     {
         $this->view->form = new LoginForm();
         $this->loadTranslation("login");
-
     }
 
     public function loginAction()
@@ -38,6 +37,9 @@ class LoginController extends ControllerBase
                     $this->flash->success("Welcome " . $user->getUsername());
                 } else {
                     $this->flash->error("username or email are incorrect");
+                    return $this->dispatcher->forward(array(
+                        "action" => "index"
+                    ));
                 }
         }
         return $this->dispatcher->forward(array(
