@@ -8,7 +8,7 @@
 
 class PrijavaController extends ControllerBase
 {
-    /*
+
     public function indexAction()
     {
 
@@ -62,5 +62,5 @@ class PrijavaController extends ControllerBase
         $this->prijava->remove('auth');
         return $this->forward('index/index');
     }
-*/
+
 }

@@ -1,14 +1,17 @@
-/**
- * Created by Luka on 01/03/15.
- */
 
 $("#narudzbe tr").click(function(){
     $(this).addClass('selected').siblings().removeClass('selected');
     var value=$(this).find('td:first').html();
-    prikaziStavke(value);
+    $("#odabir").val(value);
+    clickB();
+
 });
 
+function clickB()
+{
+    document.getElementById("prikazStavki").click();
 
+}
 
 function prikaziStavke(value)
 {

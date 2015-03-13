@@ -108,5 +108,3 @@ $di->set('prijava', function() {
 $di->set('elements', function(){
     return new Elements();
 });
-
-

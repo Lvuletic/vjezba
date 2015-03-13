@@ -6,12 +6,15 @@ td {border: 1px #DDD solid; padding: 5px; cursor: pointer;}
 
 #scroll{
     width:600px;
-
 }
+
+#scroll2{
+    width:600px;
+}
+
 
 #odabir{
     width:500px;
-
 }
 
 table{
@@ -22,6 +25,7 @@ th, td{
     width:100px;
     border:1px solid black;
 }
+/*
 thead>tr{
     position:relative;
     display:block;
@@ -30,4 +34,4 @@ tbody{
     display:block;
     height:300px;
     overflow:auto;
-}
+}*/

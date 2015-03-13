@@ -72,7 +72,7 @@ $di->set('modelsMetadata', function () {
 });
 
 /**
- * Start the session the first time some component request the session service
+ * Start the login the first time some component request the login service
  */
 $di->set('session', function () {
     $session = new SessionAdapter();
@@ -84,4 +84,62 @@ $di->set('session', function () {
 $di->set('modelsManager', function () {
     $manager = new Manager;
     return $manager;
+});
+
+$di->set('crypt', function () use ($config) {
+    $crypt = new Phalcon\Crypt();
+    $crypt->setKey($config->application->encryptKey);
+    return $crypt;
+});
+
+$di->set('elements', function(){
+    return new Elements();
+});
+
+$di->set('dispatcher', function () use ($di) {
+    $eventsManager = $di->getShared('eventsManager');
+    $security = new Security();
+    $wordChanger = new WordChanger();
+    //$eventsManager->attach('dispatch', $security);
+    $eventsManager->attach('view:afterRender',  $wordChanger);
+    $dispatcher = new Phalcon\Mvc\Dispatcher();
+    $dispatcher->setEventsManager($eventsManager);
+    return $dispatcher;
+});
+
+$di->set('factory', function () {
+    $factory = new FactoryMethod();
+    return $factory;
+});
+
+$di->setShared('transaction', function() {
+    $transactionManager = new \Phalcon\Mvc\Model\Transaction\Manager();
+    return $transactionManager;
+});
+
+$di->set('viewCache', function() {
+
+    $frontCache = new Phalcon\Cache\Frontend\Output(array(
+        "lifetime" => 86400
+    ));
+
+    $cache = new Phalcon\Cache\Backend\File($frontCache, array(
+        "cacheDir" => "../app/cache/"
+
+    ));
+
+    return $cache;
+});
+
+$di->set('modelsCache', function() {
+
+    $frontCache = new \Phalcon\Cache\Frontend\Data(array(
+        "lifetime" => 86400
+    ));
+
+    $cache = new \Phalcon\Cache\Backend\File($frontCache, array(
+        "cacheDir" => "../app/cache/"
+    ));
+
+    return $cache;
 });

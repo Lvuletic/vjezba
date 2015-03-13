@@ -13,7 +13,7 @@ use Phalcon\Events\Event,
 
 class Security extends Plugin
 {
-    /*
+
     public function getAcl()
     {
         // stvori novu access control listu
@@ -102,5 +102,5 @@ class Security extends Plugin
         }
     }
 
-*/
+
 }

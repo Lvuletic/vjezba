@@ -5,10 +5,6 @@
  * Date: 01/03/15
  * Time: 10:20
  */
-echo $this->getContent();
-echo $this->tag->javascriptInclude("js/jquery.min.js");
-echo Phalcon\Tag::linkTo("index","Povratak na glavnu stranicu");
-
 ?>
 <div id="scroll">
 <table id="narudzbe" border="1">
@@ -39,7 +35,11 @@ echo Phalcon\Tag::linkTo("index","Povratak na glavnu stranicu");
         "id" => "odabir",
         "size" => 10
     ));
-    echo Phalcon\Tag::submitButton("prikazi")
+    echo Phalcon\Tag::submitButton(array(
+        "value" => "dada",
+        "name" => "prikazi",
+        "id" => "prikazStavki"
+    ))
     ?>
     </form>
 </div>

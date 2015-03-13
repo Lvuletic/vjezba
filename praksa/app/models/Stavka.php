@@ -51,10 +51,15 @@ class Stavka extends \Phalcon\Mvc\Model
      * @return mixed
      */
 
-
     public function setSifraA($sifra_A)
     {
         $this->sifra_A = $sifra_A;
+    }
+
+    public function findStavka($sifra)
+    {
+        $stavke = Stavka::find("sifra_N='$sifra'");
+        return $stavke;
     }
 
 }

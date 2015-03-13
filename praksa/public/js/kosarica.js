@@ -1,6 +1,3 @@
-/**
- * Created by Luka on 28/02/15.
- */
 
 
 document.getElementById("Artikal").addEventListener("change", selektiraniArtikl)
@@ -9,6 +6,7 @@ var artikl;
 
 function selektiraniArtikl(){
     artikl = this.value;
+    console.log(this.value);
 }
 
 function puniKosaricu() {

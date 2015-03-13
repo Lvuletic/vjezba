@@ -6,7 +6,7 @@ return new \Phalcon\Config(array(
         'host'        => 'localhost',
         'username'    => 'root',
         'password'    => '1234',
-        'dbname'      => 'praksa',
+        'dbname'      => 'vjezba',
         'charset'     => 'utf8',
     ),
     'application' => array(
@@ -16,6 +16,10 @@ return new \Phalcon\Config(array(
         'pluginsDir'     => __DIR__ . '/../../app/plugins/',
         'libraryDir'     => __DIR__ . '/../../app/library/',
         'cacheDir'       => __DIR__ . '/../../app/cache/',
+        'formsDir'       => __DIR__ . '/../../app/forms/',
+        'factoryDir'     => __DIR__ . '/../../app/factories/',
+        'messagesDir'    => __DIR__ . '/../../app/messages/',
+        'encryptKey' => '2tx6]GD}532q4x_',
         'baseUri'        => '/vjezba/',
     )
 ));

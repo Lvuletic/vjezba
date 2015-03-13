@@ -24,6 +24,10 @@ class Elements extends Component
                 'caption' => 'pregled narudžbi',
                 'action' => 'index'
             ),
+            'kupac' => array(
+                'caption' => 'kupci',
+                'action' => 'index'
+            ),
         ),
         'navbar-right' => array(
             'prijava' => array(
