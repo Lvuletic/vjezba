@@ -54,7 +54,7 @@ class CustomerController extends ControllerBase
             } else $success = true;
             $this->db->commit();
             if ($success) {
-                echo "Thanks for registering!";
+                $this->flash->notice($this->translate->_("newregister"));
             } else {
                 echo "Sorry, the following problems were generated: ";
                 foreach ($user->getMessages() as $message) {
@@ -85,7 +85,7 @@ class CustomerController extends ControllerBase
             $password = $this->request->getPost('oldPassword');
             if ($this->security->checkHash($password, $user->getPassword()) == false)
             {
-                $this->flash->error("Upisali ste pogrešnu šifru kao staru šifru");
+                $this->flash->error($this->translate->_("wrongpass"));
                 return $this->dispatcher->forward(array(
                     "controller" => "customer",
                     "action" => "account"
@@ -103,7 +103,7 @@ class CustomerController extends ControllerBase
                 } else $success = true;
                 $this->db->commit();
                 if ($success) {
-                    $this->flash->notice("Vaše promjene su uspješno spremljene");
+                    $this->flash->notice($this->translate->_("changesave"));
                 } else {
                     echo "Sorry, the following problems were generated: ";
                     foreach ($user->getMessages() as $message) {

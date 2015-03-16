@@ -1,9 +1,10 @@
+{{ content() }}
 <html>
 <head> {{ assets.outputCss() }} </head>
 <body>
 <?php echo $t->_("checkout") ?>
 <div id="scroll">
-    <div id="rezultati">
+
 <table id="narudzbe" border="1">
     <tr>
         <th>Sifra</th>
@@ -15,14 +16,17 @@
     </tr>
     {% for row in ordersPage.items %}
     <tr>
+        <div id="results">
         <td>{{ row.getOrderCode() }}</td>
         <td>{{ row.getCustomerId() }}</td>
         <td></td>
         <td>{{ row.getAddressDelivery() }}</td>
         <td>{{ row.getTotalPrice() }}</td>
         <td>{{ row.getDate() }}</td>
+        </div>
     </tr>
     {% endfor %}
+    </table>
 <table>
 
 <tr>
@@ -32,9 +36,9 @@
 <td> <a href="#" onclick="updatePage({{ordersPage.last}})"> Last </a>
 <td><?php echo $ordersPage->current, "/", $ordersPage->total_pages ?></td>
 </tr>
+
 </table>
-</table>
-</div>
+
 </div>
 
 

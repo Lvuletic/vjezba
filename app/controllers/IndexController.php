@@ -10,8 +10,7 @@ class IndexController extends ControllerBase
     public function indexAction()
     {
 
-        $this->loadTranslation("index");
-        $this->view->cache(array("lifetime" => 3600, "key" => "index-cache"));
+  //      $this->view->cache(array("lifetime" => 3600, "key" => "index-cache"));
 
     }
 

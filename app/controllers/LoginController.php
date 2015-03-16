@@ -16,7 +16,6 @@ class LoginController extends ControllerBase
     public function indexAction()
     {
         $this->view->form = new LoginForm();
-        $this->loadTranslation("login");
     }
 
     public function loginAction()
@@ -34,9 +33,9 @@ class LoginController extends ControllerBase
                         "id" => $user->getId(),
                         "username" => $user->getUsername()
                     ));
-                    $this->flash->success("Welcome " . $user->getUsername());
+                    $this->flash->success($this->translate->_("logingreet") ." ". $user->getUsername());
                 } else {
-                    $this->flash->error("username or email are incorrect");
+                    $this->flash->error($this->translate->_("loginerror"));
                     return $this->dispatcher->forward(array(
                         "action" => "index"
                     ));
@@ -53,7 +52,7 @@ class LoginController extends ControllerBase
         $this->cookies->delete("user_id");
         $this->session->remove("user_id");
         $this->session->remove("auth");
-        $this->flashSession->success("You have been successfully logged out");
+        $this->flashSession->success($this->translate->_("logout"));
         return $this->response->redirect("index/index");
     }
 

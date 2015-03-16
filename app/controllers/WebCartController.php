@@ -17,7 +17,6 @@ class WebCartController extends ControllerBase
     {
         $this->view->formProduct = new ProductListForm();
         $this->view->formWebCart = new WebCartForm();
-        $this->loadTranslation("webcart");
 
     }
 

@@ -74,7 +74,7 @@ $di->set('modelsMetadata', function () {
 /**
  * Start the login the first time some component request the login service
  */
-$di->set('session', function () {
+$di->setShared('session', function () {
     $session = new SessionAdapter();
     $session->start();
 
@@ -142,4 +142,16 @@ $di->set('modelsCache', function() {
     ));
 
     return $cache;
+});
+
+$di->setShared('translate', function() use($di) {
+    $session = $di->getShared("session");
+    if ($session->has("lang"))
+    {
+        $language = $session->get("lang");
+    }
+    require '../app/messages/'.$language.".php";
+    return new Phalcon\Translate\Adapter\NativeArray(array(
+        "content" => $messages
+    ));
 });

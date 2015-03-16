@@ -16,7 +16,6 @@ class ProductController extends ControllerBase
     public function indexAction()
     {
         $this->view->form = new ProductForm();
-        $this->loadTranslation("product");
     }
 
     public function createAction()

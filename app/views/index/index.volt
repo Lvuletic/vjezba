@@ -2,6 +2,7 @@
 {{ content() }}
 {{ flashSession.output() }}
 <h1><?php echo $t->_("gratz") ?></h1>
+<body>
 <p><?php echo $t->_("greet") ?></
 <br>
 <p>
@@ -13,3 +14,4 @@ Cras id tempor dolor, sed cursus elit. Pellentesque habitant morbi tristique sen
 Proin volutpat sapien non sem porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
 Nullam felis risus, tincidunt in posuere fringilla, auctor eget ipsum.
 </p>
+</body>
