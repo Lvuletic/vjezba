@@ -28,37 +28,15 @@ function showItems(value)
 
 function updatePage(value)
 {
-    var xmlhttp = new XMLHttpRequest();
-   // xmlhttp.setRequestHeader("Content-type", "application/json");
-    xmlhttp.onreadystatechange=function()
-    {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        {
-            var items = JSON.parse(xmlhttp.responseText);
-            var results = document.getElementById("results");
-            for (var obj in items)
-            {
-                rezultati.innerHTML += "<td>"+ obj + "</td>";
-            }
-            console.log(items);
-        }
-    }
-    xmlhttp.open("POST", "newpage?page="+value, true);
-    xmlhttp.send();
-}
-
-
-/*
-function updatePage(value)
-{
     $.ajax({
-        url: "newpage",
+        url: "index",
         type: "post",
-        data: {"value": value},
+        data: {"page" : value},
         dataType: "json",
         success: function(response) {
-            console.log(response);
+            //console.log(response);
+            $("#navbar").html("");
+            $("#whole").html(response);
         }
     });
 }
-*/

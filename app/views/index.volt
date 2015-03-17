@@ -5,12 +5,14 @@
 
 	</head>
 	<body>
+	<div id ="navbar")
 	{{ partial("partials/navbar") }}
     <div id="main">
 	    <div id="body">
 		{{ content() }}
 
 		</div>
+	</div>
 	</div>
 
 	</body>

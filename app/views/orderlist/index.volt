@@ -1,9 +1,11 @@
 {{ content() }}
+
 <html>
 <head> {{ assets.outputCss() }} </head>
 <body>
+<div id = "whole">
 <?php echo $t->_("checkout") ?>
-<div id="scroll">
+    <div id="scroll">
 
 <table id="narudzbe" border="1">
     <tr>
@@ -39,9 +41,9 @@
 
 </table>
 
+    </div>
 </div>
-
-
+{#
 <div>
     {{ form("orderlist/index", "role": "form") }}
     {{ form.label("code") }}
@@ -75,6 +77,8 @@
 
 </table>
 </div>
+#}
 {{ assets.outputJs() }}
 </body>
+
 </html>

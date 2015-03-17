@@ -22,51 +22,52 @@ class OrdersController extends ControllerBase
 
     public function createAction()
     {
-        if ($this->request->isPost() == true)
-        {
-            $this->db->begin();
-
-            $order = $this->factory->createObject("Orders");
-            $customer = $this->factory->createObject("Customer");
-            $customerId = $this->session->get("user_id");
-            $order->createNew($order, $customer->findAddress($customerId), $customerId);
-            if($order->save()==false)
-            {
-                $this->db->rollback();
-                return;
-            }
-            else
-            {
-
-                $totalprice = 0;
-                foreach ($this->request->getPost("webcart") as $item)
-                {
-                    $orderItem = $this->factory->createObject("OrderItem");
-                    $productName = substr($item, 0, -1);
-                    $quantity = substr($item, -1);
-                    $product = Product::findFirst("name='$productName'");
-                    $orderItem = $orderItem->createNew($product, $quantity);
-                    $totalprice += $orderItem->getTotalPrice();
-                    $order->setTotalPrice($totalprice);
-                    $orderItem->setOrderCode($order->getOrderCode());
-
-                    if ($orderItem->save() == false) {
-                        $this->db->rollback();
-                        foreach ($orderItem->getMessages() as $message) {
-                            $this->flash->notice($message);
-                        }
-                        return;
-                    }
-                }
+        try {
+            if ($this->request->isPost() == true) {
+                $manager = new Phalcon\Mvc\Model\Transaction\Manager;
+                $transaction = $manager->get();
+                $order = $this->factory->createObject("Orders");
+                $order->setTransaction($transaction);
+                $customer = $this->factory->createObject("Customer");
+                $customerId = $this->session->get("user_id");
+                $order->createNew($order, $customer->findAddress($customerId), $customerId);
 
                 if ($order->save() == false) {
-                    $this->db->rollback();
-                    return;
-                };
-                $this->db->commit();
-                $this->flash->success($this->translate->_("ordersuccess"));
-                return $this->dispatcher->forward(array("controller" => "webcart", "action" => "index"));
+                    $transaction->rollback();
+                } else {
+                    $transaction->commit();
+                    $transaction->begin();
+                    $totalprice = 0;
+                    foreach ($this->request->getPost("webcart") as $item) {
+                        $orderItem = $this->factory->createObject("OrderItem");
+                        $orderItem->setTransaction($transaction);
+                        $productName = substr($item, 0, -1);
+                        $quantity = substr($item, -1);
+                        $product = Product::findFirst("name='$productName'");
+                        $orderItem = $orderItem->createNew($product, $quantity);
+                        $totalprice += $orderItem->getTotalPrice();
+                        $order->setTotalPrice($totalprice);
+                        $orderItem->setOrderCode($order->getOrderCode());
+
+                        if ($orderItem->save() == false) {
+                            $transaction->rollback();
+                            foreach ($orderItem->getMessages() as $message) {
+                                $this->flash->notice($message);
+                            }
+                        }
+                    }
+
+                    if ($order->save() == false) {
+                        $transaction->rollback();
+                    };
+                    $transaction->commit();
+                    $this->flash->success($this->translate->_("ordersuccess"));
+                    return $this->dispatcher->forward(array("controller" => "webcart", "action" => "index"));
+                }
             }
-        }
+        } catch(Phalcon\Mvc\Model\Transaction\Failed $e)
+            {
+                echo 'Failed, reason: ', $e->getMessage();
+            }
     }
 }
