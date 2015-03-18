@@ -40,10 +40,8 @@
 </tr>
 
 </table>
-
     </div>
-</div>
-{#
+
 <div>
     {{ form("orderlist/index", "role": "form") }}
     {{ form.label("code") }}
@@ -51,7 +49,9 @@
     {{ submit_button("name": "showOrderItems", "value": "Show items", "id": "showOrderItems") }}
     {{ end_form() }}
 </div>
+
 <?php echo $t->_("items") ?>
+{#
 <div id="scroll2">
 <table>
     <tr>
@@ -78,7 +78,7 @@
 </table>
 </div>
 #}
+</div>
 {{ assets.outputJs() }}
 </body>
-
 </html>

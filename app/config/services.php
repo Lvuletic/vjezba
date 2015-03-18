@@ -51,6 +51,25 @@ $di->set('view', function () use ($config) {
     return $view;
 }, true);
 
+$di->set("viewSimple", function() use ($config) {
+    $newView = new Phalcon\Mvc\View\Simple();
+    $newView->setViewsDir($config->application->viewsDir);
+    $newView->registerEngines(array(
+        '.volt' => function ($view, $di) use ($config) {
+
+            $volt = new VoltEngine($view, $di);
+
+            $volt->setOptions(array(
+                'compiledPath' => $config->application->cacheDir,
+                'compiledSeparator' => '_'
+            ));
+
+            return $volt;
+        },
+        '.phtml' => 'Phalcon\Mvc\View\Engine\Php'
+    ));
+    return $newView;
+}, true);
 /**
  * Database connection is created based in the parameters defined in the configuration file
  */

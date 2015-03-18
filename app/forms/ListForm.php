@@ -8,6 +8,7 @@
 
 use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Text;
+use Phalcon\Forms\Element\Select;
 
 class ListForm extends Form
 {
@@ -17,7 +18,6 @@ class ListForm extends Form
         $text->setLabel("Enter order code");
 
         $this->add($text);
-
     }
 
 }

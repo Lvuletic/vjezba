@@ -32,10 +32,10 @@ function updatePage(value)
         url: "index",
         type: "post",
         data: {"page" : value},
-        dataType: "json",
+        //dataType: "json",
         success: function(response) {
-            //console.log(response);
-            $("#navbar").html("");
+            // console.log(response);
+            //$("#whole").html("");
             $("#whole").html(response);
         }
     });

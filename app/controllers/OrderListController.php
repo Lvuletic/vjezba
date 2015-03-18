@@ -16,25 +16,40 @@ class OrderListController extends ControllerBase
 
     public function indexAction()
     {
-        if ($this->request->isAjax()==true)
+        if ($this->request->isAjax() == true)
         {
             $numberNewPage = $this->request->getPost("page", "int");
             $newData = Orders::find();
             $newPaginator = new Paginator(array(
                 "data" => $newData,
-                "limit"=> 5,
+                "limit" => 5,
                 "page" => $numberNewPage
             ));
 
-            $view = $this->view;
+            /*$view->start();
+          //  $view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+            $view->render('orderlist', 'index', array("ordersPage" => $newPaginator->getPaginate()));
+            $view->finish();
+            $content = $view->getContent();*/
 
-           // $view->setRenderLevel(View::LEVEL_ACTION_VIEW);
-           // $view->partial("orderlist/index", array( "ordersPage" => $newPaginator->getPaginate()));
-            $content = $view->getRender("orderlist", "index", array( "ordersPage" => $newPaginator->getPaginate()));
+            $translationPath = '../app/messages/';
+            $language = $this->session->get("lang");
+            require $translationPath . $language . ".php";
+            $translator = new Phalcon\Translate\Adapter\NativeArray(array(
+                "content" => $messages
+            ));
+
+            $newView = $this->viewSimple;
+            $newView->form = new ListForm();
+            $content = $newView->render("orderlist/index", array("ordersPage" => $newPaginator->getPaginate(), "t" => $translator));
+
+            // $view->setRenderLevel(View::LEVEL_ACTION_VIEW);
+            // $view->partial("orderlist/index", array( "ordersPage" => $newPaginator->getPaginate()));
+            // $content = $view->getRender("orderlist", "index", array( "ordersPage" => $newPaginator->getPaginate()));
 
             $response = new \Phalcon\Http\Response();
             //$response->setContent($this->view->start()->render('orderlist', 'index'));
-            $response->setJsonContent($content);
+            $response->setContent($content);
             return $response;
         }
 
@@ -42,7 +57,7 @@ class OrderListController extends ControllerBase
         $orders = Orders::find();
         $paginator = new Paginator(array(
             "data" => $orders,
-            "limit"=> 5,
+            "limit" => 5,
             "page" => $numberPage
         ));
         $this->view->ordersPage = $paginator->getPaginate();
@@ -66,6 +81,7 @@ class OrderListController extends ControllerBase
         $items = $orderItem->findOrderItemProduct($code);
 
         $this->view->orderItems = $items;
+
     }
 
 }
