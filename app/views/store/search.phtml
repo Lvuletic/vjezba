@@ -1,0 +1,49 @@
+<?php use Phalcon\Tag; ?>
+
+<?php echo $this->getContent(); ?>
+
+<table width="100%">
+    <tr>
+        <td align="left">
+            <?php echo $this->tag->linkTo(array("store/index", "Go Back")); ?>
+        </td>
+        <td align="right">
+            <?php echo $this->tag->linkTo(array("store/new", "Create ")); ?>
+        </td>
+    </tr>
+</table>
+
+<table class="browse" align="center">
+    <thead>
+        <tr>
+            <th>Store</th>
+            <th>Location</th>
+            <th>Size</th>
+            <th>Address</th>
+         </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($page->items as $store) { ?>
+        <tr>
+            <td><?php echo $store->location ?></td>
+            <td><?php echo $store->size ?></td>
+            <td><?php echo $store->address ?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+    <tbody>
+        <tr>
+            <td colspan="2" align="right">
+                <table align="center">
+                    <tr>
+                        <td><?php echo $this->tag->linkTo("store/search", "First") ?></td>
+                        <td><?php echo $this->tag->linkTo("store/search?page=" . $page->before, "Previous") ?></td>
+                        <td><?php echo $this->tag->linkTo("store/search?page=" . $page->next, "Next") ?></td>
+                        <td><?php echo $this->tag->linkTo("store/search?page=" . $page->last, "Last") ?></td>
+                        <td><?php echo $page->current, "/", $page->total_pages ?></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -11,16 +11,14 @@ class IndexController extends ControllerBase
     {
 
       // $this->view->cache(array("lifetime" => 3600, "key" => "index-cache"));
-
-
     }
 
     public function changeLanguageAction($lang)
     {
         $this->session->set("lang", $lang);
         $referer = $this->request->getHTTPReferer();
+       // return $this->response->redirect($referer, true);
         return $this->response->setHeader("Location", $referer);
     }
-
 
 }

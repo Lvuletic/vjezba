@@ -174,3 +174,17 @@ $di->setShared('translate', function() use($di) {
         "content" => $messages
     ));
 });
+
+$di->set('mongo', function() {
+    $mongo = new MongoClient();
+    return $mongo->selectDB("store");
+}, true);
+
+$di->set('collectionManager', function(){
+    return new Phalcon\Mvc\Collection\Manager();
+}, true);
+
+$di->set('router', function() use ($config){
+    return require __DIR__.'/../../app/config/routes.php';
+
+});
