@@ -14,11 +14,8 @@ class CustomerTask extends \Phalcon\CLI\Task
 
     public function createAction(array $params) {
         $customer = new Customer();
-        $customer->setUsername($params[0]);
-        $customer->setPhone($params[1]);
-        $customer->setEmail($params[2]);
-        $customer->setAddress($params[3]);
-        $customer->setPassword($params[4]);
+        $customer = $customer->createNew($params[0], $params[1],
+            $params[2], $params[3], $this->security->hash($params[4]));
 
         if ($customer->save() == true) {
             echo "A new customer was successfully saved \n";

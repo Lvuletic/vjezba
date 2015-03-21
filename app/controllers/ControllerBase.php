@@ -22,7 +22,7 @@ class ControllerBase extends Controller
         if (!$language)
         {
            // $this->dispatcher->setParam("language", "en");
-            //$this->session->set("lang", "en");
+            $this->session->set("lang", "en");
             $language = "en";
         }
         require $translationPath.$language.".php";

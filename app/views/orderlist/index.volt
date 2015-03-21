@@ -19,12 +19,12 @@
     {% for row in ordersPage.items %}
     <tr>
         <div id="results">
-        <td>{{ row.getOrderCode() }}</td>
-        <td>{{ row.getCustomerId() }}</td>
-        <td></td>
-        <td>{{ row.getAddressDelivery() }}</td>
-        <td>{{ row.getTotalPrice() }}</td>
-        <td>{{ row.getDate() }}</td>
+        <td>{{ row.orders.getOrderCode() }}</td>
+        <td>{{ row.orders.getCustomerId() }}</td>
+        <td>{{ row.username }}</td>
+        <td>{{ row.orders.getAddressDelivery() }}</td>
+        <td>{{ row.orders.getTotalPrice() }}</td>
+        <td>{{ row.orders.getDate() }}</td>
         </div>
     </tr>
     {% endfor %}

@@ -158,6 +158,15 @@ class Orders extends \Phalcon\Mvc\Model
         $this->hasMany("orderCode", "OrderItem", "orderCode", array(
             "foreignKey" => true
         ));
+
+        $this->addBehavior(new Phalcon\Mvc\Model\Behavior\Timestampable(
+            array(
+                'beforeCreate' => array(
+                    'field' => 'date',
+                    'format' => 'Y-m-d'
+                )
+            )
+        ));
     }
 
     /**
@@ -183,11 +192,9 @@ class Orders extends \Phalcon\Mvc\Model
 
     public function createNew($order, $address, $id)
     {
-        $date = date("Y-m-d");
         $order->setAddressDelivery($address);
         $order->setCustomerId($id);
         $order->setTotalPrice(0);
-        $order->setDate($date);
         return $order;
     }
 

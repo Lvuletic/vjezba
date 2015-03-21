@@ -19,7 +19,8 @@ class OrderListController extends ControllerBase
         if ($this->request->isAjax() == true)
         {
             $numberNewPage = $this->request->getPost("page", "int");
-            $newData = Orders::find();
+            $orders = new Orders();
+            $newData = $orders->findOrderCustomer();
             $newPaginator = new Paginator(array(
                 "data" => $newData,
                 "limit" => 5,
@@ -54,7 +55,8 @@ class OrderListController extends ControllerBase
         }
 
         $numberPage = 1;
-        $orders = Orders::find();
+        $orders = new Orders();
+        $orders = $orders->findOrderCustomer();
         $paginator = new Paginator(array(
             "data" => $orders,
             "limit" => 5,

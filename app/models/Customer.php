@@ -8,7 +8,7 @@ class Customer extends \Phalcon\Mvc\Model
      *
      * @var integer
      */
-    protected $id;
+    public $id;
 
     /**
      *
