@@ -18,14 +18,16 @@ class OrderListController extends ControllerBase
     {
         if ($this->request->isAjax() == true)
         {
-            $numberNewPage = $this->request->getPost("page", "int");
-            $orders = new Orders();
-            $newData = $orders->findOrderCustomer();
-            $newPaginator = new Paginator(array(
-                "data" => $newData,
-                "limit" => 5,
-                "page" => $numberNewPage
-            ));
+            if ($this->request->getPost("page", "int") == true)
+            {
+                $numberNewPage = $this->request->getPost("page", "int");
+                $orders = new Orders();
+                $newData = $orders->findOrderCustomer();
+                $newPaginator = new Paginator(array(
+                    "data" => $newData,
+                    "limit" => 5,
+                    "page" => $numberNewPage
+                ));
 
             /*$view->start();
           //  $view->setRenderLevel(View::LEVEL_ACTION_VIEW);
@@ -33,25 +35,39 @@ class OrderListController extends ControllerBase
             $view->finish();
             $content = $view->getContent();*/
 
-            $translationPath = '../app/messages/';
-            $language = $this->session->get("lang");
-            require $translationPath . $language . ".php";
-            $translator = new Phalcon\Translate\Adapter\NativeArray(array(
-                "content" => $messages
-            ));
+                $translationPath = '../app/messages/';
+                $language = $this->session->get("lang");
+                require $translationPath . $language . ".php";
+                $translator = new Phalcon\Translate\Adapter\NativeArray(array(
+                    "content" => $messages
+                ));
 
-            $newView = $this->viewSimple;
-            $newView->form = new ListForm();
-            $content = $newView->render("orderlist/index", array("ordersPage" => $newPaginator->getPaginate(), "t" => $translator));
+                $newView = $this->viewSimple;
+                $newView->form = new ListForm();
+                $content = $newView->render("orderlist/index", array("ordersPage" => $newPaginator->getPaginate(), "t" => $translator));
 
             // $view->setRenderLevel(View::LEVEL_ACTION_VIEW);
             // $view->partial("orderlist/index", array( "ordersPage" => $newPaginator->getPaginate()));
             // $content = $view->getRender("orderlist", "index", array( "ordersPage" => $newPaginator->getPaginate()));
 
-            $response = new \Phalcon\Http\Response();
-            //$response->setContent($this->view->start()->render('orderlist', 'index'));
-            $response->setContent($content);
-            return $response;
+                $response = new \Phalcon\Http\Response();
+                $response->setContent($content);
+                return $response;
+            }
+            else if ($this->request->getPost("code", "int") == true)
+            {
+                $code = $this->request->getPost("code" , "int");
+                $orderItem = $this->factory->createObject("OrderItem");
+                $items = $orderItem->findOrderItemProduct($code);
+
+                $newView = $this->viewSimple;
+                $newView->form = new ListForm();
+                $content = $newView->render("orderlist/orderitems", array("orderItems" => $items));
+
+                $response = new \Phalcon\Http\Response();
+                $response->setContent($content);
+                return $response;
+            }
         }
 
         $numberPage = 1;

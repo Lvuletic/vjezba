@@ -3,7 +3,7 @@
 {{ flashSession.output() }}
 <h1><?php echo $t->_("gratz") ?></h1>
 <body>
-<?php echo $this->tag->linkTo("store/index", "store") ?>
+<?php echo $this->tag->linkTo("en/store/index", "store") ?>
 <p><?php echo $t->_("greet") ?></
 <br>
 <p>

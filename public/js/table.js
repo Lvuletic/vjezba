@@ -2,8 +2,10 @@
 $("#narudzbe tr").click(function(){
     $(this).addClass('selected').siblings().removeClass('selected');
     var value=$(this).find('td:first').html();
-    $("#code").val(value);
-    clickB();
+    //$("#code").val(value);
+    //clickB();
+    console.log(value);
+    showItems(value);
 
 });
 
@@ -14,16 +16,14 @@ function clickB()
 
 function showItems(value)
 {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange=function()
-    {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        {
-            document.getElementById("scroll2").innerHTML=xmlhttp.responseText;
-        }
-    }
-    xmlhttp.open("POST", "items?page="+value, true);
-    xmlhttp.send();
+    $.ajax({
+       url: "index",
+       type: "post",
+       data: {"code" : value},
+       success: function(response) {
+           $("#scroll2").html(response);
+       }
+    });
 }
 
 function updatePage(value)

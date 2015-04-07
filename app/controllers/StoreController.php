@@ -5,6 +5,10 @@ use Phalcon\Paginator\Adapter\NativeArray as Paginator;
 
 class StoreController extends ControllerBase
 {
+    public function initialize()
+    {
+        parent::initialize();
+    }
 
     /**
      * Index action
