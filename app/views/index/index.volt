@@ -3,10 +3,10 @@
 {{ flashSession.output() }}
 <h1><?php echo $t->_("gratz") ?></h1>
 <body>
-<?php echo $this->tag->linkTo("en/store/index", "store") ?>
+<?php echo $this->tag->linkTo($this->session->get("lang")."/store/index", "store") ?>
 <p><?php echo $t->_("greet") ?></
 <br>
-<p>
+<br>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam convallis sapien at commodo auctor.
 Proin nec mauris nisl. Duis ut lectus id diam vestibulum porttitor at commodo diam. Nam a pharetra tellus.
 Sed vel lacus quis sapien venenatis mollis ut ac odio. Donec condimentum enim vitae dapibus fringilla.

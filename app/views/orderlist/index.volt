@@ -25,8 +25,16 @@
         <td>{{ row.orders.getAddressDelivery() }}</td>
         <td>{{ row.orders.getTotalPrice() }}</td>
         <td>{{ row.orders.getDate() }}</td>
+
+        <td> <?php if ($this->session->get("user_id") == $row->orders->getCustomerId() || $this->session->get("user_id") == 1)
+        echo $this->tag->linkTo($this->session->get("lang")."/orderlist/edit/".$row->orders->getOrderCode(), "Edit") ?> </td>
+
+        <td> <?php if ($this->session->get("user_id") == 1)
+        echo $this->tag->linkTo($this->session->get("lang")."/orders/delete/".$row->orders->getOrderCode(), "Delete") ?> </td>
+
         </div>
     </tr>
+
     {% endfor %}
     </table>
 <table>

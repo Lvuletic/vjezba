@@ -24,6 +24,9 @@ class FactoryMethod
             case "Product":
                 return new Product();
                 break;
+            case "ProductType":
+                return new ProductType();
+                break;
             default:
                 break;
         }

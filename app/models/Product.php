@@ -1,6 +1,6 @@
 <?php
 
-class Product extends \Phalcon\Mvc\Model implements CreateProduct
+class Product extends \Phalcon\Mvc\Model
 {
     /**
      *
@@ -97,7 +97,7 @@ class Product extends \Phalcon\Mvc\Model implements CreateProduct
 
     public function initialize()
     {
-        $this->hasMany("code", "OrderItem", "product_code", array(
+        $this->hasMany("code", "OrderItem", "productCode", array(
             "foreignKey" => true
         ));
     }
@@ -121,12 +121,40 @@ class Product extends \Phalcon\Mvc\Model implements CreateProduct
         return $product->name;
     }
 
-    public function createNew($product, $name, $price)
+    public function createNew($product, $name, $price, $type)
     {
-        //$product = new Product();
         $product->setName($name);
         $product->setPrice($price);
+        $product->setType($type);
         return $product;
+    }
+
+    public function findProductType()
+    {
+        $phql = "SELECT product.*, producttype.description FROM product JOIN producttype ON product.type = producttype.id ORDER BY product.code";
+        $query = $this->getModelsManager()->createQuery($phql);
+        return $items = $query->execute();
+    }
+
+    public function findTypeDescription($id)
+    {
+        $type = ProductType::findFirst($id);
+
+        $description = $type->getDescription();
+        return $description;
+    }
+
+    public function findTypeId($description)
+    {
+        $types = ProductType::find();
+        foreach ($types as $type)
+        {
+            if ($type->getDescription() == $description)
+            {
+                $id = $type->getId();
+            }
+        }
+        return $id;
     }
 
 }

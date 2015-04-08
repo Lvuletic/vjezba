@@ -36,13 +36,13 @@ class ProductForm extends Form
 
         $this->add($text2);
 
-        $text3 = new Select("type", array("bijela tehnika", "hrana", "alkohol", "slatkisi", "mesnati proizvodi", "zitarice"));
-        $text3->setLabel("Type");
-        $text3->addValidator(new PresenceOf(array(
+        $select = new Select("type", ProductType::find(), array("size" => 1, "using" => array("id", "description")));
+        $select->setLabel("Type");
+        $select->addValidator(new PresenceOf(array(
             'message' => 'Product type is required'
         )));
 
-        $this->add($text3);
+        $this->add($select);
     }
 
 }

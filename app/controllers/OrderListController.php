@@ -102,4 +102,38 @@ class OrderListController extends ControllerBase
 
     }
 
+    public function editAction($code)
+    {
+        $order = Orders::findFirstByOrderCode($code);
+
+        $this->view->formOrderEdit = new OrderEditForm();
+
+        $this->tag->setDefault("orderCode", $order->getOrderCode());
+        $this->tag->setDefault("customerId", $order->getCustomerId());
+        $this->tag->setDefault("address", $order->getAddressDelivery());
+        $this->tag->setDefault("totalPrice", $order->getTotalPrice());
+        $this->tag->setDefault("date", $order->getDate());
+    }
+
+    public function saveAction()
+    {
+        $code = $this->request->getPost("orderCode", "int");
+
+        $order = Orders::findFirstByOrderCode($code);
+
+        $order->setCustomerId($this->request->getPost("customerId", "int"));
+        $order->setAddressDelivery($this->request->getPost("address", "string"));
+        $order->setTotalPrice($this->request->getPost("totalPrice"));
+        $order->setDate($this->request->getPost("date"));
+
+        if ($order->save()==false)
+        {
+            foreach($order->getMessages() as $message)
+            {
+                echo $message;
+            }
+        }
+        else $this->flash->success($this->translate->_("ordereditsuccess"));
+    }
+
 }

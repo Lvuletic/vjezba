@@ -21,5 +21,8 @@ $messages = array(
     "ordersuccess" => "Your order has been successfully saved",
     "wrongpass" => "Old password is incorrect",
     "changesave" => "Your changes have been saved",
-    "registernew" => "Thank you for registering"
+    "registernew" => "Thank you for registering",
+    "ordereditsuccess" => "Your order has been successfully updated",
+    "productsuccess" => "A new product has been successfully saved",
+    "producteditsuccess" => "Product has been successfully updated"
 );

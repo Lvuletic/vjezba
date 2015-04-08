@@ -70,4 +70,23 @@ class OrdersController extends ControllerBase
                 echo 'Failed, reason: ', $e->getMessage();
             }
     }
+
+    public function deleteAction($code)
+    {
+        $order = Orders::findFirstByOrderCode($code);
+        $orderitem = $this->factory->createObject("OrderItem");
+        $orderitems = $orderitem->findObject($code);
+        foreach($orderitems as $item)
+        {
+            $item->delete();
+        }
+        if($order->delete()==false)
+        {
+            foreach($order->getMessages() as $message)
+            {
+                echo $message;
+            }
+        }
+        $this->flash->success("Narudžba je uspješno pobrisana");
+    }
 }

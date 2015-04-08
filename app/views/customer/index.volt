@@ -1,7 +1,7 @@
 {{ content() }}
 <?php echo $t->_("register") ?>
 <div>
-    {{ form("customer/register", "role": "form") }}
+    {{ form(this.session.get("lang")~"/customer/register", "role": "form") }}
     {{ formUser.label("username") }}
     <br>
     {{ formUser.render("username") }}

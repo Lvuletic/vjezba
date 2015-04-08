@@ -9,7 +9,6 @@
         <th>Ukupna cijena</th>
     </tr>
 
-
     {% for item in orderItems %}
     <tr>
         <td> {{ item.orderItem.getOrderCode() }} </td>

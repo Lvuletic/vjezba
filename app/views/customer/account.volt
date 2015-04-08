@@ -1,6 +1,6 @@
 {{ content() }}
 <div>
-    {{ form("customer/save", "role": "form") }}
+    {{ form(this.session.get("lang")~"/customer/save", "role": "form") }}
 
     {{ formAccount.label("phone") }}
     <br>
