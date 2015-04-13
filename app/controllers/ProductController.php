@@ -24,33 +24,25 @@ class ProductController extends ControllerBase
 
     public function createAction()
     {
-        try {
-            if ($this->request->isPost() == true) {
-                $manager = new Phalcon\Mvc\Model\Transaction\Manager;
-                $transaction = $manager->get();
-                $product = $this->factory->createObject("Product");
-                $product->setTransaction($transaction);
-                $name = $this->request->getPost("name");
-                $price = $this->request->getPost("price");
-                $type = $this->request->getPost("type");
-                $product->createNew($product, $name, $price, $type);
 
-                if ($product->save() == false)
-                {
-                    $transaction->rollback();
-                    foreach ($product->getMessages() as $message) {
-                        $this->flash->notice($message);
-                    }
-                }
-                $transaction->commit();
-                $this->flash->success($this->translate->_("productsuccess"));
-                return $this->dispatcher->forward(array("controller" => "product", "action" => "index"));
-            }
+        if ($this->request->isPost() == true) {
+            $product = $this->factory->createObject("Product");
+            $name = $this->request->getPost("name");
+            $price = $this->request->getPost("price");
+            $type = $this->request->getPost("type");
+            $product->createNew($product, $name, $price, $type);
 
-        } catch(Phalcon\Mvc\Model\Transaction\Failed $e)
+            if ($product->save() == false)
             {
-                echo 'Failed, reason: ', $e->getMessage();
+                foreach ($product->getMessages() as $message) {
+                    $this->flash->notice($message);
+                }
             }
+            $this->flash->success($this->translate->_("productsuccess"));
+            return $this->dispatcher->forward(array("controller" => "product", "action" => "index"));
+        }
+
+
 
     }
 
@@ -63,7 +55,8 @@ class ProductController extends ControllerBase
         $this->tag->setDefault("code", $product->getCode());
         $this->tag->setDefault("name", $product->getName());
         $this->tag->setDefault("price", $product->getPrice());
-        $this->tag->setDefault("type", $product->findTypeDescription($product->getType()));
+        $this->tag->setDefault("editType", $product->findTypeDescription($product->getType()));
+
     }
 
     public function saveAction()
@@ -71,10 +64,9 @@ class ProductController extends ControllerBase
         $code = $this->request->getPost("code", "int");
 
         $product = Product::findFirstByCode($code);
-        $type = $product->findTypeId($this->request->getPost("type"));
         $product->setName($this->request->getPost("name"));
         $product->setPrice($this->request->getPost("price"));
-        $product->setType($type);
+        $product->setType($this->request->getPost("editType"));
 
         if ($product->save()==false)
         {

@@ -73,20 +73,33 @@ class OrdersController extends ControllerBase
 
     public function deleteAction($code)
     {
-        $order = Orders::findFirstByOrderCode($code);
-        $orderitem = $this->factory->createObject("OrderItem");
-        $orderitems = $orderitem->findObject($code);
-        foreach($orderitems as $item)
-        {
-            $item->delete();
-        }
-        if($order->delete()==false)
-        {
-            foreach($order->getMessages() as $message)
+        try {
+            $manager = new Phalcon\Mvc\Model\Transaction\Manager;
+            $transaction = $manager->get();
+            $order = Orders::findFirstByOrderCode($code);
+            $order->setTransaction($transaction);
+            $orderitem = $this->factory->createObject("OrderItem");
+            $orderitem->setTransaction($transaction);
+            $orderitems = $orderitem->findObject($code);
+            foreach($orderitems as $item)
             {
-                echo $message;
+                if ($item->delete() == false)
+                {
+                    $transaction->rollback();
+                } else {
+                    $transaction->commit();
+                    $transaction->begin();
+                }
             }
-        }
-        $this->flash->success("Narudžba je uspješno pobrisana");
+            if($order->delete()==false)
+            {
+                $transaction->rollback();
+            }
+            $transaction->commit();
+            $this->flash->success("Narudžba je uspješno pobrisana");
+        } catch(Phalcon\Mvc\Model\Transaction\Failed $e)
+            {
+                echo 'Failed, reason: ', $e->getMessage();
+            }
     }
 }

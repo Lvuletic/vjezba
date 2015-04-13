@@ -12,9 +12,12 @@ td {border: 1px #DDD solid; padding: 5px; cursor: pointer;}
     width:600px;
 }
 
+#links{
+    width:600px;
+}
 
-#odabir{
-    width:500px;
+#products{
+    width:600px;
 }
 
 table{
@@ -25,6 +28,7 @@ th, td{
     width:100px;
     border:1px solid black;
 }
+
 /*
 thead>tr{
     position:relative;

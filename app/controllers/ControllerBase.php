@@ -8,8 +8,13 @@ class ControllerBase extends Controller
         $this->assets
             ->addJs("js/jquery.min.js")
             ->addJs("js/table.js")
-            ->addJs("js/webcart.js");
-        $this->assets->addCss("css/tables.css");
+            ->addJs("js/webcart.js")
+            ->addJs("js/edit.js")
+            ->addJs("js/jquery-ui.min.js");
+        $this->assets
+            ->addCss("css/tables.css")
+            ->addCss("css/jquery-ui.min.css");
+
         $this->tag->setDoctype(\Phalcon\Tag::HTML5);
         $this->loadTranslation();
     }

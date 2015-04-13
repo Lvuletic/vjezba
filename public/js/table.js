@@ -1,9 +1,9 @@
 
-$("#narudzbe tr").click(function(){
+$("#whole").on("click", "tr", function(){
     $(this).addClass('selected').siblings().removeClass('selected');
     var value=$(this).find('td:first').html();
     //$("#code").val(value);
-    //console.log(value);
+    console.log(value);
     showItems(value);
 
 });

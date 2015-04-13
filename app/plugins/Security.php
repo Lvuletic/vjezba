@@ -37,8 +37,9 @@ class Security extends Plugin
 
         $privateResources = array(
             "webcart" => array("index"),
-            "orders" => array("create"),
-            "customer" => array("account")
+            "orders" => array("create", "delete"),
+            "customer" => array("account"),
+            "orderlist" => array("edit")
         );
 
         foreach ($privateResources as $resource => $actions) {
@@ -48,7 +49,8 @@ class Security extends Plugin
         $publicResources = array(
             "index" => array("index", "changeLanguage"),
             "customer" => array("index", "register"),
-            "login" => array("index", "login", "logout")
+            "login" => array("index", "login", "logout"),
+            "orderlist" => array("index")
         );
 
         foreach ($publicResources as $resource => $actions) {
@@ -73,10 +75,13 @@ class Security extends Plugin
         $productResource = new Resource("product");
         $pregledResource = new Resource("orderlist");
         $acl->addResource($pregledResource, "index");
-        $acl->addResource($productResource, array("index", "create"));
-        $acl->allow("Admin", "orderlist", "index");
+        $acl->addResource($productResource, array("index", "create", "delete", "edit", "save"));
         $acl->allow("Admin", "product", "index");
         $acl->allow("Admin", "product", "create");
+        $acl->allow("Admin", "product", "edit");
+        $acl->allow("Admin", "product", "delete");
+        $acl->allow("Admin", "product", "save");
+        $acl->allow("Admin", "orders", "delete");
 
         return $this->persistent->acl = $acl;
     }
@@ -100,9 +105,58 @@ class Security extends Plugin
 
         $acl = $this->getAcl();
 
+        if ($controller=="orderlist" && $action=="edit")
+        {
+            $parameter = $dispatcher->getParam(0);
+            if ($parameter)
+            {
+                $order = $this->factory->createObject("Orders");
+                $id=$order->findCustomerId($parameter);
+                $user=$this->session->get("user_id");
+
+                if ($id!=$user)
+                {
+                    $this->flash->error("You do not have access to this page, please login or register");
+                    $dispatcher->forward(
+                        array(
+                            "controller" => "login",
+                            "action" => "index"
+                        )
+                    );
+                    return false;
+                }
+            } else {
+                if ($this->request->isPost())
+                {
+                    $order = $this->factory->createObject("Orders");
+                    $id = $order->findCustomerId($this->request->getPost("orderCode"));
+                    if ($id!=$this->session->get("user_id"))
+                    {
+                        $this->flash->error("You do not have access to this page, please login or register");
+                        $dispatcher->forward(
+                            array(
+                                "controller" => "login",
+                                "action" => "index"
+                            )
+                        );
+                        return false;
+                    }
+                    if ($this->request->getPost("customerId")!=$this->session->get("user_id"))
+                    {
+                        $this->flash->error("You do not have access to this page, please login or register");
+                        $dispatcher->forward(
+                            array(
+                                "controller" => "login",
+                                "action" => "index"
+                            )
+                        );
+                        return false;
+                    }
+                }
+            }
+        }
         $allowed = $acl->isAllowed($role, $controller, $action);
         if ($allowed != Acl::ALLOW) {
-
             $this->flash->error("You do not have access to this page, please login or register");
 
             $dispatcher->forward(

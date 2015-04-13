@@ -35,9 +35,9 @@
         <td>{{ row.product.getPrice() }}</td>
         <td>{{ row.description }}</td>
 
-        <td> <?php echo $this->tag->linkTo($this->session->get("lang")."/Product/edit/".$row->product->getCode(), "Edit") ?> </td>
+        <td> <?php echo $this->tag->linkTo($this->session->get("lang")."/product/edit/".$row->product->getCode(), "Edit") ?> </td>
 
-        <td> <?php echo $this->tag->linkTo($this->session->get("lang")."/Product/delete/".$row->product->getCode(), "Delete") ?> </td>
+        <td> <?php echo $this->tag->linkTo($this->session->get("lang")."/product/delete/".$row->product->getCode(), "Delete") ?> </td>
         </div>
     </tr>
 

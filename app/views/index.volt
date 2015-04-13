@@ -10,5 +10,7 @@
 		{{ content() }}
 		</div>
 	</div>
+	{{ assets.outputJs() }}
+    {{ assets.outputCss() }}
 	</body>
 </html>

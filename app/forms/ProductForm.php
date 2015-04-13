@@ -36,7 +36,7 @@ class ProductForm extends Form
 
         $this->add($text2);
 
-        $select = new Select("type", ProductType::find(), array("size" => 1, "using" => array("id", "description")));
+        $select = new Select("type", ProductType::find(), array("size" => 1, "useEmpty" => true, "using" => array("id", "description")));
         $select->setLabel("Type");
         $select->addValidator(new PresenceOf(array(
             'message' => 'Product type is required'

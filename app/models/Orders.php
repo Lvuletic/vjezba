@@ -198,4 +198,10 @@ class Orders extends \Phalcon\Mvc\Model
         return $order;
     }
 
+    public function findCustomerId($ordercode)
+    {
+        $order = Orders::findFirst($ordercode);
+        return $order->getCustomerId();
+    }
+
 }

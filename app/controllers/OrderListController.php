@@ -44,7 +44,7 @@ class OrderListController extends ControllerBase
 
                 $newView = $this->viewSimple;
                 $newView->form = new ListForm();
-                $content = $newView->render("orderlist/index", array("ordersPage" => $newPaginator->getPaginate(), "t" => $translator));
+                $content = $newView->render("orderlist/orders", array("ordersPage" => $newPaginator->getPaginate(), "t" => $translator));
 
             // $view->setRenderLevel(View::LEVEL_ACTION_VIEW);
             // $view->partial("orderlist/index", array( "ordersPage" => $newPaginator->getPaginate()));
@@ -104,6 +104,26 @@ class OrderListController extends ControllerBase
 
     public function editAction($code)
     {
+        if ($this->request->isPost())
+        {
+            $code = $this->request->getPost("orderCode", "int");
+
+            $order = Orders::findFirstByOrderCode($code);
+
+            $order->setCustomerId($this->request->getPost("customerId", "int"));
+            $order->setAddressDelivery($this->request->getPost("address", "string"));
+            $order->setTotalPrice($this->request->getPost("totalPrice"));
+            $order->setDate($this->request->getPost("date"));
+
+            if ($order->save()==false)
+            {
+                foreach($order->getMessages() as $message)
+                {
+                    echo $message;
+                }
+            }
+            else $this->flash->success($this->translate->_("ordereditsuccess"));
+        }
         $order = Orders::findFirstByOrderCode($code);
 
         $this->view->formOrderEdit = new OrderEditForm();
@@ -117,23 +137,7 @@ class OrderListController extends ControllerBase
 
     public function saveAction()
     {
-        $code = $this->request->getPost("orderCode", "int");
 
-        $order = Orders::findFirstByOrderCode($code);
-
-        $order->setCustomerId($this->request->getPost("customerId", "int"));
-        $order->setAddressDelivery($this->request->getPost("address", "string"));
-        $order->setTotalPrice($this->request->getPost("totalPrice"));
-        $order->setDate($this->request->getPost("date"));
-
-        if ($order->save()==false)
-        {
-            foreach($order->getMessages() as $message)
-            {
-                echo $message;
-            }
-        }
-        else $this->flash->success($this->translate->_("ordereditsuccess"));
     }
 
 }
