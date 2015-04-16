@@ -214,9 +214,9 @@ class OrderItem extends \Phalcon\Mvc\Model
         return $items;
     }
 
-    public function createNew($product, $quantity)
+    public function createNew($orderItem, $product, $quantity)
     {
-        $orderItem = new OrderItem();
+        //$orderItem = new OrderItem();
         $orderItem->setProductCode($product->getCode());
         $orderItem->setPrice($product->getPrice());
         $orderItem->setQuantity($quantity);

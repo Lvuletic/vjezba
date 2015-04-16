@@ -119,7 +119,7 @@ $di->set('dispatcher', function () use ($di) {
     $eventsManager = $di->getShared('eventsManager');
     $security = new Security();
     $wordChanger = new WordChanger();
-    $eventsManager->attach('dispatch', $security);
+    //$eventsManager->attach('dispatch', $security);
     $eventsManager->attach('view:afterRender',  $wordChanger);
     $dispatcher = new Phalcon\Mvc\Dispatcher();
     $dispatcher->setEventsManager($eventsManager);

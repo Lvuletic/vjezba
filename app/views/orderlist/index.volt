@@ -9,7 +9,7 @@
 <?php echo $t->_("checkout") ?>
     <div id="scroll">
 
-<table id="narudzbe" border="1">
+<table id="narudzbe" class="table table-bordered" width="100%">
     <tr>
         <th>Sifra</th>
         <th>Sifra kupca</th>

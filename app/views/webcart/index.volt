@@ -11,7 +11,7 @@
 
 <div id="shoplist" class="col-md-8">
 {% for product in productPage.items%}
-<button type="button" class="btn btn-default btn-lg" onclick="addTable()">
+<button type="button" class="btn btn-default btn-lg" onclick="addTable('{{product.getCode()}}','{{product.getName()}}','{{product.getPrice()}}')">
   <span class="glyphicon glyphicon-star"></span> {{product.getName()}}
 </button>
 {% endfor %}
@@ -21,42 +21,42 @@
 <a href="#" onclick="updateWebshopPage({{productPage.before}})"> Previous </a>
 <a href="#" onclick="updateWebshopPage({{productPage.next}})"> Next </a>
 <a href="#" onclick="updateWebshopPage({{productPage.last}})"> Last </a>
-<?php echo $productPage->current, "/", $productPage->total_pages ?></td>
+<?php echo $productPage->current, "/", $productPage->total_pages ?>
 </div>
 
 <div class="col-md-4">
-{{ form("orders/create", "role": "form") }}
-{{ formWebCart.label("webcart") }}
-<br>
-{{ formWebCart.render("webcart") }}
-<br>
-{{ tag_html("button", ["type": "button", "onclick": "removeProduct()"], false, true, true) }}
-Remove product
-{{ tag_html_close("button") }}
-<br>
 
 
-
-<table id="webcartTable" border="1">
+<div id="data">
+<table id="webcartTable" class="table table-bordered table-condensed">
+    <thead>
     <tr>
+        <th>Kod</th>
         <th>Proizvod</th>
         <th>Količina</th>
         <th>Cijena</th>
+        <th>Ukupna cijena</th>
 
     </tr>
-
-
-        </div>
+    </thead>
+    <tbody>
+    <tr id="total">
+    <td colspan="4">Ukupna cijena</td>
+    <td> 0 </td>
     </tr>
+    </tbody>
 
+</table>
+</div>
+<button type="button" onclick="getTable()">
+dodo
+</button>
 
-    </table>
-
-{{ submit_button("name": "create", "value": "Save order", "onclick": "selectAll()") }}
 
 {{ end_form() }}
 </div>
 </div>
+
 </body>
 </html>
 

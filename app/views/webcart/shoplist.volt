@@ -1,6 +1,6 @@
 <div id="shoplist">
 {% for product in productPage.items%}
-<button type="button" class="btn btn-default btn-lg" onclick="addProduct('{{product.getName()}}')">
+<button type="button" class="btn btn-default btn-lg" onclick="addTable('{{product.getCode()}}','{{product.getName()}}','{{product.getPrice()}}')">
   <span class="glyphicon glyphicon-star"></span> {{product.getName()}}
 </button>
 {% endfor %}

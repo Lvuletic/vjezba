@@ -1,6 +1,6 @@
-td {border: 1px #DDD solid; padding: 5px; cursor: pointer;}
+/*td {border: 1px #DDD solid; padding: 5px; cursor: pointer;}*/
 .selected {
-    background-color: brown;
+    background-color: lightslategray;
     color: #FFF;
 }
 
@@ -19,7 +19,7 @@ td {border: 1px #DDD solid; padding: 5px; cursor: pointer;}
 #products{
     width:600px;
 }
-
+/*
 table{
     border:1px solid black;
     width:100%;
@@ -28,7 +28,7 @@ th, td{
     width:100px;
     border:1px solid black;
 }
-
+*/
 /*
 thead>tr{
     position:relative;

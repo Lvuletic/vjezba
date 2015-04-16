@@ -1,50 +1,21 @@
 
-document.getElementById("product").addEventListener("change", selectedProduct)
-
-var product;
-
-function selectedProduct(){
-    product = this.value;
-    console.log(this.value);
-}
-
-function addProduct(product) {
-    var selectbox = document.getElementById("webcart");
-    var quantity = 1;
-        var options = selectbox.options;
-        for (var i = 0; i < options.length; i++)
-        {
-            if (product == options[i].text.slice(0,-2)) {
-                var foundProduct = options[i].text;
-                var productName = foundProduct.slice(0, -1)
-                var newQuantity = foundProduct.slice(-1);
-                newQuantity++;
-                var changedItem = productName.concat(newQuantity);
-                options[i].text = changedItem;
-                return true;
-            }
-        }
-    var newitem = product;
-    var item = document.createElement("option");
-    var newitem = newitem.concat(" "+quantity);
-    item.text = newitem;
-    selectbox.add(item);
-
-}
-
-function selectAll()
-{
-    selectBox = document.getElementById("webcart");
-    for (var i = 0; i < selectBox.options.length; i++)
-    {
-        selectBox.options[i].selected = true;
-    }
-}
+var rowIndex;
+/*
+$("#data tbody").on("click", "tr:not('#totalprice')", function () {
+    $(this).addClass('selected').siblings().removeClass('selected');
+    rowIndex = $(this).index();
+})
+*/
+$("#data tbody").on("click", "button", function () {
+    rowIndex = $(this).closest('tr').index();
+    console.log(rowIndex);
+    removeProduct()
+})
 
 function removeProduct()
 {
-    var selectbox = document.getElementById("webcart");
-    selectbox.remove(selectbox.selectedIndex);
+    var table = document.getElementById("webcartTable");
+    table.deleteRow(rowIndex+1);
 }
 
 function updateWebshopPage(value)
@@ -62,27 +33,96 @@ function updateWebshopPage(value)
     });
 }
 
-function addTable()
+function addTable(productCode, productName, price)
 {
-    var table = document.getElementById("webcartTable");
-    var row = table.insertRow(webcartTable.rows.length);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    cell1.innerHTML = "kruh";
-    cell2.innerHTML = "5";
-    cell3.innerHTML = "25";
-    fillSelectBox();
+    var bool;
+    $("#webcartTable tbody tr").each(function() {
+        var value = $(this).find("td:first").text();
+        if (value==productCode)
+        {
+            var quantity = $(this).find("td").eq(2).html();
+            quantity = parseInt(quantity, 10)+1;
+            $(this).find("td").eq(2).text(quantity);
+            var price = $(this).find("td").eq(3).html();
+            price = parseFloat(price, 10);
+            var totalprice = quantity*price;
+            $(this).find("td").eq(4).text(totalprice);
+            bool = 1;
+        }
+    });
+    if (bool!=1)
+    {
+        var table = document.getElementById("webcartTable");
+        var row = table.insertRow(webcartTable.rows.length-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        button  = document.createElement("button");
+        button.type = "button";
+        //button.className = "btn btn-default";
+        span = document.createElement("span");
+        span.className = "glyphicon glyphicon-minus";
+        button.appendChild(span);
+        cell6.appendChild(button);
+        cell1.innerHTML = productCode;
+        cell2.innerHTML = productName;
+        cell3.innerHTML = 1;
+        cell4.innerHTML = price;
+        cell5.innerHTML = price * 1;
+    }
+    //var pricetotal = $("#webcartTable tbody tr:last").find("td").eq(1).html();
+    var pricetotal = 0;
+    /*console.log(pricetotal);
+    pricetotal = parseFloat(pricetotal);
+    console.log(pricetotal);*/
+    $("#webcartTable tbody tr:not('#total')").each(function() {
+        var oneprice = $(this).find("td").eq(4).html();
+        oneprice = parseFloat(oneprice, 10);
+        //console.log(oneprice);
+        pricetotal = oneprice + pricetotal;
+        //console.log(pricetotal);
+    });
+    $("#webcartTable tbody tr:last").find("td").eq(1).text(pricetotal);
+
 }
 
-function fillSelectBox()
+function getTable()
 {
-    $('#webcartTable tr').each(function (index, value)
-    {
-        var row = webcartTable[1].cells[0].innerHTML;
-        var selectbox = document.getElementById("webcart");
-        var item = document.createElement("option");
-        item.text = row;
-        selectbox.add(item);
+    var rowcount = $('#webcartTable tr').length;
+    if (rowcount<=2) {
+        alert("Niste stavili niti jedan artikl");
+    }
+    else {
+    var headers = [];
+    var array = [];
+    $('#webcartTable th').each(function(index, item) {
+        headers[index] = $(item).html();
+    });
+    $('#webcartTable tr:not("#total")').has('td').each(function() {
+        var arrayItem = {};
+        $('td', $(this)).each(function(index, item) {
+            arrayItem[headers[index]] = $(item).html();
+        });
+        array.push(arrayItem);
+    });
+
+    sendOrder(JSON.stringify(array));
+    //alert(JSON.stringify(array));
+    }
+}
+
+function sendOrder(data)
+{
+    $.ajax({
+        url: "orders/create",
+        type: "post",
+        data: {"data" : data},
+        success: function(response) {
+            $("#data").html(response);
+        }
     });
 }
+
