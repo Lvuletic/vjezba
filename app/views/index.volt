@@ -5,7 +5,7 @@
 	</head>
 	<body>
 	{{ partial("partials/navbar") }}
-    <div id="main">
+    <div id="main" class="container">
 	    <div id="body">
 		{{ content() }}
 		</div>

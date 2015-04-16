@@ -93,13 +93,6 @@ class OrderListController extends ControllerBase
         }
         */
 
-        $request = new Phalcon\Http\Request();
-        $code = $request->get('code');
-        $orderItem = $this->factory->createObject("OrderItem");
-        $items = $orderItem->findOrderItemProduct($code);
-
-        $this->view->orderItems = $items;
-
     }
 
     public function editAction($code)

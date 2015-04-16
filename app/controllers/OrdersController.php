@@ -24,6 +24,7 @@ class OrdersController extends ControllerBase
     {
         try {
             if ($this->request->isPost() == true) {
+                if ($this->request->getPost("webcart")) {
                 $manager = new Phalcon\Mvc\Model\Transaction\Manager;
                 $transaction = $manager->get();
                 $order = $this->factory->createObject("Orders");
@@ -64,7 +65,10 @@ class OrdersController extends ControllerBase
                     $this->flash->success($this->translate->_("ordersuccess"));
                     return $this->dispatcher->forward(array("controller" => "webcart", "action" => "index"));
                 }
-            }
+            } else {
+                    $this->flash->error("Niste napunili ičim košaricu");
+                    return $this->dispatcher->forward(array("controller" => "webcart", "action" => "index"));
+                }}
         } catch(Phalcon\Mvc\Model\Transaction\Failed $e)
             {
                 echo 'Failed, reason: ', $e->getMessage();
