@@ -8,24 +8,35 @@
 
 <div class="row">
 <br>
-
 <div id="shoplist" class="col-md-8">
+
+
+
 {% for product in productPage.items%}
-<button type="button" class="btn btn-default btn-lg" onclick="addTable('{{product.getCode()}}','{{product.getName()}}','{{product.getPrice()}}')">
+<div class ="col-md-3">
+<button type="button" class="btn btn-default" width="20%" onclick="addTable('{{product.getCode()}}','{{product.getName()}}','{{product.getPrice()}}')">
   <span class="glyphicon glyphicon-star"></span> {{product.getName()}}
 </button>
+
+</div>
 {% endfor %}
 
+
 <br>
-<a href="#" onclick="updateWebshopPage(1)"> First </a>
-<a href="#" onclick="updateWebshopPage({{productPage.before}})"> Previous </a>
-<a href="#" onclick="updateWebshopPage({{productPage.next}})"> Next </a>
-<a href="#" onclick="updateWebshopPage({{productPage.last}})"> Last </a>
-<?php echo $productPage->current, "/", $productPage->total_pages ?>
+<!--
+<table>
+<tr>
+<td> <a href="#" onclick="updateWebshopPage(1)"> First </a> </td>
+<td> <a href="#" onclick="updateWebshopPage({{productPage.before}})"> Previous </a> </td>
+<td> <a href="#" onclick="updateWebshopPage({{productPage.next}})"> Next </a> </td>
+<td> <a href="#" onclick="updateWebshopPage({{productPage.last}})"> Last </a> </td>
+<td> <?php echo $productPage->current, "/", $productPage->total_pages ?> </td>
+</tr>
+</table>
+-->
 </div>
 
 <div class="col-md-4">
-
 
 <div id="data">
 <table id="webcartTable" class="table table-bordered table-condensed">

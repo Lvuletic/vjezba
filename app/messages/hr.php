@@ -24,5 +24,6 @@ $messages = array(
     "registernew" => "Hvala vam što ste se registrirali",
     "ordereditsuccess" => "Vaša narudžba je uspješno promijenjena",
     "productsuccess" => "Novi artikal je uspješno zaprimljen",
-    "producteditsuccess" => "Artikal je uspješno promijenjen"
+    "producteditsuccess" => "Artikal je uspješno promijenjen",
+    "yourorders" => "Popis narudžbi za kupca "
 );

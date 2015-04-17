@@ -24,5 +24,6 @@ $messages = array(
     "registernew" => "Thank you for registering",
     "ordereditsuccess" => "Your order has been successfully updated",
     "productsuccess" => "A new product has been successfully saved",
-    "producteditsuccess" => "Product has been successfully updated"
+    "producteditsuccess" => "Product has been successfully updated",
+    "yourorders" => "List of orders for customer "
 );

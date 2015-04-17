@@ -1,5 +1,5 @@
     <div id="scroll">
-<table border="1">
+<table class="table table-bordered" width="100%">
     <tr>
         <th>Sifra</th>
         <th>Sifra kupca</th>

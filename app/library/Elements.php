@@ -42,28 +42,28 @@ class Elements extends Component
             'caption' => 'glavna stranica',
             'route' => 'welcome'
         ),
-        'orderstable' => array(
+        /*'orderstable' => array(
             'caption' => 'pregled narudžbi',
             'route' => 'orderstable'
-        ),
+        ),*/
         'webshop' => array(
             'caption' => 'web kupovina',
             'route' => 'webshop'
         ),
-        'products' => array(
+        /*'products' => array(
             'caption' => 'proizvodi',
             'route' => 'products'
-        ),
+        ),*/
         'registration' => array(
             'caption' => 'registracija',
             'route' => 'registration'
         ),
-        'login' => array(
+        /*'login' => array(
             'caption' => 'prijava',
             'route' => 'login'
-        ),
+        ),*/
     );
-
+/*
     public function getMenu()
     {
         $auth = $this->session->get('auth');
@@ -80,4 +80,5 @@ class Elements extends Component
             );
         }
     }
+*/
 }

@@ -133,4 +133,59 @@ class OrderListController extends ControllerBase
 
     }
 
+    public function customerAction()
+    {
+        if ($this->request->isAjax() == true)
+        {
+            if ($this->request->getPost("page", "int") == true)
+            {
+                $numberNewPage = $this->request->getPost("page", "int");
+                $neworders = $this->factory->createObject("Orders");
+                $neworders = $neworders->findAllByCustomer($neworders, $this->session->get("user_id"));
+                $newPaginator = new Paginator(array(
+                    "data" => $neworders,
+                    "limit" => 5,
+                    "page" => $numberNewPage
+                ));
+
+                $translationPath = '../app/messages/';
+                $language = $this->session->get("lang");
+                require $translationPath . $language . ".php";
+                $translator = new Phalcon\Translate\Adapter\NativeArray(array(
+                    "content" => $messages
+                ));
+
+                $newView = $this->viewSimple;
+                $content = $newView->render("orderlist/customerorders", array("customerPage" => $newPaginator->getPaginate(), "t" => $translator));
+
+                $response = new \Phalcon\Http\Response();
+                $response->setContent($content);
+                return $response;
+            }
+            else if ($this->request->getPost("code", "int") == true)
+            {
+                $code = $this->request->getPost("code" , "int");
+                $orderItem = $this->factory->createObject("OrderItem");
+                $items = $orderItem->findOrderItemProduct($code);
+
+                $newView = $this->viewSimple;
+                $content = $newView->render("orderlist/orderitems", array("orderItems" => $items));
+
+                $response = new \Phalcon\Http\Response();
+                $response->setContent($content);
+                return $response;
+            }
+        }
+        $numberPage = 1;
+        $orders = $this->factory->createObject("Orders");
+        $orders = $orders->findAllByCustomer($orders, $this->session->get("user_id"));
+        $paginator = new Paginator(array(
+            "data" => $orders,
+            "limit" => 5,
+            "page" => $numberPage
+        ));
+        $this->view->customerPage = $paginator->getPaginate();
+
+    }
+
 }

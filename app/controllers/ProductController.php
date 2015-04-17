@@ -36,10 +36,12 @@ class ProductController extends ControllerBase
             {
                 foreach ($product->getMessages() as $message) {
                     $this->flash->notice($message);
+                    return $this->dispatcher->forward(array("controller" => "product", "action" => "index"));
                 }
-            }
+            } else {
             $this->flash->success($this->translate->_("productsuccess"));
             return $this->dispatcher->forward(array("controller" => "product", "action" => "index"));
+            }
         }
 
 
@@ -75,21 +77,34 @@ class ProductController extends ControllerBase
                 echo $message;
             }
         }
-        else $this->flash->success($this->translate->_("producteditsuccess"));
+        else {
+            $this->flash->success($this->translate->_("producteditsuccess"));
+            return $this->dispatcher->forward(array("controller" => "product", "action" => "index"));
+        }
     }
 
     public function deleteAction($code)
     {
         $product = Product::findFirst($code);
-
-        if($product->delete()==false)
+        $orderItem = $this->factory->createObject("OrderItem");
+        $productCode = $product->getCode();
+        $orderItemProduct = $orderItem->findFirst("productCode='$productCode'");
+        if ($orderItemProduct) {
+            $this->flash->error("Unable to delete product due to existing orders demanding it");
+            return $this->dispatcher->forward(array("controller" => "product", "action" => "index"));
+        }
+        else if($product->delete()==false)
         {
             foreach($product->getMessages() as $message)
             {
                 echo $message;
             }
         }
+        else {
         $this->flash->success("Delete successful");
+        return $this->dispatcher->forward(array("controller" => "product", "action" => "index"));
+        }
+
     }
 
 }

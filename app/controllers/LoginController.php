@@ -28,6 +28,7 @@ class LoginController extends ControllerBase
                 if ($user && $this->security->checkHash($password, $user->getPassword()))
                 {
                     $this->session->set("user_id", $user->getId());
+                    $this->session->set("username", $user->getUsername());
                     $this->cookies->set("user_id", $user->getId());
                     $this->session->set("auth", array(
                         "id" => $user->getId(),

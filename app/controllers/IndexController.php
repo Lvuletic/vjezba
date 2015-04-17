@@ -15,10 +15,22 @@ class IndexController extends ControllerBase
 
     public function changeLanguageAction($lang)
     {
-        $this->session->set("lang", $lang);
-        $referer = $this->request->getHTTPReferer();
-       // return $this->response->redirect($referer, true);
-        return $this->response->setHeader("Location", $referer);
+
+        //$this->dispatcher->setParam("language", $lang);
+        //$referer = $this->request->getHTTPReferer();
+        //$this->session->set("lang", $lang);
+        //return $this->response->redirect($referer, true);
+        //return $this->response->setHeader("Location", $referer);
+        $this->response->redirect(array(
+            "for" => "welcome",
+            "language" => $lang
+        ),null);
+
+
     }
 
+    public function aboutAction()
+    {
+
+    }
 }

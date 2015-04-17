@@ -1,5 +1,5 @@
 
-<table id="items">
+<table id="items" class="table table-bordered" width="100%">
     <tr>
         <th>Sifra narudzbe</th>
         <th>Sifra artikla</th>

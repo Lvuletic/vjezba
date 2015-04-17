@@ -204,4 +204,9 @@ class Orders extends \Phalcon\Mvc\Model
         return $order->getCustomerId();
     }
 
+    public function findAllByCustomer($order, $id)
+    {
+        $order = $order->find("customerId='$id'");
+        return $order;
+    }
 }

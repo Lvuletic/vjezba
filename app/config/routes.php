@@ -33,7 +33,6 @@ $router->add('/{language:[a-z]{2}+}/:controller/:action/:params', array(
     "params"     => 4
 ));
 
-
 $router->add("/{language:[a-z]{2}+}/welcome", array(
     "controller" => "index",
     "action" => "index"
@@ -74,8 +73,14 @@ $router->add("/{language:[a-z]{2}+}/logout", array(
     "action" => "logout"
 ))->setName("logout");
 
+$router->add("/{language:[a-z]{2}+}/yourorders", array(
+    "controller" => "orderlist",
+    "action" => "customer"
+))->setName("yourorders");
 
-
-
+$router->add("/{language:[a-z]{2}+}/about", array(
+    "controller" => "index",
+    "action" => "about"
+))->setName("about");
 
 return $router;

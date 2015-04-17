@@ -31,12 +31,12 @@ class ControllerBase extends Controller
     public function loadTranslation()
     {
         $translationPath = '../app/messages/';
-        $language = $this->session->get("lang");
-        //$language = $this->dispatcher->getParam("language");
+        //$language = $this->session->get("lang");
+        $language = $this->dispatcher->getParam("language");
         if (!$language)
         {
-           // $this->dispatcher->setParam("language", "en");
-            $this->session->set("lang", "en");
+            $this->dispatcher->setParam("language", "en");
+            //$this->session->set("lang", "en");
             $language = "en";
         }
         require $translationPath.$language.".php";

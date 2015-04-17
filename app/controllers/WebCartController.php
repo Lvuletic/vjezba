@@ -21,7 +21,7 @@ class WebCartController extends ControllerBase
             $products = Product::find();
             $newPaginator = new Paginator(array(
                 "data" => $products,
-                "limit" => 15,
+                "limit" => 50,
                 "page" => $numberNewPage
             ));
 
@@ -40,7 +40,7 @@ class WebCartController extends ControllerBase
         $numberPage = 1;
         $paginator = new Paginator(array(
             "data" => $products,
-            "limit" => 15,
+            "limit" => 50,
             "page" => $numberPage
         ));
         $this->view->productPage = $paginator->getPaginate();

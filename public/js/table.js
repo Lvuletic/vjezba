@@ -15,7 +15,7 @@ function showItems(value)
        type: "post",
        data: {"code" : value},
        success: function(response) {
-           $("#scroll2").html(response);
+           $("#orderDetails").html(response);
        }
     });
 }
@@ -34,3 +34,22 @@ function updatePage(value)
         }
     });
 }
+
+function updateCustomerPage(value)
+{
+    $.ajax({
+        url: "orderlist/customer",
+        type: "post",
+        data: {"page" : value},
+        //dataType: "json",
+        success: function(response) {
+            // console.log(response);
+            //$("#whole").html("");
+            $("#whole").html(response);
+        }
+    });
+}
+
+$(document).ready( function() {
+    $('.dropdown-toggle').dropdown();
+});

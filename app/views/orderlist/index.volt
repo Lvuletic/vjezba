@@ -1,7 +1,8 @@
 {{ content() }}
 
 <html>
-<head> {{ assets.outputCss() }} </head>
+<head>
+</head>
 <body>
 
 <div id = "whole">
@@ -43,7 +44,7 @@
  </div>
 
 <div id="links">
-<table>
+<table class="table table-bordered" width="100%">
 
 <tr>
 <td> <a href="#" onclick="updatePage(1)"> First </a>
@@ -67,7 +68,7 @@
 #}
 
 <?php echo $t->_("items") ?>
-<div id="scroll2">
+<div id="orderDetails">
 
 </div>
 
