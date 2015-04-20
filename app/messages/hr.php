@@ -25,5 +25,6 @@ $messages = array(
     "ordereditsuccess" => "Vaša narudžba je uspješno promijenjena",
     "productsuccess" => "Novi artikal je uspješno zaprimljen",
     "producteditsuccess" => "Artikal je uspješno promijenjen",
-    "yourorders" => "Popis narudžbi za kupca "
+    "yourorders" => "Popis narudžbi za kupca ",
+    "loginnotallow" => "Nemate pristup ovoj stranici molimo prijavite se"
 );

@@ -25,5 +25,6 @@ $messages = array(
     "ordereditsuccess" => "Your order has been successfully updated",
     "productsuccess" => "A new product has been successfully saved",
     "producteditsuccess" => "Product has been successfully updated",
-    "yourorders" => "List of orders for customer "
+    "yourorders" => "List of orders for customer ",
+    "loginnotallow" => "You do not have access to this page, please login"
 );

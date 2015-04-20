@@ -116,7 +116,7 @@ class Security extends Plugin
 
                 if ($id!=$user)
                 {
-                    $this->flash->error("You do not have access to this page, please login or register");
+                    $this->flash->error($this->translate->_("loginnotallow"));
                     $dispatcher->forward(
                         array(
                             "controller" => "login",
@@ -132,7 +132,7 @@ class Security extends Plugin
                     $id = $order->findCustomerId($this->request->getPost("orderCode"));
                     if ($id!=$this->session->get("user_id"))
                     {
-                        $this->flash->error("You do not have access to this page, please login or register");
+                        $this->flash->error($this->translate->_("loginnotallow"));
                         $dispatcher->forward(
                             array(
                                 "controller" => "login",
@@ -143,7 +143,7 @@ class Security extends Plugin
                     }
                     if ($this->request->getPost("customerId")!=$this->session->get("user_id"))
                     {
-                        $this->flash->error("You do not have access to this page, please login or register");
+                        $this->flash->error($this->translate->_("loginnotallow"));
                         $dispatcher->forward(
                             array(
                                 "controller" => "login",
@@ -157,7 +157,7 @@ class Security extends Plugin
         }
         $allowed = $acl->isAllowed($role, $controller, $action);
         if ($allowed != Acl::ALLOW) {
-            $this->flash->error("You do not have access to this page, please login or register");
+            $this->flash->error($this->translate->_("loginnotallow"));
 
             $dispatcher->forward(
                 array(

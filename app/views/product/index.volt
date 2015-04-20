@@ -1,7 +1,7 @@
 {{ content() }}
 <?php echo $t->_("product") ?>
 <div>
-    {{ form(this.session.get("lang")~"/product/create", "role": "form") }}
+    {{ form(this.dispatcher.getParam("language")~"/product/create", "role": "form") }}
     {{ form.label("name") }}
     <br>
     {{ form.render("name") }}

@@ -10,7 +10,7 @@
     </tr>
     {% for row in ordersPage.items %}
     <tr>
-        <div id="results">
+
         <td>{{ row.orders.getOrderCode() }}</td>
         <td>{{ row.orders.getCustomerId() }}</td>
         <td>{{ row.username }}</td>
@@ -24,11 +24,22 @@
         <td> <?php if ($this->session->get("user_id") == 1)
         echo $this->tag->linkTo($this->session->get("lang")."/orders/delete/".$row->orders->getOrderCode(), "Delete") ?> </td>
 
-        </div>
+
     </tr>
 
     {% endfor %}
     </table>
+</div>
+<div id="links">
+
+
+<tr>
+<td> <a href="#" onclick="updatePage(1)"> First </a>
+<td> <a href="#" onclick="updatePage({{ordersPage.before}})"> Previous </a>
+<td> <a href="#" onclick="updatePage({{ordersPage.next}})"> Next </a>
+<td> <a href="#" onclick="updatePage({{ordersPage.last}})"> Last </a>
+<td><?php echo $ordersPage->current, "/", $ordersPage->total_pages ?></td>
+</tr>
 
 
 </div>

@@ -15,11 +15,4 @@ Cras id tempor dolor, sed cursus elit. Pellentesque habitant morbi tristique sen
 Proin volutpat sapien non sem porta faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
 Nullam felis risus, tincidunt in posuere fringilla, auctor eget ipsum.
 </p>
-<button type="button" class="btn btn-default">
-  <span class="glyphicon glyphicon-align-left"></span>
-</button>
-
-<button type="button" class="btn btn-default btn-lg">
-  <span class="glyphicon glyphicon-star"></span> Star
-</button>
 </body>

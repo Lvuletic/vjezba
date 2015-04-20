@@ -1,6 +1,7 @@
 {{ get_doctype() }}
 <html>
 	<head>
+	    {{ assets.outputCss() }}
 		<title>Phalcon PHP Framework</title>
 	</head>
 	<body>
@@ -11,6 +12,6 @@
 		</div>
 	</div>
 	{{ assets.outputJs() }}
-    {{ assets.outputCss() }}
+
 	</body>
 </html>

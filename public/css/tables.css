@@ -19,6 +19,12 @@
 #products{
     width:600px;
 }
+
+#shoplist .col-md-3{
+    border-style: solid;
+    border-width: 1px;
+    height: 85px;
+}
 /*
 table{
     border:1px solid black;

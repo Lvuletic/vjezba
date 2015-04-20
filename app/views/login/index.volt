@@ -1,7 +1,7 @@
 {{ content() }}
 <?php echo $t->_("login") ?>
 <div>
-    {{ form(this.session.get("lang")~"/login/login", "role": "form") }}
+    {{ form(this.dispatcher.getParam("language")~"/login/login", "role": "form") }}
     {{ form.label("usermail") }}
     <br>
     {{ form.render("usermail") }}

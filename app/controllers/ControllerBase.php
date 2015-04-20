@@ -12,15 +12,12 @@ class ControllerBase extends Controller
             ->addJs("js/edit.js")
             ->addJs("js/jquery-ui.min.js")
             ->addJs("js/bootstrap.js")
-            ->addJs("js/bootstrap.min.js")
-            ->addJs("js/npm.js");
+            ->addJs("js/bootstrap.min.js");
         $this->assets
             ->addCss("css/tables.css")
             ->addCss("css/jquery-ui.min.css")
             ->addCss("css/bootstrap.css")
-            ->addCss("css/bootstrap.min.css")
             ->addCss("css/bootstrap-theme.css")
-            ->addCss("css/bootstrap-theme.min.css")
             ->addCss("css/bootstrap.css.map")
             ->addCss("css/bootstrap-theme.css.map");
 

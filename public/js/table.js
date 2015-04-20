@@ -5,7 +5,6 @@ $("#whole").on("click", "tr", function(){
     //$("#code").val(value);
     console.log(value);
     showItems(value);
-
 });
 
 function showItems(value)
@@ -26,10 +25,7 @@ function updatePage(value)
         url: "",
         type: "post",
         data: {"page" : value},
-        //dataType: "json",
         success: function(response) {
-            // console.log(response);
-            //$("#whole").html("");
             $("#whole").html(response);
         }
     });
@@ -41,10 +37,7 @@ function updateCustomerPage(value)
         url: "orderlist/customer",
         type: "post",
         data: {"page" : value},
-        //dataType: "json",
         success: function(response) {
-            // console.log(response);
-            //$("#whole").html("");
             $("#whole").html(response);
         }
     });

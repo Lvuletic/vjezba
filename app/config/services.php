@@ -164,10 +164,14 @@ $di->set('modelsCache', function() {
 });
 
 $di->setShared('translate', function() use($di) {
-    $session = $di->getShared("session");
-    if ($session->has("lang"))
+    // = $di->getShared("session");
+    $dispatcher = $di->getShared("dispatcher");
+    $language = $dispatcher->getParam("language");
+    if (!$language)
     {
-        $language = $session->get("lang");
+        $dispatcher->setParam("language", "en");
+        //$this->session->set("lang", "en");
+        $language = "en";
     }
     require '../app/messages/'.$language.".php";
     return new Phalcon\Translate\Adapter\NativeArray(array(

@@ -31,20 +31,20 @@
     {% endfor %}
     </table>
  </div>
- </div>
 
-<div id="links">
-<table class="table table-bordered" width="100%">
 
-<tr>
-<td> <a href="#" onclick="updateCustomerPage(1)"> First </a>
-<td> <a href="#" onclick="updateCustomerPage({{customerPage.before}})"> Previous </a>
-<td> <a href="#" onclick="updateCustomerPage({{customerPage.next}})"> Next </a>
-<td> <a href="#" onclick="updateCustomerPage({{customerPage.last}})"> Last </a>
-<td><?php echo $customerPage->current, "/", $customerPage->total_pages ?></td>
-</tr>
 
-</table>
+
+
+  <tr>
+    <td> <a href="#" onclick="updateCustomerPage(1)"> First </a> </td>
+    <td> <a href="#" onclick="updateCustomerPage({{customerPage.before}})"> Previous </a> </td>
+    <td> <a href="#" onclick="updateCustomerPage({{customerPage.next}})"> Next </a> </td>
+    <td> <a href="#" onclick="updateCustomerPage({{customerPage.last}})"> Last </a> </td>
+    <td> <?php echo $customerPage->current, "/", $customerPage->total_pages ?> </td>
+  </tr>
+
+
 </div>
 
 <?php echo $t->_("items") ?>

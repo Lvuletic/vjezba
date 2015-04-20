@@ -75,15 +75,11 @@ function addTable(productCode, productName, price)
     }
     //var pricetotal = $("#webcartTable tbody tr:last").find("td").eq(1).html();
     var pricetotal = 0;
-    /*console.log(pricetotal);
-    pricetotal = parseFloat(pricetotal);
-    console.log(pricetotal);*/
+    //pricetotal = parseFloat(pricetotal);
     $("#webcartTable tbody tr:not('#total')").each(function() {
         var oneprice = $(this).find("td").eq(4).html();
         oneprice = parseFloat(oneprice, 10);
-        //console.log(oneprice);
         pricetotal = oneprice + pricetotal;
-        //console.log(pricetotal);
     });
     $("#webcartTable tbody tr:last").find("td").eq(1).text(pricetotal);
 

@@ -1,7 +1,7 @@
 {{ content() }}
 {{ link_to(["for":"products","language":this.session.get("lang")],"povratak") }}
 <div>
-    {{ form(this.session.get("lang")~"/product/save", "role": "form") }}
+    {{ form(this.dispatcher.getParam("language")~"/product/save", "role": "form") }}
     {{ formProductEdit.label("code") }}
     <br>
     {{ formProductEdit.render("code") }}

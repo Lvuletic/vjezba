@@ -25,7 +25,7 @@
                 <span class="caret"></span></a>
           <?php }
           else {
-             echo $this->tag->linkTo(array(array("for" => "login", "language" => $this->session->get("lang")), "prijava"));
+             echo $this->tag->linkTo(array(array("for" => "login", "language" => $this->dispatcher->getParam("language")), "prijava"));
            }?>
           <ul class="dropdown-menu" role="menu">
           <?php if($this->session->get("user_id")==1)

@@ -36,7 +36,7 @@ class OrderListController extends ControllerBase
             $content = $view->getContent();*/
 
                 $translationPath = '../app/messages/';
-                $language = $this->session->get("lang");
+                $language = $this->dispatcher->getParam("language");
                 require $translationPath . $language . ".php";
                 $translator = new Phalcon\Translate\Adapter\NativeArray(array(
                     "content" => $messages
@@ -149,7 +149,7 @@ class OrderListController extends ControllerBase
                 ));
 
                 $translationPath = '../app/messages/';
-                $language = $this->session->get("lang");
+                $language = $this->dispatcher->getParam("language");
                 require $translationPath . $language . ".php";
                 $translator = new Phalcon\Translate\Adapter\NativeArray(array(
                     "content" => $messages
