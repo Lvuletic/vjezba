@@ -38,7 +38,7 @@ class Security extends Plugin
         $privateResources = array(
             "webcart" => array("index"),
             "orders" => array("create", "delete"),
-            "customer" => array("account"),
+            "customer" => array("account", "save"),
             "orderlist" => array("edit", "customer")
         );
 

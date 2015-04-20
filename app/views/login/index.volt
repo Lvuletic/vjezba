@@ -1,15 +1,19 @@
 {{ content() }}
 <?php echo $t->_("login") ?>
-<div>
-    {{ form(this.dispatcher.getParam("language")~"/login/login", "role": "form") }}
-    {{ form.label("usermail") }}
-    <br>
-    {{ form.render("usermail") }}
-    <br>
-    {{ form.label("password") }}
-    <br>
-    {{ form.render("password") }}
-    <br>
-    {{ submit_button("value": "Login") }}
-    {{ end_form() }}
+
+{{ form(this.dispatcher.getParam("language")~"/login/login", "role": "form") }}
+
+<div class="form-group">
+{{ form.label("usermail") }}
+{{ form.render("usermail", ["class": "form-control", "placeholder": "Username or email"]) }}
 </div>
+
+<div class="form-group">
+{{ form.label("password") }}
+{{ form.render("password", ["class": "form-control", "placeholder": "Password"]) }}
+</div>
+
+<div class="form-group">
+{{ submit_button("value": "Login", "class": "btn btn-default") }}
+</div>
+{{ end_form() }}

@@ -9,8 +9,6 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-         <li> <?php echo $this->tag->linkTo("index/changeLanguage/hr", "Hrvatski") ?> </li>
-         <li> <?php echo $this->tag->linkTo("index/changeLanguage/en", "English") ?> </li>
         {% for controller,option in elements._headerMenu %}
         <li> <?php if ($option["route"]!="login" && $option["route"]!="logout")
         echo $this->tag->linkTo(array(array("for" => $option["route"], "language" => $this->dispatcher->getParam("language")), $option['caption'])) ?> </li>
@@ -43,6 +41,8 @@
            <?php } ?>
           </ul>
         </li>
+        <li> <a href="index/changeLanguage/hr"><img src="/vjezba/public/img/tinyCRO.gif" alt="Hr" title="Hrvatski jezik"> </a> </li>
+        <li> <a href="index/changeLanguage/en"><img src="/vjezba/public/img/tinyUK.gif" alt="UK"title="English language"> </a> </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

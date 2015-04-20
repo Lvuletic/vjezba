@@ -1,26 +1,31 @@
 {{ content() }}
 <?php echo $t->_("product") ?>
-<div>
-    {{ form(this.dispatcher.getParam("language")~"/product/create", "role": "form") }}
-    {{ form.label("name") }}
-    <br>
-    {{ form.render("name") }}
-    <br>
-    {{ form.label("price") }}
-    <br>
-    {{ form.render("price") }}
-    <br>
-    {{ form.label("type") }}
-    <br>
-    {{ form.render("type") }}
-    {{ submit_button("value": "Create") }}
-    {{ end_form() }}
+
+{{ form(this.dispatcher.getParam("language")~"/product/create", "role": "form") }}
+
+<div class="form-group">
+{{ form.label("name") }}
+{{ form.render("name", ["class": "form-control", "placeholder": "Name"]) }}
 </div>
+
+<div class="form-group">
+{{ form.label("price") }}
+{{ form.render("price", ["class": "form-control", "placeholder": "Price"]) }}
+</div>
+
+<div class="form-group">
+{{ form.label("type") }}
+{{ form.render("type", ["class": "form-control"]) }}
+</div>
+
+{{ submit_button("value": "Create", "class": "btn btn-default") }}
+{{ end_form() }}
+
 
 <br>
 
 <div>
-<table id="products" border="1">
+<table id="products" class="table table-bordered" width="100%">
     <tr>
         <th>Kod</th>
         <th>Naziv</th>

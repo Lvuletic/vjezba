@@ -1,7 +1,7 @@
 {{ content() }}
-{{ link_to(["for":"orderstable","language":this.session.get("lang")],"povratak") }}
+{{ link_to(["for":"orderstable","language":this.dispatcher.getParam("language")],"povratak") }}
 <div>
-    {{ form(this.session.get("lang")~"/orderlist/edit", "role": "form") }}
+    {{ form(this.dispatcher.getParam("language")~"/orderlist/edit", "role": "form") }}
     {{ formOrderEdit.label("orderCode") }}
     <br>
     {{ formOrderEdit.render("orderCode") }}

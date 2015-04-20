@@ -25,6 +25,7 @@
         <td>{{ row.getTotalPrice() }}</td>
         <td>{{ row.getDate() }}</td>
 
+        <td> <?php echo $this->tag->linkTo($this->dispatcher->getParam("language")."/orders/delete/".$row->getOrderCode(), "Delete") ?> </td>
 
     </tr>
 
@@ -34,15 +35,15 @@
 
 
 
-
-
-  <tr>
-    <td> <a href="#" onclick="updateCustomerPage(1)"> First </a> </td>
-    <td> <a href="#" onclick="updateCustomerPage({{customerPage.before}})"> Previous </a> </td>
-    <td> <a href="#" onclick="updateCustomerPage({{customerPage.next}})"> Next </a> </td>
-    <td> <a href="#" onclick="updateCustomerPage({{customerPage.last}})"> Last </a> </td>
-    <td> <?php echo $customerPage->current, "/", $customerPage->total_pages ?> </td>
-  </tr>
+<nav>
+  <ul class="pager">
+    <li><a href="#" onclick="updateCustomerPage(1)">First</a></li>
+    <li><a href="#" onclick="updateCustomerPage({{customerPage.before}})">Previous</a></li>
+    <li><a href="#" onclick="updateCustomerPage({{customerPage.next}})">Next</a></li>
+    <li><a href="#" onclick="updateCustomerPage({{customerPage.last}})">Last</a></li>
+    <li>  <?php echo $customerPage->current, "/", $customerPage->total_pages ?></li>
+  </ul>
+</nav>
 
 
 </div>
