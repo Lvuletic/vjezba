@@ -16,31 +16,37 @@ class ProductEditForm extends Form
         $text = new Text("code", array(
             "readonly" => true
         ));
-        $text->setLabel("Kod");
+        $text->setLabel($this->translate->_("productcode"));
         $text->addValidator(new PresenceOf(array(
             'message' => 'Code is required'
         )));
 
         $this->add($text);
 
-        $text2 = new Text("name");
-        $text2->setLabel("Naziv");
+        $text2 = new Text("name", array(
+            "placeholder" => $this->translate->_("productname")
+        ));
+        $text2->setLabel($this->translate->_("productname"));
         $text2->addValidator(new PresenceOf(array(
             'message' => 'Name is required'
         )));
 
         $this->add($text2);
 
-        $text3 = new Text("price");
-        $text3->setLabel("Cijena");
+        $text3 = new Text("price", array(
+            "placeholder" => $this->translate->_("productprice")
+        ));
+        $text3->setLabel($this->translate->_("productprice"));
         $text3->addValidator(new PresenceOf(array(
             'message' => 'Price is required'
         )));
 
         $this->add($text3);
 
-        $text4 = new Text("type");
-        $text4->setLabel("Tip");
+        $text4 = new Text("type", array(
+            "placeholder" => $this->translate->_("producttype")
+        ));
+        $text4->setLabel($this->translate->_("producttype"));
         $text4->addValidator(new PresenceOf(array(
             'message' => 'Type is required'
         )));
@@ -48,7 +54,7 @@ class ProductEditForm extends Form
         $this->add($text4);
 
         $select = new Select("editType", ProductType::find(), array("size" => 1, "useEmpty" => true, "using" => array("id", "description")));
-        $select->setLabel("Type");
+        $select->setLabel($this->translate->_("producttype"));
         $select->addValidator(new PresenceOf(array(
             'message' => 'Product type is required'
         )));

@@ -237,4 +237,15 @@ class Customer extends \Phalcon\Mvc\Model
         return $customer;
     }
 
+    public function addNew()
+    {
+        $customer = new Customer();
+        $customer->setUsername("dodo");
+        $customer->setPhone("1234");
+        $customer->setEmail("dodo@gmail.com");
+        $customer->setAddress("rijeka");
+        $customer->setPassword("abcd1234");
+        return $customer->save();
+    }
+
 }

@@ -39,7 +39,7 @@ class Elements extends Component
 
     public $_headerMenu = array(
         'welcome' => array(
-            'caption' => 'glavna stranica',
+            'caption' => 'mainpagelink',
             'route' => 'welcome'
         ),
         /*'orderstable' => array(
@@ -47,7 +47,7 @@ class Elements extends Component
             'route' => 'orderstable'
         ),*/
         'webshop' => array(
-            'caption' => 'web kupovina',
+            'caption' => 'webshoplink',
             'route' => 'webshop'
         ),
         /*'products' => array(
@@ -55,7 +55,7 @@ class Elements extends Component
             'route' => 'products'
         ),*/
         'registration' => array(
-            'caption' => 'registracija',
+            'caption' => 'registrationlink',
             'route' => 'registration'
         ),
         /*'login' => array(

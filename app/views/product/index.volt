@@ -5,12 +5,12 @@
 
 <div class="form-group">
 {{ form.label("name") }}
-{{ form.render("name", ["class": "form-control", "placeholder": "Name"]) }}
+{{ form.render("name", ["class": "form-control"]) }}
 </div>
 
 <div class="form-group">
 {{ form.label("price") }}
-{{ form.render("price", ["class": "form-control", "placeholder": "Price"]) }}
+{{ form.render("price", ["class": "form-control"]) }}
 </div>
 
 <div class="form-group">

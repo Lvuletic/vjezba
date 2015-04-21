@@ -18,7 +18,7 @@ class CustomerForm extends Form
     public function initialize()
     {
         $text = new Text("username");
-        $text->setLabel("Name");
+        $text->setLabel($this->translate->_("customername"));
         $text->addValidator(new PresenceOf(array(
             'message' => 'Username is required'
         )));
@@ -26,7 +26,7 @@ class CustomerForm extends Form
         $this->add($text);
 
         $text2 = new Text("phone");
-        $text2->setLabel("Phone");
+        $text2->setLabel($this->translate->_("customerphone"));
         $text2->addValidator(new PresenceOf(array(
             'message' => 'Phone number is required'
         )));
@@ -45,7 +45,7 @@ class CustomerForm extends Form
         $this->add($text3);
 
         $text4 = new Text("address");
-        $text4->setLabel("Address");
+        $text4->setLabel($this->translate->_("customeraddress"));
         $text4->addValidator(new PresenceOf(array(
             'message' => 'Address is required'
         )));
@@ -53,7 +53,7 @@ class CustomerForm extends Form
         $this->add($text4);
 
         $text5 = new Password("password");
-        $text5->setLabel("Password");
+        $text5->setLabel($this->translate->_("customerpass"));
         $text5->addValidator(new PresenceOf(array(
             'message' => 'Password is required'
         )));

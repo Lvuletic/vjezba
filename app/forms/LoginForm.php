@@ -15,12 +15,12 @@ class LoginForm extends Form
     public function initialize()
     {
         $text = new Text("usermail");
-        $text->setLabel("Email ");
+        $text->setLabel("Email");
 
         $this->add($text);
 
         $text2 = new Password("password");
-        $text2->setLabel("Password ");
+        $text2->setLabel($this->translate->_("loginpassword"));
 
         $this->add($text2);
     }

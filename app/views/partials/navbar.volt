@@ -4,14 +4,14 @@
   <div class="container">
 
     <div class="navbar-header">
-     <?php echo $this->tag->linkTo(array(array("for" => "about", "language" => $this->dispatcher->getParam("language")), "O nama", "class" => "navbar-brand")) ?>
+     <?php echo $this->tag->linkTo(array(array("for" => "about", "language" => $this->dispatcher->getParam("language")), $t->_("aboutlink"), "class" => "navbar-brand")) ?>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         {% for controller,option in elements._headerMenu %}
         <li> <?php if ($option["route"]!="login" && $option["route"]!="logout")
-        echo $this->tag->linkTo(array(array("for" => $option["route"], "language" => $this->dispatcher->getParam("language")), $option['caption'])) ?> </li>
+        echo $this->tag->linkTo(array(array("for" => $option["route"], "language" => $this->dispatcher->getParam("language")), $t->_($option['caption']))) ?> </li>
         {% endfor %}
       </ul>
 
@@ -23,21 +23,21 @@
                 <span class="caret"></span></a>
           <?php }
           else {
-             echo $this->tag->linkTo(array(array("for" => "login", "language" => $this->dispatcher->getParam("language")), "prijava"));
+             echo $this->tag->linkTo(array(array("for" => "login", "language" => $this->dispatcher->getParam("language")), $t->_("loginlink")));
            }?>
           <ul class="dropdown-menu" role="menu">
           <?php if($this->session->get("user_id")==1)
           { ?>
-            <li> <?php echo $this->tag->linkTo(array(array("for" => "orderstable", "language" => $this->dispatcher->getParam("language")), "Popis narudžbi")) ?> </li>
-            <li> <?php echo $this->tag->linkTo(array(array("for" => "products", "language" => $this->dispatcher->getParam("language")), "Proizvodi")) ?> </li>
+            <li> <?php echo $this->tag->linkTo(array(array("for" => "orderstable", "language" => $this->dispatcher->getParam("language")), $t->_("list of orders"))) ?> </li>
+            <li> <?php echo $this->tag->linkTo(array(array("for" => "products", "language" => $this->dispatcher->getParam("language")), $t->_("list of products"))) ?> </li>
             <li class="divider"></li>
-            <li> <?php echo $this->tag->linkTo(array(array("for" => "logout", "language" => $this->dispatcher->getParam("language")), "Odjava")) ?> </li>
+            <li> <?php echo $this->tag->linkTo(array(array("for" => "logout", "language" => $this->dispatcher->getParam("language")), $t->_("logoutlink"))) ?> </li>
          <?php }
          else { ?>
-            <li> <?php echo $this->tag->linkTo(array(array("for" => "account", "language" => $this->dispatcher->getParam("language")), "Vaš Račun")) ?> </li>
-            <li> <?php echo $this->tag->linkTo(array(array("for" => "yourorders", "language" => $this->dispatcher->getParam("language")), "Vaše narudžbe")) ?> </li>
+            <li> <?php echo $this->tag->linkTo(array(array("for" => "account", "language" => $this->dispatcher->getParam("language")), $t->_("youraccount"))) ?> </li>
+            <li> <?php echo $this->tag->linkTo(array(array("for" => "yourorders", "language" => $this->dispatcher->getParam("language")), $t->_("your orders"))) ?> </li>
             <li class="divider"></li>
-            <li> <?php echo $this->tag->linkTo(array(array("for" => "logout", "language" => $this->dispatcher->getParam("language")), "Odjava")) ?> </li>
+            <li> <?php echo $this->tag->linkTo(array(array("for" => "logout", "language" => $this->dispatcher->getParam("language")), $t->_("logoutlink"))) ?> </li>
            <?php } ?>
           </ul>
         </li>

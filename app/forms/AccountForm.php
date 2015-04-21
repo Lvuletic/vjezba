@@ -19,7 +19,7 @@ class AccountForm extends Form
     {
 
         $text = new Text("phone");
-        $text->setLabel("Phone");
+        $text->setLabel($this->translate->_("accountphone"));
         $text->addValidator(new PresenceOf(array(
             'message' => 'Phone number is required'
         )));
@@ -38,7 +38,7 @@ class AccountForm extends Form
         $this->add($text2);
 
         $text3 = new Text("address");
-        $text3->setLabel("Address");
+        $text3->setLabel($this->translate->_("accountaddress"));
         $text3->addValidator(new PresenceOf(array(
             'message' => 'Address is required'
         )));
@@ -46,7 +46,7 @@ class AccountForm extends Form
         $this->add($text3);
 
         $text4 = new Password("oldPassword");
-        $text4->setLabel("Enter current password");
+        $text4->setLabel($this->translate->_("accountoldpass"));
         $text4->addValidator(new PresenceOf(array(
             'message' => 'Password is required'
         )));
@@ -59,7 +59,7 @@ class AccountForm extends Form
         $this->add($text4);
 
         $text5 = new Password("newPassword");
-        $text5->setLabel("Enter new password");
+        $text5->setLabel($this->translate->_("accountnewpass"));
         $text5->addValidator(new PresenceOf(array(
             'message' => 'Password is required'
         )));

@@ -16,16 +16,20 @@ class ProductForm extends Form
 {
     public function initialize()
     {
-        $text = new Text("name");
-        $text->setLabel("Product name");
+        $text = new Text("name", array(
+            "placeholder" => $this->translate->_("productname")
+        ));
+        $text->setLabel($this->translate->_("productname"));
         $text->addValidator(new PresenceOf(array(
             'message' => 'Product name is required'
         )));
 
         $this->add($text);
 
-        $text2 = new Text("price");
-        $text2->setLabel("Price");
+        $text2 = new Text("price", array(
+            "placeholder" => $this->translate->_("productprice")
+        ));
+        $text2->setLabel($this->translate->_("productprice"));
         $text2->addValidator(new PresenceOf(array(
             'message' => 'Price is required'
         )));
@@ -37,7 +41,7 @@ class ProductForm extends Form
         $this->add($text2);
 
         $select = new Select("type", ProductType::find(), array("size" => 1, "useEmpty" => true, "using" => array("id", "description")));
-        $select->setLabel("Type");
+        $select->setLabel($this->translate->_("producttype"));
         $select->addValidator(new PresenceOf(array(
             'message' => 'Product type is required'
         )));
