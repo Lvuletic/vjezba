@@ -125,7 +125,7 @@ class Orders extends \Phalcon\Mvc\Model
      */
     public function getAddressDelivery()
     {
-        return $this->address;
+        return $this->address_delivery;
     }
 
     /**
@@ -207,6 +207,12 @@ class Orders extends \Phalcon\Mvc\Model
     public function findAllByCustomer($order, $id)
     {
         $order = $order->find("customerId='$id'");
+        return $order;
+    }
+
+    public function findOrderByCustomer($ordercode)
+    {
+        $order = Orders::findFirst($ordercode);
         return $order;
     }
 }

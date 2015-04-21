@@ -1,0 +1,14 @@
+{
+    "name": "luka/vjezba",
+    "description": "praksa",
+    "require": {
+        "phpunit/phpunit": "~4.6",
+        "phalcon/incubator": "~1.3"
+    },
+    "authors": [
+        {
+            "name": "Luka Vuletic",
+            "email": "lvuleti@gmail.com"
+        }
+    ]
+}

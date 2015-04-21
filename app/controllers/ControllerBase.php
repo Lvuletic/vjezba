@@ -12,7 +12,8 @@ class ControllerBase extends Controller
             ->addJs("js/edit.js")
             ->addJs("js/jquery-ui.min.js")
             ->addJs("js/bootstrap.js")
-            ->addJs("js/bootstrap.min.js");
+            ->addJs("js/bootstrap.min.js")
+            ->addJs("js/sorttable.js");
         $this->assets
             ->addCss("css/tables.css")
             ->addCss("css/jquery-ui.min.css")

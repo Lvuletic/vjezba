@@ -8,10 +8,11 @@
 <div id = "whole">
 
 <?php echo $t->_("checkout") ?>
-    <div id="scroll">
 
-<table id="narudzbe" class="table table-bordered" width="100%">
-    <tr>
+
+<table id="narudzbe" class="table table-bordered sortable" width="100%">
+    <thead>
+    <tr class="header">
         <th>Sifra</th>
         <th>Sifra kupca</th>
         <th>Ime kupca</th>
@@ -19,6 +20,8 @@
         <th>Ukupna cijena</th>
         <th>Datum</th>
     </tr>
+    </thead>
+    <tbody>
     {% for row in ordersPage.items %}
     <tr>
 
@@ -36,8 +39,9 @@
     </tr>
 
     {% endfor %}
+    </tbody>
     </table>
- </div>
+
 
 <nav>
   <ul class="pager">

@@ -1,5 +1,6 @@
-    <div id="scroll">
-<table class="table table-bordered" width="100%">
+
+<table class="table table-bordered sortable" width="100%">
+    <thead>
     <tr>
         <th>Sifra</th>
         <th>Sifra kupca</th>
@@ -8,7 +9,10 @@
         <th>Ukupna cijena</th>
         <th>Datum</th>
     </tr>
+    </thead>
+    <tbody>
     {% for row in ordersPage.items %}
+
     <tr>
 
         <td>{{ row.orders.getOrderCode() }}</td>
@@ -19,14 +23,16 @@
         <td>{{ row.orders.getDate() }}</td>
 
         <td> <?php if ($this->session->get("user_id") == 1)
-        echo $this->tag->linkTo($this->session->get("lang")."/orders/delete/".$row->orders->getOrderCode(), "Delete") ?> </td>
+        echo $this->tag->linkTo($this->dispatcher->getParam("language")."/orders/delete/".$row->orders->getOrderCode(), "Delete") ?> </td>
 
 
     </tr>
 
+
     {% endfor %}
     </table>
-</div>
+    </tbody>
+
 
 <nav>
   <ul class="pager">
