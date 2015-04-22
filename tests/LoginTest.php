@@ -15,12 +15,8 @@ class LoginTest extends \UnitTestCase
     {
 
         $controller = new \LoginController();
-
-        $controller->dispatcher->forward(array(
-            "controller" => "index",
-            "action" => "index"
-        ));
-
+        $this->assertEquals($controller->testLogin("ivo@gmail.com", "ivo73"), 11, "Jednaki su");
+        $this->assertEquals($controller->testLogin("ivo@gmail.com", "ivo73"), 12, "Nisu jednaki");
 
     }
 

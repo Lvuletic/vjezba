@@ -57,4 +57,16 @@ class LoginController extends ControllerBase
         return $this->response->redirect("index/index");
     }
 
+    public function testLogin($username, $password)
+    {
+        $user = User::findFirst("email = '$username'");
+
+        if ($user && $this->security->checkHash($password, $user->getPassword()))
+        {
+            return $user->getID();
+        } else {
+            return false;
+        }
+    }
+
 }

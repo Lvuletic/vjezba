@@ -8,6 +8,7 @@
 
 use Phalcon\DI,
     Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter,
+    Phalcon\Session\Adapter\Files as SessionAdapter,
     Phalcon\DI\FactoryDefault;
 
 
@@ -65,6 +66,13 @@ $di->set('dispatcher', function () use ($di) {
     $dispatcher = new Phalcon\Mvc\Dispatcher();
     $dispatcher->setEventsManager($eventsManager);
     return $dispatcher;
+});
+
+$di->setShared('session', function () {
+    $session = new SessionAdapter();
+    $session->start();
+
+    return $session;
 });
 
 // add any needed services to the DI here

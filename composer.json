@@ -3,7 +3,8 @@
     "description": "praksa",
     "require": {
         "phpunit/phpunit": "~4.6",
-        "phalcon/incubator": "~1.3"
+        "phalcon/incubator": "~1.3",
+        "phpunit/phpunit-selenium": " >=1.2"
     },
     "authors": [
         {
